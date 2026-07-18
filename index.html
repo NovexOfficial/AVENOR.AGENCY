@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avenor - 3D Modern Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAFAFA;
+            overflow-x: hidden;
+        }
+        .text-accent { color: #C89628; }
+        .bg-accent { background-color: #C89628; }
+        .bg-accent-hover { background-color: #A87E21; }
+        .border-accent { border-color: #C89628; }
+        
+        /* 3D Patterns & Utilities */
+        .bg-dots {
+            background-image: radial-gradient(rgba(0, 0, 0, 0.05) 2px, transparent 2px);
+            background-size: 20px 20px;
+        }
+
+        /* 3D Animations & Hover Effects */
+        .perspective-1000 { perspective: 1000px; }
+        
+        .mockup-3d {
+            transform-style: preserve-3d;
+            transform: rotateY(-15deg) rotateX(10deg) rotateZ(-2deg);
+            box-shadow: -30px 40px 60px rgba(0, 0, 0, 0.1), inset 0 0 0 2px rgba(255,255,255,0.8);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        .mockup-3d:hover {
+            transform: rotateY(-5deg) rotateX(5deg) rotateZ(0deg) scale(1.02);
+            box-shadow: -15px 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .float-fast { animation: float 3s ease-in-out infinite; }
+        .float-slow { animation: float 5s ease-in-out infinite reverse; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) translateZ(20px); }
+            50% { transform: translateY(-12px) translateZ(20px); }
+            100% { transform: translateY(0px) translateZ(20px); }
+        }
+
+        .card-3d {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+        .card-3d:hover {
+            transform: translateY(-10px) rotateX(2deg) rotateY(2deg);
+            box-shadow: 15px 20px 40px rgba(0, 0, 0, 0.08), -10px -10px 20px rgba(255, 255, 255, 1);
+        }
+
+        /* Neumorphic 3D Pop for Banners */
+        .banner-3d {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <!-- Navbar -->
+    <nav class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center bg-[#FAFAFA]/90 backdrop-blur-md sticky top-0 z-50">
+        <div class="text-2xl font-bold flex items-center gap-2 text-gray-900 tracking-tight">
+            <span>AVENOR</span>
+        </div>
+        <div class="hidden md:flex space-x-10 font-semibold text-[15px] text-gray-800">
+            <a href="#" class="text-accent border-b-2 border-accent pb-1">Home</a>
+            <a href="#" class="hover:text-accent hover:-translate-y-0.5 transition-transform duration-300 inline-block">Services</a>
+            <a href="#" class="hover:text-accent hover:-translate-y-0.5 transition-transform duration-300 inline-block">Portfolio</a>
+            <a href="#" class="hover:text-accent hover:-translate-y-0.5 transition-transform duration-300 inline-block">About</a>
+            <a href="#" class="hover:text-accent hover:-translate-y-0.5 transition-transform duration-300 inline-block">Contact</a>
+        </div>
+        <a href="#" class="hidden md:inline-block bg-accent hover:bg-accent-hover text-white px-7 py-3.5 rounded-xl font-semibold text-sm transition-all transform hover:-translate-y-1 shadow-[0_10px_20px_-10px_rgba(200,150,40,0.6)]">
+            Book Free Consultation ↗
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="max-w-7xl mx-auto px-6 py-12 lg:py-20 flex flex-col-reverse lg:flex-row items-center gap-12 overflow-hidden perspective-1000">
+        <div class="lg:w-[55%] space-y-7 z-10 relative">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white rounded-full text-[13px] font-semibold text-accent border border-gray-100 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span> Digital Marketing & Influencer Agency
+            </div>
+            <h1 class="text-[3.5rem] lg:text-[5rem] font-extrabold leading-[1.1] text-gray-900 tracking-tight" style="text-shadow: 2px 4px 10px rgba(0,0,0,0.05);">
+                Where Vision<br>Becomes<br><span class="text-accent">Influence.</span>
+            </h1>
+            <p class="text-gray-500 text-lg max-w-[90%] leading-relaxed font-medium">
+                We help brands grow faster with smart strategies, influencer collaborations, and performance-driven marketing that delivers real results.
+            </p>
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+                <a href="#" class="bg-accent hover:bg-accent-hover text-white px-8 py-4 rounded-xl font-semibold transition-all transform hover:-translate-y-1 shadow-[0_15px_30px_-10px_rgba(200,150,40,0.5)]">
+                    Book Free Consultation ↗
+                </a>
+                <a href="#" class="flex items-center gap-2 px-6 py-4 font-bold text-gray-900 bg-white rounded-xl border border-gray-200 hover:border-accent hover:text-accent transition-all shadow-sm hover:shadow-md transform hover:-translate-y-1">
+                    Explore Services ↗
+                </a>
+            </div>
+            <!-- Trust Avatars -->
+            <div class="flex items-center gap-4 pt-6">
+                <div class="flex -space-x-3">
+                    <img class="w-10 h-10 rounded-full border-2 border-white shadow-md object-cover" src="https://i.pravatar.cc/100?img=1" alt="User">
+                    <img class="w-10 h-10 rounded-full border-2 border-white shadow-md object-cover" src="https://i.pravatar.cc/100?img=2" alt="User">
+                    <img class="w-10 h-10 rounded-full border-2 border-white shadow-md object-cover" src="https://i.pravatar.cc/100?img=3" alt="User">
+                    <img class="w-10 h-10 rounded-full border-2 border-white shadow-md object-cover" src="https://i.pravatar.cc/100?img=4" alt="User">
+                </div>
+                <p class="text-sm font-semibold text-gray-600">Trusted by 20+ brands worldwide</p>
+            </div>
+        </div>
+        
+        <!-- Hero Graphic (3D Mobile Phone) -->
+        <div class="lg:w-[45%] relative w-full h-[500px] flex justify-center items-center">
+            
+            <!-- Large faint circle background for depth -->
+            <div class="absolute w-[450px] h-[450px] bg-gradient-to-tr from-gray-100 to-white border border-gray-200 rounded-full shadow-inner -z-10"></div>
+            
+            <!-- Mobile Phone Mockup (3D) -->
+            <div class="mockup-3d w-[240px] h-[500px] bg-black border-[8px] border-gray-100 rounded-[3rem] relative z-10 overflow-hidden">
+                
+                <!-- Glass Glare Effect -->
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/10 to-transparent z-30 pointer-events-none"></div>
+
+                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop" 
+                     class="absolute inset-0 w-full h-full object-cover opacity-90" alt="Social Media Campaign">
+                
+                <div class="absolute top-0 w-full px-5 py-3 flex justify-between items-center z-20 text-white text-[10px] font-medium">
+                    <span>9:41</span>
+                    <div class="flex gap-1.5 items-center">
+                        <span class="text-[9px]">📶</span>
+                        <span class="text-[9px]">🔋</span>
+                    </div>
+                </div>
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
+
+                <div class="absolute right-3 bottom-24 flex flex-col gap-4 z-20 items-center transform translate-z-[30px]">
+                    <div class="flex flex-col items-center gap-1 cursor-pointer hover:scale-110 transition">
+                        <div class="bg-white/20 p-2 rounded-full backdrop-blur-md flex justify-center items-center h-10 w-10 text-white text-sm border border-white/30 shadow-lg">❤️</div>
+                        <span class="text-white text-[10px] font-bold">12K</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 cursor-pointer hover:scale-110 transition">
+                        <div class="bg-white/20 p-2 rounded-full backdrop-blur-md flex justify-center items-center h-10 w-10 text-white text-sm border border-white/30 shadow-lg">💬</div>
+                        <span class="text-white text-[10px] font-bold">842</span>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-6 left-4 right-12 z-20 text-white transform translate-z-[20px]">
+                    <div class="flex items-center gap-2 mb-2">
+                        <img src="https://i.pravatar.cc/100?img=5" class="w-8 h-8 rounded-full border-2 border-white object-cover shadow-md" alt="Profile">
+                        <span class="font-bold text-[13px] tracking-wide">@brand.growth</span>
+                        <span class="bg-blue-500 text-white text-[8px] px-1 py-0.5 rounded-full flex items-center justify-center h-3.5 w-3.5">✓</span>
+                    </div>
+                    <p class="text-[10px] leading-relaxed text-gray-200">Scaling brands with the best marketing strategies! 🚀</p>
+                </div>
+            </div>
+
+            <!-- Total Reach Card (Outer Floating 3D) -->
+            <div class="absolute top-10 -left-6 bg-white p-5 rounded-2xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-100 z-20 w-48 float-fast backdrop-blur-sm bg-white/90">
+                <p class="text-[11px] text-gray-400 font-bold uppercase tracking-wider mb-1">Total Reach</p>
+                <div class="flex items-end gap-3">
+                    <p class="text-3xl font-extrabold text-gray-900">1.2M</p>
+                    <span class="text-green-600 text-sm font-bold bg-green-50 px-2 py-0.5 rounded mb-1">+45%</span>
+                </div>
+            </div>
+
+            <!-- Engagement Rate Card (Outer Floating 3D) -->
+            <div class="absolute bottom-16 -right-10 bg-white p-5 rounded-2xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-100 z-20 w-48 float-slow backdrop-blur-sm bg-white/90">
+                <p class="text-[11px] text-gray-400 font-bold uppercase tracking-wider mb-1">Engagement</p>
+                <div class="flex items-end gap-2">
+                    <p class="text-3xl font-extrabold text-gray-900">8.7%</p>
+                </div>
+                <span class="inline-block text-accent text-xs font-bold bg-yellow-50 px-2 py-0.5 rounded mt-2 border border-yellow-100">+32% Growth</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Trusted Brands -->
+    <section class="max-w-7xl mx-auto px-6 py-12 mt-8">
+        <p class="text-center text-xs text-gray-400 font-bold mb-10 uppercase tracking-[0.2em] relative inline-block left-1/2 -translate-x-1/2">
+            <span class="bg-[#FAFAFA] px-4 relative z-10">Trusted By Growing Brands</span>
+            <span class="absolute top-1/2 left-[-50px] right-[-50px] h-px bg-gray-200 -z-10"></span>
+        </p>
+        <div class="flex flex-wrap justify-center md:justify-between items-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+            <h3 class="text-2xl font-bold cursor-pointer hover:scale-110 transition">Google</h3>
+            <h3 class="text-2xl font-bold cursor-pointer hover:scale-110 transition">airbnb</h3>
+            <h3 class="text-2xl font-bold cursor-pointer hover:scale-110 transition">HubSpot</h3>
+            <h3 class="text-2xl font-bold flex items-center gap-1 cursor-pointer hover:scale-110 transition"><span class="w-4 h-4 bg-gray-900 rounded-full"></span> Swiggy</h3>
+            <h3 class="text-2xl font-bold font-serif cursor-pointer hover:scale-110 transition">N notion</h3>
+            <h3 class="text-2xl font-bold uppercase border-2 border-gray-900 px-2 cursor-pointer hover:scale-110 transition">CRED</h3>
+        </div>
+    </section>
+
+    <!-- Our Services (3D Cards) -->
+    <section class="max-w-7xl mx-auto px-6 py-24 text-center">
+        <p class="text-xs font-bold text-accent tracking-[0.2em] uppercase mb-3">What We Do</p>
+        <h2 class="text-[2.5rem] font-extrabold mb-16 text-gray-900">Our Services<br><span class="inline-block w-12 h-1.5 bg-accent rounded-full mt-4 shadow-sm"></span></h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+            <!-- Service 1 -->
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 card-3d cursor-pointer">
+                <div class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center mb-6 text-accent text-3xl shadow-inner border border-yellow-100">👥</div>
+                <h3 class="font-bold text-gray-900 mb-3 text-lg">Influencer Marketing</h3>
+                <p class="text-sm text-gray-500 leading-relaxed font-medium">Connect with the right creators to build trust and boost your brand exponentially.</p>
+            </div>
+            <!-- Service 2 -->
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 card-3d cursor-pointer">
+                <div class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center mb-6 text-accent text-3xl shadow-inner border border-yellow-100">🎯</div>
+                <h3 class="font-bold text-gray-900 mb-3 text-lg">Performance Marketing</h3>
+                <p class="text-sm text-gray-500 leading-relaxed font-medium">Data-driven campaigns that bring clicks, leads and massive real conversions.</p>
+            </div>
+            <!-- Service 3 -->
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 card-3d cursor-pointer">
+                <div class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center mb-6 text-accent text-3xl shadow-inner border border-yellow-100">📱</div>
+                <h3 class="font-bold text-gray-900 mb-3 text-lg">Social Management</h3>
+                <p class="text-sm text-gray-500 leading-relaxed font-medium">We plan, create & manage 3D content that grows your brand & community.</p>
+            </div>
+            <!-- Service 4 -->
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 card-3d cursor-pointer">
+                <div class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center mb-6 text-accent text-3xl shadow-inner border border-yellow-100">💻</div>
+                <h3 class="font-bold text-gray-900 mb-3 text-lg">Website Design</h3>
+                <p class="text-sm text-gray-500 leading-relaxed font-medium">Modern, fast & 3D interactive websites that convert visitors into buyers.</p>
+            </div>
+            <!-- Service 5 -->
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 card-3d cursor-pointer">
+                <div class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center mb-6 text-accent text-3xl shadow-inner border border-yellow-100">✨</div>
+                <h3 class="font-bold text-gray-900 mb-3 text-lg">Branding</h3>
+                <p class="text-sm text-gray-500 leading-relaxed font-medium">Build a strong brand identity with modern aesthetics that leave an impact.</p>
+            </div>
+            <!-- Service 6 -->
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 card-3d cursor-pointer">
+                <div class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center mb-6 text-accent text-3xl shadow-inner border border-yellow-100">🚀</div>
+                <h3 class="font-bold text-gray-900 mb-3 text-lg">SEO & AI Automation</h3>
+                <p class="text-sm text-gray-500 leading-relaxed font-medium">Rank higher on Google and automate your workflows for maximum scaling.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="max-w-7xl mx-auto px-6 py-12 text-center">
+        <h2 class="text-3xl font-extrabold mb-14 tracking-wide text-gray-900">Why Choose <span class="text-accent">AVENOR</span>?</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8 text-left">
+            <div class="group cursor-default">
+                <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center text-2xl text-accent mb-4 group-hover:scale-110 transition group-hover:shadow-md">📈</div>
+                <h4 class="font-bold text-gray-900 mb-2">Result Driven</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">We focus on real ROI.</p>
+            </div>
+            <div class="group cursor-default">
+                <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center text-2xl text-accent mb-4 group-hover:scale-110 transition group-hover:shadow-md">🏆</div>
+                <h4 class="font-bold text-gray-900 mb-2">Expert Team</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">Top marketing pros.</p>
+            </div>
+            <div class="group cursor-default">
+                <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center text-2xl text-accent mb-4 group-hover:scale-110 transition group-hover:shadow-md">💧</div>
+                <h4 class="font-bold text-gray-900 mb-2">Transparent</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">Clear communication.</p>
+            </div>
+            <div class="group cursor-default">
+                <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center text-2xl text-accent mb-4 group-hover:scale-110 transition group-hover:shadow-md">⚙️</div>
+                <h4 class="font-bold text-gray-900 mb-2">Custom Strategy</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">Tailored for your brand.</p>
+            </div>
+            <div class="group cursor-default">
+                <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center text-2xl text-accent mb-4 group-hover:scale-110 transition group-hover:shadow-md">💰</div>
+                <h4 class="font-bold text-gray-900 mb-2">Fair Pricing</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">Premium value delivered.</p>
+            </div>
+            <div class="group cursor-default">
+                <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center text-2xl text-accent mb-4 group-hover:scale-110 transition group-hover:shadow-md">🤝</div>
+                <h4 class="font-bold text-gray-900 mb-2">Client First</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">Your success is ours.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Case Studies (3D Extruded Look) -->
+    <section class="max-w-7xl mx-auto px-6 py-24 text-center">
+        <p class="text-xs font-bold text-accent tracking-[0.2em] uppercase mb-3">Our Work</p>
+        <h2 class="text-4xl font-extrabold mb-16 text-gray-900">Recent Case Studies<br><span class="inline-block w-12 h-1.5 bg-accent rounded-full mt-4"></span></h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mb-12">
+            <!-- Card 1 -->
+            <div class="bg-white border border-gray-100 rounded-[2rem] p-8 relative overflow-hidden group hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col h-full transform hover:-translate-y-2">
+                <div class="absolute inset-0 bg-gradient-to-br from-yellow-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <span class="relative z-10 inline-block bg-white text-xs font-bold px-4 py-2 rounded-full mb-6 w-max shadow-sm border border-gray-100">Influencer Campaign</span>
+                <h3 class="relative z-10 text-2xl font-extrabold text-gray-900 mb-2">Glow Skincare</h3>
+                <p class="relative z-10 text-4xl font-black text-accent mt-4 drop-shadow-sm">+200%</p>
+                <p class="relative z-10 text-sm font-semibold text-gray-500 mb-10">Revenue Growth</p>
+                <div class="mt-auto flex justify-end relative">
+                    <div class="w-40 h-40 bg-yellow-100 rounded-full opacity-50 absolute -bottom-10 -right-10 group-hover:scale-150 transition-transform duration-700"></div>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="bg-white border border-gray-100 rounded-[2rem] p-8 relative overflow-hidden group hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col h-full transform hover:-translate-y-2">
+                <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <span class="relative z-10 inline-block bg-white text-xs font-bold px-4 py-2 rounded-full mb-6 w-max shadow-sm border border-gray-100">Performance Ads</span>
+                <h3 class="relative z-10 text-2xl font-extrabold text-gray-900 mb-2">FitFuel Nutrition</h3>
+                <p class="relative z-10 text-4xl font-black text-gray-900 mt-4 drop-shadow-sm">+150%</p>
+                <p class="relative z-10 text-sm font-semibold text-gray-500 mb-10">Leads Generated</p>
+                <div class="mt-auto flex justify-end relative z-10">
+                    <div class="w-32 h-40 bg-gray-100 border border-gray-200 rounded-xl shadow-inner group-hover:rotate-12 transition-transform duration-500"></div> 
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white border border-gray-100 rounded-[2rem] p-8 relative overflow-hidden group hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col h-full transform hover:-translate-y-2">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <span class="relative z-10 inline-block bg-white text-xs font-bold px-4 py-2 rounded-full mb-6 w-max shadow-sm border border-gray-100">Social Management</span>
+                <h3 class="relative z-10 text-2xl font-extrabold text-gray-900 mb-2">Urban Streetwear</h3>
+                <p class="relative z-10 text-4xl font-black text-gray-900 mt-4 drop-shadow-sm">+180%</p>
+                <p class="relative z-10 text-sm font-semibold text-gray-500 mb-10">Engagement</p>
+                <div class="mt-auto flex justify-end absolute -bottom-5 -right-5">
+                    <div class="w-48 h-48 bg-gray-50 border border-gray-200 rounded-full shadow-inner group-hover:scale-110 transition-transform duration-500"></div> 
+                </div>
+            </div>
+        </div>
+        
+        <button class="bg-white border-2 border-gray-900 text-gray-900 font-bold px-8 py-4 rounded-xl hover:bg-gray-900 hover:text-white transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1">
+            View All Projects ↗
+        </button>
+    </section>
+
+    <!-- Light Theme 3D Stats Banner (Replaced Dark Mode) -->
+    <section class="max-w-7xl mx-auto px-6 py-10 mb-16">
+        <div class="banner-3d rounded-[2.5rem] p-10 lg:p-14 flex flex-col md:flex-row justify-around items-center text-gray-900 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full bg-dots opacity-50 pointer-events-none"></div>
+            
+            <div class="flex items-center gap-6 z-10 mb-8 md:mb-0 hover:scale-105 transition-transform">
+                <div class="w-20 h-20 bg-white rounded-2xl shadow-md border border-gray-100 flex items-center justify-center text-4xl text-accent">📄</div>
+                <div>
+                    <h4 class="text-5xl font-black mb-1 drop-shadow-sm">50+</h4>
+                    <p class="text-sm text-gray-500 font-bold uppercase tracking-wider">Projects Completed</p>
+                </div>
+            </div>
+            
+            <div class="hidden md:block w-px h-20 bg-gray-200 z-10"></div>
+            
+            <div class="flex items-center gap-6 z-10 mb-8 md:mb-0 hover:scale-105 transition-transform">
+                <div class="w-20 h-20 bg-white rounded-2xl shadow-md border border-gray-100 flex items-center justify-center text-4xl text-accent">👥</div>
+                <div>
+                    <h4 class="text-5xl font-black mb-1 drop-shadow-sm">20+</h4>
+                    <p class="text-sm text-gray-500 font-bold uppercase tracking-wider">Happy Clients</p>
+                </div>
+            </div>
+            
+            <div class="hidden md:block w-px h-20 bg-gray-200 z-10"></div>
+
+            <div class="flex items-center gap-6 z-10 hover:scale-105 transition-transform">
+                <div class="w-20 h-20 bg-white rounded-2xl shadow-md border border-gray-100 flex items-center justify-center text-4xl text-accent">⭐</div>
+                <div>
+                    <h4 class="text-5xl font-black mb-1 drop-shadow-sm">95%</h4>
+                    <p class="text-sm text-gray-500 font-bold uppercase tracking-wider">Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="max-w-7xl mx-auto px-6 py-16 text-center">
+        <h2 class="text-3xl font-extrabold mb-12 text-gray-900">Client Reviews<br><span class="inline-block w-12 h-1.5 bg-accent rounded mt-4"></span></h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full text-left">
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] flex flex-col justify-between h-full transform transition hover:-translate-y-2 hover:shadow-xl">
+                <div>
+                    <div class="text-accent text-5xl font-serif mb-2 leading-none drop-shadow-sm">"</div>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-8 font-medium">AVENOR transformed our brand presence online. Their influencer campaigns and ads brought amazing 3D results.</p>
+                </div>
+                <div class="flex items-center gap-4 bg-gray-50 p-3 rounded-2xl border border-gray-100">
+                    <img src="https://i.pravatar.cc/100?img=5" class="w-12 h-12 rounded-xl object-cover shadow-sm" alt="Client">
+                    <div>
+                        <h5 class="font-bold text-gray-900 text-sm">Riya Sharma</h5>
+                        <p class="text-xs text-gray-500 font-semibold">Founder, Glow Skincare</p>
+                    </div>
+                </div>
+            </div>
+            <!-- More reviews following same white/3d style -->
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] flex flex-col justify-between h-full transform transition hover:-translate-y-2 hover:shadow-xl">
+                <div>
+                    <div class="text-accent text-5xl font-serif mb-2 leading-none drop-shadow-sm">"</div>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-8 font-medium">Professional team, transparent work and great communication. Highly recommended for growing modern brands.</p>
+                </div>
+                <div class="flex items-center gap-4 bg-gray-50 p-3 rounded-2xl border border-gray-100">
+                    <img src="https://i.pravatar.cc/100?img=11" class="w-12 h-12 rounded-xl object-cover shadow-sm" alt="Client">
+                    <div>
+                        <h5 class="font-bold text-gray-900 text-sm">Arjun Mehta</h5>
+                        <p class="text-xs text-gray-500 font-semibold">Marketing Head, FitFuel</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] flex flex-col justify-between h-full transform transition hover:-translate-y-2 hover:shadow-xl">
+                <div>
+                    <div class="text-accent text-5xl font-serif mb-2 leading-none drop-shadow-sm">"</div>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-8 font-medium">Their strategies helped us scale faster than we expected. Truly a result-driven agency with a premium feel!</p>
+                </div>
+                <div class="flex items-center gap-4 bg-gray-50 p-3 rounded-2xl border border-gray-100">
+                    <img src="https://i.pravatar.cc/100?img=9" class="w-12 h-12 rounded-xl object-cover shadow-sm" alt="Client">
+                    <div>
+                        <h5 class="font-bold text-gray-900 text-sm">Neha Verma</h5>
+                        <p class="text-xs text-gray-500 font-semibold">Co-founder, Urban</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="max-w-4xl mx-auto px-6 py-16 text-center">
+        <h2 class="text-3xl font-extrabold mb-12 text-gray-900">FAQ</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+            <!-- FAQs -->
+            <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-center cursor-pointer hover:shadow-md hover:-translate-y-1 transition-all">
+                <h4 class="font-bold text-sm text-gray-800">What services does AVENOR offer?</h4>
+                <span class="w-8 h-8 rounded-full bg-yellow-50 text-accent flex items-center justify-center font-bold">+</span>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-center cursor-pointer hover:shadow-md hover:-translate-y-1 transition-all">
+                <h4 class="font-bold text-sm text-gray-800">How long does it take to see results?</h4>
+                <span class="w-8 h-8 rounded-full bg-yellow-50 text-accent flex items-center justify-center font-bold">+</span>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-center cursor-pointer hover:shadow-md hover:-translate-y-1 transition-all">
+                <h4 class="font-bold text-sm text-gray-800">How do you ensure results?</h4>
+                <span class="w-8 h-8 rounded-full bg-yellow-50 text-accent flex items-center justify-center font-bold">+</span>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex justify-between items-center cursor-pointer hover:shadow-md hover:-translate-y-1 transition-all">
+                <h4 class="font-bold text-sm text-gray-800">What platforms do you manage?</h4>
+                <span class="w-8 h-8 rounded-full bg-yellow-50 text-accent flex items-center justify-center font-bold">+</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Light Theme 3D CTA Banner (Replaced Dark Mode) -->
+    <section class="max-w-7xl mx-auto px-6 mb-24 mt-8">
+        <div class="bg-white border border-gray-100 rounded-[2.5rem] p-12 lg:p-16 flex flex-col md:flex-row justify-between items-center text-gray-900 relative overflow-hidden shadow-[0_20px_50px_-10px_rgba(0,0,0,0.08)] transform transition hover:-translate-y-1">
+            <div class="absolute inset-0 bg-dots opacity-40"></div>
+            <!-- Decorative 3D Blobs -->
+            <div class="absolute -top-20 -right-20 w-64 h-64 bg-yellow-100 rounded-full blur-3xl opacity-60"></div>
+            
+            <div class="z-10 relative text-center md:text-left">
+                <p class="text-sm text-accent mb-3 font-bold uppercase tracking-widest">Ready to Elevate?</p>
+                <h2 class="text-4xl md:text-5xl font-black tracking-tight drop-shadow-sm">Let's Grow Your Brand.</h2>
+            </div>
+            <button class="z-10 mt-8 md:mt-0 bg-accent hover:bg-accent-hover text-white px-9 py-5 rounded-xl font-bold text-lg transition-all shadow-[0_15px_30px_-10px_rgba(200,150,40,0.5)] hover:-translate-y-1">
+                Book Free Consultation ↗
+            </button>
+        </div>
+    </section>
+
+    <!-- Light Theme Footer (Replaced Dark Mode) -->
+    <footer class="bg-white text-gray-600 py-20 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-24 mb-16">
+            <div class="col-span-1 lg:col-span-1">
+                <h3 class="text-2xl font-extrabold text-gray-900 mb-6 tracking-tight">AVENOR</h3>
+                <p class="text-[14px] leading-relaxed mb-8 font-medium text-gray-500">We help brands grow faster with smart strategies, influencer collaborations and performance-driven marketing.</p>
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-900 font-bold hover:bg-accent hover:text-white hover:border-accent shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">IG</div>
+                    <div class="w-10 h-10 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-900 font-bold hover:bg-accent hover:text-white hover:border-accent shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">IN</div>
+                    <div class="w-10 h-10 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-900 font-bold hover:bg-accent hover:text-white hover:border-accent shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">TW</div>
+                </div>
+            </div>
+            <!-- Standard Footer Links -->
+            <div>
+                <h4 class="text-gray-900 font-bold mb-6 tracking-wider text-sm uppercase">Services</h4>
+                <ul class="space-y-4 text-[13.5px] font-medium">
+                    <li><a href="#" class="hover:text-accent transition">Influencer Marketing</a></li>
+                    <li><a href="#" class="hover:text-accent transition">Performance Ads</a></li>
+                    <li><a href="#" class="hover:text-accent transition">Social Management</a></li>
+                    <li><a href="#" class="hover:text-accent transition">Web Design</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-gray-900 font-bold mb-6 tracking-wider text-sm uppercase">Company</h4>
+                <ul class="space-y-4 text-[13.5px] font-medium">
+                    <li><a href="#" class="hover:text-accent transition">About Us</a></li>
+                    <li><a href="#" class="hover:text-accent transition">Case Studies</a></li>
+                    <li><a href="#" class="hover:text-accent transition">Careers</a></li>
+                    <li><a href="#" class="hover:text-accent transition">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-gray-900 font-bold mb-6 tracking-wider text-sm uppercase">Legal</h4>
+                <ul class="space-y-4 text-[13.5px] font-medium">
+                    <li><a href="#" class="hover:text-accent transition">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-accent transition">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 border-t border-gray-100 pt-8 flex justify-center items-center text-[13px] font-semibold text-gray-400">
+            <p>© 2026 AVENOR. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
