@@ -56,15 +56,16 @@
             border: 1px solid var(--glass-border); border-radius: 24px; padding: 40px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
             position: relative; overflow: hidden; width: 90%; max-width: 800px; margin: 0 auto;
+            display: flex; flex-direction: column; align-items: center; /* Ensures content is centered */
         }
 
         /* Premium Buttons */
         .btn-cinematic {
             background: transparent; color: #fff; border: 1px solid rgba(255,42,112,0.5);
-            padding: 15px 40px; border-radius: 50px; font-family: var(--font-body); font-weight: 500;
+            padding: 12px 35px; border-radius: 50px; font-family: var(--font-body); font-weight: 500;
             letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative; overflow: hidden; display: inline-block; margin-top: 30px; font-size: 0.9rem;
-            box-shadow: 0 0 20px rgba(255,42,112,0.2) inset; z-index: 10;
+            position: relative; overflow: hidden; display: inline-block; font-size: 0.9rem;
+            box-shadow: 0 0 20px rgba(255,42,112,0.2) inset; z-index: 10; margin-top: 20px;
         }
         .btn-cinematic::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: 0.5s; }
         .btn-cinematic:hover { background: var(--neon-pink); box-shadow: 0 0 30px var(--neon-pink), 0 0 60px rgba(255,42,112,0.5); border-color: var(--neon-pink); transform: translateY(-3px); }
@@ -81,7 +82,8 @@
         .loading-bar { width: 0%; height: 100%; background: var(--neon-pink); box-shadow: 0 0 15px var(--neon-pink); transition: width 0.1s linear; }
 
         /* Step 2: Secret Input */
-        .secret-input { width: 100%; max-width: 350px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.2); padding: 16px 25px; border-radius: 50px; color: #fff; font-size: 1.1rem; text-align: center; font-family: var(--font-body); outline: none; transition: 0.3s; margin-top: 20px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
+        .secret-input-wrapper { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 25px; width: 100%; }
+        .secret-input { width: 100%; max-width: 320px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.2); padding: 14px 25px; border-radius: 50px; color: #fff; font-size: 1.1rem; text-align: center; font-family: var(--font-body); outline: none; transition: 0.3s; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
         .secret-input:focus { border-color: var(--neon-pink); box-shadow: 0 0 20px rgba(255,42,112,0.3); }
         .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
         @keyframes shake { 10%, 90% { transform: translate3d(-2px, 0, 0); } 20%, 80% { transform: translate3d(4px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-6px, 0, 0); } 40%, 60% { transform: translate3d(6px, 0, 0); } }
@@ -92,7 +94,7 @@
         .tier-1 { width: 250px; height: 100px; bottom: 0; z-index: 1; }
         .tier-2 { width: 180px; height: 80px; bottom: 60px; left: 35px; z-index: 2; }
         .tier-3 { width: 120px; height: 60px; bottom: 110px; left: 65px; z-index: 3; }
-        .candle-wrap { position: absolute; bottom: 155px; left: 115px; width: 20px; height: 50px; z-index: 4; display: flex; flex-direction: column; align-items: center; }
+        .candle-wrap { position: absolute; bottom: 155px; left: 115px; width: 20px; height: 50px; z-index: 4; display: flex; flex-direction: column; align-items: center; cursor: pointer; }
         .candle-stick { width: 12px; height: 40px; background: repeating-linear-gradient(45deg, #fff, #fff 5px, #ff2a70 5px, #ff2a70 10px); border-radius: 3px; box-shadow: 2px 2px 5px rgba(0,0,0,0.3); }
         .flame { width: 14px; height: 22px; background: #ffcc00; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; position: absolute; top: -18px; box-shadow: 0 0 20px #ffcc00, 0 0 40px #ff6600; opacity: 0; transition: opacity 1s; animation: flicker 0.1s infinite alternate; }
         @keyframes flicker { 0% { transform: scale(1) rotate(-1deg); } 100% { transform: scale(1.1) rotate(1deg); } }
@@ -107,11 +109,11 @@
         .envelope-flap { position: absolute; top: 0; left: 0; width: 100%; height: 70%; background: linear-gradient(135deg, #ff3377, #e62061); z-index: 4; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .wax-seal { position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%); font-size: 2.5rem; z-index: 5; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)); transition: opacity 0.5s; }
         
-        /* Updated Letter CSS for better readability */
+        /* Updated Letter CSS */
         .letter { position: absolute; top: 10px; left: 5%; width: 90%; height: 90%; background: #fffde8; z-index: 2; border-radius: 5px; box-shadow: 0 0 15px rgba(0,0,0,0.2); padding: 25px; transform: translateY(0); transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); }
-        #typed-letter { color: #333; font-family: 'Playfair Display', serif; font-size: 1rem; line-height: 1.6; text-align: left; margin: 0; font-weight: 600; }
+        #typed-letter { color: #222; font-family: 'Playfair Display', serif; font-size: 1rem; line-height: 1.6; text-align: left; margin: 0; font-weight: 600; }
         
-        .envelope-container.open { margin-bottom: 160px; /* Pushes the button down when opened */ }
+        .envelope-container.open { margin-bottom: 200px; /* Stronger push to clear the button */ }
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
         .envelope-container.open .wax-seal { opacity: 0; }
         .envelope-container.open .letter { transform: translateY(-80px) scale(1.1); z-index: 5; height: 350px; overflow-y: auto; box-shadow: 0 -10px 30px rgba(0,0,0,0.3); cursor: default; }
@@ -142,14 +144,15 @@
         .shayari-box { font-family: var(--font-head); font-size: clamp(1.2rem, 3vw, 1.8rem); line-height: 2; font-style: italic; color: #f5f5f5; text-align: center; margin: 30px 0; text-shadow: 0 2px 15px rgba(255,255,255,0.2); }
         
         /* Step 7: 200 Reasons */
-        .reasons-container { width: 95%; max-width: 1000px; height: 60vh; overflow-y: auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; scroll-behavior: smooth; }
+        .reasons-container { width: 95%; max-width: 1000px; height: 60vh; overflow-y: auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; scroll-behavior: smooth; margin-top: 10px;}
         .reasons-container::-webkit-scrollbar { width: 6px; }
         .reasons-container::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 10px; }
-        .reason-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 25px; border-radius: 16px; transition: 0.4s; position: relative; overflow: hidden; opacity: 0; transform: translateY(20px); }
+        .reason-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 16px; transition: 0.4s; position: relative; overflow: hidden; opacity: 0; transform: translateY(20px); text-align: left; }
         .reason-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,42,112,0.1) 0%, transparent 70%); opacity: 0; transition: 0.5s; pointer-events: none; }
         .reason-card:hover { transform: translateY(-5px); border-color: rgba(255,42,112,0.4); box-shadow: 0 10px 30px rgba(255,42,112,0.15); }
         .reason-card:hover::before { opacity: 1; }
-        .reason-num { font-family: var(--font-head); font-size: 1.5rem; color: var(--neon-pink); font-weight: bold; margin-bottom: 10px; opacity: 0.8; }
+        .reason-num { font-family: var(--font-head); font-size: 1.3rem; color: var(--neon-pink); font-weight: bold; margin-bottom: 5px; opacity: 0.9; text-shadow: 0 0 5px rgba(255,42,112,0.4); }
+        .reason-text { color: #ffffff; font-size: 0.95rem; line-height: 1.5; font-weight: 400; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
         
         /* Step 8: Gift */
         .gift-box { position: relative; width: 150px; height: 150px; margin: 20px auto; cursor: pointer; perspective: 1000px; transform-style: preserve-3d; transition: transform 0.3s; }
@@ -209,10 +212,16 @@
     <div class="step-container" id="step-2">
         <div class="glass-panel text-center">
             <h1 class="heading glow-text" style="font-size: 2.2rem;">Security Check 🌍</h1>
-            <p class="subtext mb-20">Duniya ki sabse pyari ladki kaun hai?</p>
-            <input type="text" id="secret-input" class="secret-input hover-target" placeholder="Type here..." autocomplete="off">
-            <p id="hint-msg" class="subtext mt-20" style="color: #ff99aa; font-size: 0.9rem; opacity: 0;">Hint: Jiska Birthday Hai 😊</p>
+            <p class="subtext">Duniya ki sabse pyari ladki kaun hai?</p>
+            
+            <div class="secret-input-wrapper">
+                <input type="text" id="secret-input" class="secret-input hover-target" placeholder="Type here..." autocomplete="off">
+                <button class="btn-cinematic hover-target" onclick="checkAnswer()" style="margin-top: 5px; padding: 10px 30px;">Enter</button>
+            </div>
+
+            <p id="hint-msg" class="subtext mt-10" style="color: #ff99aa; font-size: 0.9rem; opacity: 0; margin-top: 15px;">Hint: Jiska Birthday Hai 😊</p>
             <p id="success-msg" class="heading glow-text hidden" style="font-size: 1.5rem; margin-top: 15px; color: #00ff88;">Correct Answer ❤️</p>
+            
             <button class="btn-cinematic hover-target hidden" id="btn-next-2" onclick="nextStep(2, 3)">Unlock Magic ✨</button>
         </div>
     </div>
@@ -251,7 +260,7 @@
                     <span id="typed-letter"></span>
                 </div>
             </div>
-            <button class="btn-cinematic hover-target hidden" id="btn-next-4" style="margin-top: 10px;" onclick="nextStep(4, 5)">See Memories 📸</button>
+            <button class="btn-cinematic hover-target hidden" id="btn-next-4" onclick="nextStep(4, 5)">See Memories 📸</button>
         </div>
     </div>
 
@@ -273,12 +282,11 @@
     </div>
 
     <div class="step-container" id="step-7">
-        <h1 class="heading glow-text" style="font-size: 2rem; margin-bottom: 5px;">200 Reasons Why You're Amazing 💖</h1>
-        <p class="subtext mb-20" id="reason-progress">Loading reasons...</p>
+        <h1 class="heading glow-text" style="font-size: 2rem; margin-bottom: 5px; margin-top: 20px;">200 Reasons Why You're Amazing 💖</h1>
+        <p class="subtext mb-10" id="reason-progress">Scroll to discover them all...</p>
         <div class="reasons-container" id="reasons-grid">
             </div>
-        <p class="subtext mt-20 glow-text" style="font-family: var(--font-head); font-size: 1.2rem;">These are only a few of the countless reasons that make you wonderful. ❤️</p>
-        <button class="btn-cinematic hover-target" onclick="nextStep(7, 8)">Open Surprise 🎁</button>
+        <button class="btn-cinematic hover-target" style="margin-bottom: 30px;" onclick="nextStep(7, 8)">Open Surprise 🎁</button>
     </div>
 
     <div class="step-container" id="step-8">
@@ -410,7 +418,6 @@
         }
 
         // Logical trigger for specific steps
-        // BUG FIXED: Removed `initLetter()` from step 4 check which was causing the Uncaught ReferenceError
         function triggerStepLogic(step) {
             if (step == 5) animateGallery4();
             if (step == 6) initShayari();
@@ -506,7 +513,6 @@
             env.classList.add('open');
             setTimeout(() => {
                 letterTyped = true;
-                // EDITABLE LETTER TEXT HERE
                 new Typed('#typed-letter', {
                     strings: ["Dear Aaru,<br><br>Happy Birthday to the most amazing person in the world.<br><br>Your presence brings so much light, and your smile makes everything perfectly magical. I hope this day is exactly as beautiful as your heart.<br><br>With love. ❤️"],
                     typeSpeed: 35, showCursor: false,
@@ -558,33 +564,51 @@
             });
         }
 
-        // --- Step 7: 200 Reasons ---
+        // --- Step 7: 200 Reasons (FIXED & EXPANDED to 50 unique looped) ---
         let reasonsLoaded = false;
         function load200Reasons() {
             if(reasonsLoaded) return; reasonsLoaded = true;
+            
+            // 50 Beautiful unique reasons written from the heart
             const baseReasons = [
-                "Your beautiful smile", "The way you care", "Your pure heart", "Your cute anger", "Your magical eyes", 
-                "How you listen", "Your intelligence", "Your sense of humor", "The way you support", "You are my peace",
-                "Your kindness", "Your voice", "How strong you are", "Your innocent face", "Your elegance",
-                "The way you dress", "Your positive aura", "Your respect for others", "The way you laugh", "Your existence"
+                "Your beautifully innocent smile", "The way you deeply care for everyone", "Your pure and golden heart", 
+                "Your cute little angry face", "Those magical and deep eyes", "How patiently you listen to me", 
+                "Your incredible intelligence", "Your amazing sense of humor", "The way you always support me", 
+                "You are my ultimate peace", "Your unmatched kindness", "The soothing sound of your voice", 
+                "How strong you stand in tough times", "Your beautifully expressive face", "Your unmatched elegance",
+                "The way you style yourself", "Your extremely positive aura", "Your deep respect for others", 
+                "The way your laugh brightens my day", "Simply your magical existence", "How special you make me feel",
+                "Your late-night deep talks", "The way you understand my silence", "Your cute sleepy morning voice",
+                "How you effortlessly inspire me", "Your endless patience with me", "The way you naturally blush",
+                "Your absolutely perfect imperfections", "How safe I feel around you", "Your random cute texts",
+                "The mature way you handle things", "Your beautifully pure soul", "How you remember all the little details",
+                "Your comforting and warm presence", "The way you forgive so easily", "Your dedication to your dreams",
+                "How you instantly light up any room", "Your beautiful perspective on life", "The way you constantly motivate me",
+                "Your unwavering loyalty and trust", "How you celebrate small victories", "Your gentle and caring touch",
+                "The way you pout when annoyed", "Your sparkling and infectious energy", "How you make boring things so fun",
+                "Your deep empathy for everyone", "The way you believe in me", "Your beautiful enthusiasm",
+                "How you effortlessly steal my heart", "Because you are exactly who you are"
             ];
-            const emojis = ["❤️", "✨", "🌸", "🦋", "🎀", "💖", "💫"];
+            const emojis = ["❤️", "✨", "🌸", "🦋", "🎀", "💖", "💫", "🥰", "🥺", "🌙"];
+            
             const cont = document.getElementById('reasons-grid');
             let html = '';
+            
+            // Loop exactly 200 times
             for(let i=1; i<=200; i++) {
-                const text = baseReasons[i % baseReasons.length];
-                const emoji = emojis[i % emojis.length];
+                const text = baseReasons[(i - 1) % baseReasons.length];
+                const emoji = emojis[(i - 1) % emojis.length];
                 html += `
                     <div class="reason-card hover-target">
                         <div class="reason-num">#${i}</div>
-                        <div style="font-size: 0.95rem; line-height: 1.5;">${text} ${emoji}</div>
+                        <div class="reason-text">${text} ${emoji}</div>
                     </div>
                 `;
             }
             cont.innerHTML = html;
             
+            // GSAP stagger entrance
             gsap.to('.reason-card', { opacity: 1, y: 0, stagger: 0.02, duration: 0.5, ease: "power1.out" });
-            document.getElementById('reason-progress').innerText = "Scroll to discover them all...";
         }
 
         // --- Step 8: Gift ---
