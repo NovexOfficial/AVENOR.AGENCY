@@ -3,355 +3,727 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creator Portfolio</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Aaru's Magical Journey ✨</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
-        /* CSS STARTS HERE */
+        /* ================= BASE STYLES & VARIABLES ================= */
         :root {
-            --bg-dark: #0a0410;
-            --primary-glow: #e11d74;
-            --secondary-glow: #6a11cb;
-            --text-main: #ffffff;
-            --text-muted: #a09da6;
+            --bg-dark: #070913;
+            --neon-pink: #ff2a70;
+            --neon-blue: #00e5ff;
             --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --font-main: 'Outfit', sans-serif;
-            --font-cursive: 'Playfair Display', serif;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --font-head: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: var(--font-main);
-            overflow-x: hidden;
+        body { 
+            background: var(--bg-dark); color: #fff; overflow: hidden;
+            font-family: var(--font-body); width: 100vw; height: 100vh;
+            cursor: none; 
         }
+        
+        /* Background Canvas & Aurora */
+        #bg-canvas { position: absolute; top: 0; left: 0; z-index: 1; pointer-events: none; }
+        .aurora {
+            position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 42, 112, 0.1), transparent 60%),
+                        radial-gradient(circle at 80% 20%, rgba(0, 229, 255, 0.05), transparent 50%);
+            animation: aurora-move 20s infinite alternate; z-index: 0;
+        }
+        @keyframes aurora-move { 0% { transform: rotate(0deg) scale(1); } 100% { transform: rotate(15deg) scale(1.1); } }
+
+        /* Custom Cursor */
+        .cursor { width: 20px; height: 20px; border: 2px solid var(--neon-pink); border-radius: 50%; position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s; box-shadow: 0 0 15px var(--neon-pink); }
+        .cursor-dot { width: 5px; height: 5px; background: #fff; border-radius: 50%; position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); }
+        .hover-active .cursor { width: 50px; height: 50px; background: rgba(255,42,112,0.1); border-color: transparent; }
 
         /* Typography & Utilities */
-        a { text-decoration: none; color: var(--text-main); }
-        .text-pink { color: var(--primary-glow); }
-        .instagram-gradient {
-            background: -webkit-linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .heading { font-family: var(--font-head); font-weight: 700; font-size: clamp(2.5rem, 5vw, 4.5rem); text-align: center; margin-bottom: 20px; text-shadow: 0 0 20px rgba(255,255,255,0.2); }
+        .subtext { font-size: 1.1rem; text-align: center; max-width: 600px; margin: 0 auto; color: #ddd; line-height: 1.8; }
+        .glow-text { text-shadow: 0 0 15px rgba(255, 42, 112, 0.8), 0 0 30px rgba(255, 42, 112, 0.5); }
+        .hidden { display: none !important; }
+        
+        /* Glassmorphism Cards */
+        .glass-panel {
+            background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border); border-radius: 24px; padding: 40px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+            position: relative; overflow: hidden; width: 90%; max-width: 800px; margin: 0 auto;
         }
 
-        /* Glassmorphism Classes */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 20px;
+        /* Premium Buttons */
+        .btn-cinematic {
+            background: transparent; color: #fff; border: 1px solid rgba(255,42,112,0.5);
+            padding: 15px 40px; border-radius: 50px; font-family: var(--font-body); font-weight: 500;
+            letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative; overflow: hidden; display: inline-block; margin-top: 30px; font-size: 0.9rem;
+            box-shadow: 0 0 20px rgba(255,42,112,0.2) inset; z-index: 10;
         }
+        .btn-cinematic::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: 0.5s; }
+        .btn-cinematic:hover { background: var(--neon-pink); box-shadow: 0 0 30px var(--neon-pink), 0 0 60px rgba(255,42,112,0.5); border-color: var(--neon-pink); transform: translateY(-3px); }
+        .btn-cinematic:hover::before { left: 100%; }
 
-        /* Navbar */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(10, 4, 16, 0.8);
-            backdrop-filter: blur(10px);
-        }
-        .logo { font-size: 24px; font-weight: 800; font-family: var(--font-cursive); }
-        .nav-links { display: flex; list-style: none; gap: 30px; }
-        .nav-links a { font-size: 14px; font-weight: 400; transition: 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: var(--primary-glow); border-bottom: 2px solid var(--primary-glow); }
+        /* Screens Setup */
+        .step-container { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; opacity: 0; pointer-events: none; }
+        .step-container.active { opacity: 1; pointer-events: all; }
 
-        /* Buttons */
-        .btn-outline {
-            border: 1px solid var(--glass-border);
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-        .btn-outline:hover { background: var(--glass-bg); }
+        /* ================= STEP SPECIFIC STYLES ================= */
+        
+        /* Step 1: Loader */
+        .loading-bar-wrap { width: 300px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; margin: 30px auto 0; box-shadow: inset 0 1px 3px rgba(0,0,0,0.5); }
+        .loading-bar { width: 0%; height: 100%; background: var(--neon-pink); box-shadow: 0 0 15px var(--neon-pink); transition: width 0.1s linear; }
 
-        .btn-primary {
-            background: linear-gradient(90deg, #6a11cb, #e11d74);
-            padding: 12px 28px;
-            border-radius: 30px;
-            font-weight: 600;
-            display: inline-block;
-            box-shadow: 0 0 15px rgba(225, 29, 116, 0.4);
-            transition: 0.3s;
-        }
-        .btn-primary:hover { transform: scale(1.05); }
+        /* Step 2: Secret Input */
+        .secret-input { width: 100%; max-width: 350px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.2); padding: 16px 25px; border-radius: 50px; color: #fff; font-size: 1.1rem; text-align: center; font-family: var(--font-body); outline: none; transition: 0.3s; margin-top: 20px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
+        .secret-input:focus { border-color: var(--neon-pink); box-shadow: 0 0 20px rgba(255,42,112,0.3); }
+        .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake { 10%, 90% { transform: translate3d(-2px, 0, 0); } 20%, 80% { transform: translate3d(4px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-6px, 0, 0); } 40%, 60% { transform: translate3d(6px, 0, 0); } }
+        
+        /* Step 3: Birthday Cake */
+        .cake { position: relative; width: 250px; height: 200px; margin: 0 auto 30px; perspective: 1000px; transform-style: preserve-3d; }
+        .tier { position: absolute; background: linear-gradient(145deg, #ff99cc, #ff4d94); border-radius: 50%; box-shadow: 0 15px 35px rgba(0,0,0,0.4), inset 0 5px 15px rgba(255,255,255,0.3); display: flex; justify-content: center; border: 1px solid rgba(255,255,255,0.2); }
+        .tier-1 { width: 250px; height: 100px; bottom: 0; z-index: 1; }
+        .tier-2 { width: 180px; height: 80px; bottom: 60px; left: 35px; z-index: 2; }
+        .tier-3 { width: 120px; height: 60px; bottom: 110px; left: 65px; z-index: 3; }
+        .candle-wrap { position: absolute; bottom: 155px; left: 115px; width: 20px; height: 50px; z-index: 4; display: flex; flex-direction: column; align-items: center; }
+        .candle-stick { width: 12px; height: 40px; background: repeating-linear-gradient(45deg, #fff, #fff 5px, #ff2a70 5px, #ff2a70 10px); border-radius: 3px; box-shadow: 2px 2px 5px rgba(0,0,0,0.3); }
+        .flame { width: 14px; height: 22px; background: #ffcc00; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; position: absolute; top: -18px; box-shadow: 0 0 20px #ffcc00, 0 0 40px #ff6600; opacity: 0; transition: opacity 1s; animation: flicker 0.1s infinite alternate; }
+        @keyframes flicker { 0% { transform: scale(1) rotate(-1deg); } 100% { transform: scale(1.1) rotate(1deg); } }
+        .timer-circle { position: absolute; width: 120px; height: 120px; border: 3px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; font-family: var(--font-head); opacity: 0; pointer-events: none; border-top-color: var(--neon-pink); animation: spin 1s linear infinite; }
+        .timer-text { font-family: var(--font-head); font-size: 3rem; color: var(--neon-pink); opacity: 0; text-shadow: 0 0 20px var(--neon-pink); }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            padding: 12px 28px;
-            border-radius: 30px;
-            font-weight: 600;
-            display: inline-block;
-            transition: 0.3s;
-        }
-        .btn-secondary:hover { background: var(--glass-bg); }
+        /* Step 4: Envelope & Letter */
+        .envelope-container { position: relative; width: 320px; height: 220px; margin: 40px auto; cursor: pointer; perspective: 1200px; transition: margin 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .envelope-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #cc1b54, #ff2a70); border-radius: 10px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); z-index: 1; }
+        .envelope-front { position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(135deg, #e62061, #ff3377); z-index: 3; border-radius: 0 0 10px 10px; clip-path: polygon(0 100%, 100% 100%, 100% 0, 50% -30%, 0 0); }
+        .envelope-flap { position: absolute; top: 0; left: 0; width: 100%; height: 70%; background: linear-gradient(135deg, #ff3377, #e62061); z-index: 4; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .wax-seal { position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%); font-size: 2.5rem; z-index: 5; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)); transition: opacity 0.5s; }
+        
+        /* Updated Letter CSS for better readability */
+        .letter { position: absolute; top: 10px; left: 5%; width: 90%; height: 90%; background: #fffde8; z-index: 2; border-radius: 5px; box-shadow: 0 0 15px rgba(0,0,0,0.2); padding: 25px; transform: translateY(0); transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); }
+        #typed-letter { color: #333; font-family: 'Playfair Display', serif; font-size: 1rem; line-height: 1.6; text-align: left; margin: 0; font-weight: 600; }
+        
+        .envelope-container.open { margin-bottom: 160px; /* Pushes the button down when opened */ }
+        .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+        .envelope-container.open .wax-seal { opacity: 0; }
+        .envelope-container.open .letter { transform: translateY(-80px) scale(1.1); z-index: 5; height: 350px; overflow-y: auto; box-shadow: 0 -10px 30px rgba(0,0,0,0.3); cursor: default; }
 
-        /* Hero Section */
-        .hero {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 50px 10%;
-            min-height: 80vh;
-        }
-        .hero-content { flex: 1; z-index: 2; }
-        .hero-content .main-title { font-size: 5rem; line-height: 1.1; margin: 10px 0; }
-        .cursive-text { font-family: var(--font-cursive); color: var(--primary-glow); font-size: 4rem; }
-        .tags {
-            display: inline-block; border: 1px solid var(--glass-border);
-            padding: 8px 15px; border-radius: 20px; font-size: 12px; margin-bottom: 20px;
-        }
-        .description { color: var(--text-muted); max-width: 400px; margin-bottom: 30px; }
+        /* Step 5 & 10: Galleries */
+        .gallery-wrap { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; width: 90%; max-width: 1200px; padding: 20px; overflow-y: auto; max-height: 70vh; }
+        .gallery-wrap::-webkit-scrollbar { display: none; }
+        .polaroid { background: #fff; padding: 12px 12px 40px 12px; border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); cursor: pointer; transition: 0.4s; position: relative; opacity: 0; transform: translateY(30px); }
+        .polaroid img { width: 220px; height: 250px; object-fit: cover; border-radius: 2px; }
+        .polaroid-cap { position: absolute; bottom: 12px; left: 0; width: 100%; text-align: center; color: #333; font-family: 'Playfair Display'; font-weight: 600; font-size: 1rem; }
+        .polaroid:hover { transform: scale(1.05) rotate(0deg) !important; z-index: 10; box-shadow: 0 20px 50px rgba(255,42,112,0.4); }
+        
+        .masonry { columns: 4 200px; column-gap: 20px; width: 90%; max-width: 1200px; padding: 20px; max-height: 75vh; overflow-y: auto; }
+        .masonry::-webkit-scrollbar { display: none; }
+        .masonry-item { break-inside: avoid; margin-bottom: 20px; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; transform: scale(0.9); transition: 0.4s; }
+        .masonry-item img { width: 100%; display: block; transition: 0.5s; }
+        .masonry-item:hover { box-shadow: 0 15px 40px rgba(255,42,112,0.4); transform: translateY(-5px); }
+        .masonry-item:hover img { transform: scale(1.1); filter: brightness(0.8); }
 
-        /* Stats Row */
-        .stats-row { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
-        .stat-box { display: flex; align-items: center; gap: 10px; background: var(--glass-bg); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--glass-border); }
+        /* Lightbox */
+        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 999; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.4s; backdrop-filter: blur(10px); }
+        .lightbox.active { opacity: 1; pointer-events: all; }
+        .lightbox img { max-width: 85%; max-height: 75vh; border-radius: 12px; box-shadow: 0 0 50px rgba(255,255,255,0.1); transform: scale(0.95); transition: 0.4s; }
+        .lightbox.active img { transform: scale(1); }
+        .lb-close { position: absolute; top: 30px; right: 40px; font-size: 3rem; color: #fff; cursor: pointer; text-shadow: 0 0 10px rgba(255,42,112,0.8); }
+        
+        /* Step 6: Shayari */
+        .shayari-box { font-family: var(--font-head); font-size: clamp(1.2rem, 3vw, 1.8rem); line-height: 2; font-style: italic; color: #f5f5f5; text-align: center; margin: 30px 0; text-shadow: 0 2px 15px rgba(255,255,255,0.2); }
+        
+        /* Step 7: 200 Reasons */
+        .reasons-container { width: 95%; max-width: 1000px; height: 60vh; overflow-y: auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; scroll-behavior: smooth; }
+        .reasons-container::-webkit-scrollbar { width: 6px; }
+        .reasons-container::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 10px; }
+        .reason-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 25px; border-radius: 16px; transition: 0.4s; position: relative; overflow: hidden; opacity: 0; transform: translateY(20px); }
+        .reason-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,42,112,0.1) 0%, transparent 70%); opacity: 0; transition: 0.5s; pointer-events: none; }
+        .reason-card:hover { transform: translateY(-5px); border-color: rgba(255,42,112,0.4); box-shadow: 0 10px 30px rgba(255,42,112,0.15); }
+        .reason-card:hover::before { opacity: 1; }
+        .reason-num { font-family: var(--font-head); font-size: 1.5rem; color: var(--neon-pink); font-weight: bold; margin-bottom: 10px; opacity: 0.8; }
+        
+        /* Step 8: Gift */
+        .gift-box { position: relative; width: 150px; height: 150px; margin: 20px auto; cursor: pointer; perspective: 1000px; transform-style: preserve-3d; transition: transform 0.3s; }
+        .gift-box:hover { transform: scale(1.05) rotate(2deg); }
+        .box-body { width: 100%; height: 100px; background: linear-gradient(135deg, #1b28cc, #00e5ff); position: absolute; bottom: 0; border-radius: 5px; box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 15px 35px rgba(0,0,0,0.5); }
+        .box-lid { width: 110%; height: 40px; background: linear-gradient(135deg, #00e5ff, #1b28cc); position: absolute; bottom: 90px; left: -5%; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 2; transition: transform 1s cubic-bezier(0.5, -0.5, 0.5, 1.5); transform-origin: bottom center; }
+        .ribbon { position: absolute; background: #ff2a70; box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+        .ribbon-v { width: 20px; height: 100%; left: 50%; transform: translateX(-50%); }
+        .ribbon-h { width: 100%; height: 20px; top: 50%; transform: translateY(-50%); }
+        .gift-box.open .box-lid { transform: translateY(-60px) rotateX(60deg) scale(1.1); opacity: 0; }
+        .gift-particles { position: absolute; top: 50%; left: 50%; pointer-events: none; z-index: 10; }
+        .butterfly { position: absolute; width: 20px; height: 20px; font-size: 24px; opacity: 0; }
 
-        .cta-buttons { display: flex; gap: 15px; }
+        /* Step 9: Balloons */
+        .sky-container { position: relative; width: 100vw; height: 70vh; overflow: hidden; display: flex; justify-content: center; align-items: flex-end; gap: 3vw; padding-bottom: 20px; }
+        .balloon-wrap { position: relative; cursor: pointer; transition: 0.3s; animation: float-balloon 3s ease-in-out infinite alternate; }
+        .balloon { width: 6vw; min-width: 60px; height: 8vw; min-height: 80px; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,42,112,0.9)); border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; box-shadow: inset -5px -5px 15px rgba(0,0,0,0.3), 0 10px 20px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; }
+        .balloon::after { content: ''; position: absolute; bottom: -40px; left: 50%; width: 1px; height: 40px; background: rgba(255,255,255,0.4); }
+        .balloon span { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        .balloon-wrap:hover { transform: scale(1.1) !important; filter: brightness(1.2); }
+        @keyframes float-balloon { 0% { transform: translateY(0) rotate(-2deg); } 100% { transform: translateY(-15px) rotate(2deg); } }
 
-        /* Hero Image & Glow */
-        .hero-image { flex: 1; position: relative; display: flex; justify-content: center; }
-        .glow-circle {
-            position: absolute;
-            width: 400px; height: 400px;
-            background: var(--primary-glow);
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.5;
-            z-index: -1;
-        }
-        .main-portrait { width: 100%; max-width: 450px; border-radius: 20px; z-index: 1; }
-
-        /* About Section */
-        .about-section { display: flex; align-items: center; justify-content: center; gap: 50px; padding: 80px 10%; flex-wrap: wrap; }
-        .polaroid-image { background: white; padding: 10px 10px 40px 10px; transform: rotate(-5deg); box-shadow: 0 10px 20px rgba(0,0,0,0.5); position: relative; }
-        .polaroid-image img { width: 250px; height: 300px; object-fit: cover; }
-        .about-text { max-width: 400px; }
-        .about-text h2 { margin-bottom: 15px; }
-        .about-text p { color: var(--text-muted); margin-bottom: 15px; line-height: 1.6; }
-
-        .in-numbers { width: 300px; text-align: center; }
-        .numbers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px; }
-
-        /* Grid Sections (Reels & Vibe) */
-        .grid-section { display: flex; gap: 40px; padding: 50px 10%; flex-wrap: wrap; }
-        .reels-container { flex: 2; }
-        .vibe-container { flex: 1; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-
-        .reels-grid { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; }
-        .reel-card {
-            min-width: 150px; height: 250px;
-            border-radius: 12px; background-size: cover; background-position: center;
-            position: relative; border: 1px solid var(--glass-border);
-            display: flex; align-items: flex-end; padding: 10px; font-weight: bold;
-        }
-        .vibe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .vibe-pill {
-            background: var(--glass-bg); border: 1px solid var(--glass-border);
-            padding: 15px; border-radius: 30px; text-align: center; font-size: 14px;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
-
-        /* Contact Banner */
-        .contact-banner {
-            display: flex; justify-content: space-between; align-items: center;
-            margin: 50px 10%; padding: 40px;
-            background: linear-gradient(135deg, rgba(20, 5, 30, 0.9), rgba(10, 2, 20, 0.9));
-        }
-        .contact-text h2 { margin-bottom: 10px; }
-        .contact-text p { color: var(--text-muted); margin-bottom: 20px; }
-        .contact-links { display: flex; flex-direction: column; gap: 15px; }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; }
-            .hero-content .main-title { font-size: 3.5rem; }
-            .stats-row, .cta-buttons { justify-content: center; }
-            .about-section, .grid-section, .contact-banner { flex-direction: column; }
-            .nav-links { display: none; }
-        }
-        /* CSS ENDS HERE */
+        /* Step 11: Finale */
+        .moon { width: 250px; height: 250px; background: radial-gradient(circle, #fff, #fdfcdc 60%, transparent 65%); position: absolute; top: -50px; left: 50%; transform: translateX(-50%); border-radius: 50%; box-shadow: 0 0 80px rgba(255,255,255,0.6), 0 0 150px rgba(255,255,255,0.3); z-index: 0; opacity: 0.8; }
+        .finale-text-wrap { position: relative; z-index: 2; text-align: center; }
+        
+        /* Hidden Secret (Step 12) */
+        .secret-heart { position: absolute; bottom: 20px; right: 25px; font-size: 1.5rem; opacity: 0.15; cursor: pointer; transition: 0.5s; z-index: 100; filter: grayscale(100%); }
+        .secret-heart:hover { opacity: 1; filter: grayscale(0%); text-shadow: 0 0 15px #ff2a70; transform: scale(1.2); }
+        .secret-page { background: #020205; }
+        .secret-handwriting { font-family: 'Playfair Display', cursive; font-size: 1.6rem; line-height: 2.2; color: #e0e0e0; max-width: 600px; margin: 0 auto; text-align: left; }
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">Chhavi<span>🦋</span></div>
-        <ul class="nav-links">
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#reels">Reels</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#youtube">YouTube</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <a href="#contact" class="btn-outline">Let's Connect <i class="fa-brands fa-telegram"></i></a>
-    </nav>
+    <audio id="bg-music" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+    </audio>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h4 class="greeting">✨ Hi, I'm ✨</h4>
-            <h1 class="main-title">Chhavi <br><span class="cursive-text">Kokliyal</span>♡</h1>
-            <div class="tags">
-                <span>✨ Content Creator</span> • <span>Dancer</span> • <span>Digital Creator</span>
-            </div>
-            <p class="description">Creating moments, telling stories, and spreading good vibes through content that connects. ✨</p>
-            
-            <div class="stats-row">
-                <div class="stat-box">
-                    <i class="fa-brands fa-instagram instagram-gradient"></i>
-                    <div><strong>136K+</strong><br><span>Followers</span></div>
+    <div class="aurora"></div>
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lb-close" onclick="closeLightbox()">&times;</span>
+        <img id="lb-img" src="" alt="Memory">
+        <p id="lb-cap" class="subtext mt-20" style="font-family: var(--font-head); font-size: 1.5rem;"></p>
+    </div>
+
+    <div class="step-container active" id="step-1">
+        <h1 class="heading glow-text" style="font-size: 2.5rem;">A Special Birthday Surprise Is Loading...</h1>
+        <div class="loading-bar-wrap"><div class="loading-bar" id="loading-bar"></div></div>
+    </div>
+
+    <div class="step-container" id="step-2">
+        <div class="glass-panel text-center">
+            <h1 class="heading glow-text" style="font-size: 2.2rem;">Security Check 🌍</h1>
+            <p class="subtext mb-20">Duniya ki sabse pyari ladki kaun hai?</p>
+            <input type="text" id="secret-input" class="secret-input hover-target" placeholder="Type here..." autocomplete="off">
+            <p id="hint-msg" class="subtext mt-20" style="color: #ff99aa; font-size: 0.9rem; opacity: 0;">Hint: Jiska Birthday Hai 😊</p>
+            <p id="success-msg" class="heading glow-text hidden" style="font-size: 1.5rem; margin-top: 15px; color: #00ff88;">Correct Answer ❤️</p>
+            <button class="btn-cinematic hover-target hidden" id="btn-next-2" onclick="nextStep(2, 3)">Unlock Magic ✨</button>
+        </div>
+    </div>
+
+    <div class="step-container" id="step-3">
+        <div class="glass-panel text-center">
+            <h1 class="heading glow-text">Make a Wish 🎂</h1>
+            <div class="cake mt-40">
+                <div class="tier tier-1"></div>
+                <div class="tier tier-2"></div>
+                <div class="tier tier-3"></div>
+                <div class="candle-wrap hover-target" onclick="lightCandles()" id="candle-btn">
+                    <div class="flame" id="flame"></div>
+                    <div class="candle-stick"></div>
                 </div>
-                <div class="stat-box">
-                    <div><strong>96</strong><br><span>Posts</span></div>
+            </div>
+            <div style="position: relative; display: flex; justify-content: center; height: 120px;">
+                <div class="timer-circle hidden" id="timer-ring"></div>
+                <div class="timer-text hidden" id="timer-text">10</div>
+            </div>
+            <p id="cake-msg" class="subtext mt-20">Click the candle to light it up.</p>
+            <button class="btn-cinematic hover-target hidden" id="btn-next-3" onclick="nextStep(3, 4)">Continue Journey</button>
+        </div>
+    </div>
+
+    <div class="step-container" id="step-4">
+        <div class="glass-panel text-center" style="max-width: 600px;">
+            <h1 class="heading glow-text" style="font-size: 2.5rem;">A Letter For You 💌</h1>
+            <p class="subtext">Click the envelope to open.</p>
+            <div class="envelope-container hover-target" id="envelope" onclick="openEnvelope()">
+                <div class="envelope-back"></div>
+                <div class="envelope-flap"></div>
+                <div class="envelope-front"></div>
+                <div class="wax-seal">❤️</div>
+                <div class="letter">
+                    <span id="typed-letter"></span>
                 </div>
-                <div class="stat-box">
-                    <div><strong>477</strong><br><span>Following</span></div>
-                </div>
-                <div class="stat-box">
-                    <i class="fa-brands fa-youtube" style="color: red;"></i>
-                    <div><strong>YouTube</strong><br><span>Channel</span></div>
-                </div>
             </div>
+            <button class="btn-cinematic hover-target hidden" id="btn-next-4" style="margin-top: 10px;" onclick="nextStep(4, 5)">See Memories 📸</button>
+        </div>
+    </div>
 
-            <div class="cta-buttons">
-                <a href="#reels" class="btn-primary"><i class="fa-solid fa-play"></i> Watch Reels</a>
-                <a href="#" class="btn-secondary"><i class="fa-brands fa-instagram"></i> Follow on Instagram ➔</a>
+    <div class="step-container" id="step-5">
+        <h1 class="heading glow-text">Beautiful Memories 🎞️</h1>
+        <div class="gallery-wrap" id="gallery-4">
             </div>
-        </div>
+        <button class="btn-cinematic hover-target" onclick="nextStep(5, 6)">Next Chapter 📖</button>
+    </div>
 
-        <div class="hero-image">
-            <div class="glow-circle"></div>
-            <!-- Yahan tum apni transparent background wali main PNG image lagana -->
-            <img src="https://via.placeholder.com/500x600" alt="Creator Portrait" class="main-portrait">
+    <div class="step-container" id="step-6">
+        <div class="glass-panel text-center">
+            <h1 class="heading glow-text" style="font-size: 2rem;">Kuch Lafz Tumhare Liye 🌙</h1>
+            <div class="shayari-box">
+                <span id="typed-shayari"></span>
+            </div>
+            <button class="btn-cinematic hover-target hidden" id="btn-next-6" onclick="nextStep(6, 7)">Continue ❤️</button>
         </div>
-    </section>
+    </div>
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="polaroid-image">
-            <!-- Yahan apni about me wali image lagana -->
-            <img src="https://via.placeholder.com/300x350" alt="About Me">
-            <div class="tape"></div>
-        </div>
-        <div class="about-text">
-            <h2>About Me</h2>
-            <p>I'm Chhavi, a passionate content creator and dancer who loves expressing creativity through dance, lifestyle, and entertaining content.</p>
-            <p>I believe in staying real, spreading positivity, and creating content that connects with people. ✨</p>
-            <a href="#" class="btn-outline">Know More About Me ➔</a>
-        </div>
-        <div class="glass-card in-numbers">
-            <h3>✨ In Numbers ✨</h3>
-            <div class="numbers-grid">
-                <div><i class="fa-solid fa-users text-pink"></i><br><strong>136K+</strong><br><span>Followers</span></div>
-                <div><i class="fa-brands fa-instagram text-pink"></i><br><strong>96</strong><br><span>Posts</span></div>
-                <div><i class="fa-regular fa-eye text-pink"></i><br><strong>50M+</strong><br><span>Views (Est.)</span></div>
-                <div><i class="fa-solid fa-heart text-pink"></i><br><strong>477</strong><br><span>Following</span></div>
+    <div class="step-container" id="step-7">
+        <h1 class="heading glow-text" style="font-size: 2rem; margin-bottom: 5px;">200 Reasons Why You're Amazing 💖</h1>
+        <p class="subtext mb-20" id="reason-progress">Loading reasons...</p>
+        <div class="reasons-container" id="reasons-grid">
             </div>
-        </div>
-    </section>
+        <p class="subtext mt-20 glow-text" style="font-family: var(--font-head); font-size: 1.2rem;">These are only a few of the countless reasons that make you wonderful. ❤️</p>
+        <button class="btn-cinematic hover-target" onclick="nextStep(7, 8)">Open Surprise 🎁</button>
+    </div>
 
-    <!-- Reels & Vibe Section -->
-    <section id="reels" class="grid-section">
-        <div class="reels-container">
-            <div class="section-header">
-                <h2>✨ Featured Reels ✨</h2>
-                <a href="#">View All ➔</a>
+    <div class="step-container" id="step-8">
+        <div class="glass-panel text-center">
+            <h1 class="heading glow-text">A Special Surprise 🎀</h1>
+            <p class="subtext mb-20">Tap the box to open your gift.</p>
+            <div class="gift-box hover-target" id="gift" onclick="openGift()">
+                <div class="box-lid"><div class="ribbon ribbon-h"></div><div class="ribbon ribbon-v"></div></div>
+                <div class="box-body"><div class="ribbon ribbon-h"></div><div class="ribbon ribbon-v"></div></div>
+                <div class="gift-particles" id="gift-particles"></div>
             </div>
-            <div class="reels-grid">
-                <!-- In placeholders ki jagah apne reels ki thumbnail image ka URL daalna -->
-                <div class="reel-card" style="background-image: url('https://via.placeholder.com/150x250');"><i class="fa-solid fa-play"></i> &nbsp;<span>1.2M</span></div>
-                <div class="reel-card" style="background-image: url('https://via.placeholder.com/150x250');"><i class="fa-solid fa-play"></i> &nbsp;<span>2.3M</span></div>
-                <div class="reel-card" style="background-image: url('https://via.placeholder.com/150x250');"><i class="fa-solid fa-play"></i> &nbsp;<span>1.8M</span></div>
-            </div>
+            <h2 id="gift-msg" class="heading glow-text hidden" style="font-size: 1.8rem; margin-top: 30px; line-height: 1.5;">Your smile is the most beautiful gift today. ❤️</h2>
+            <button class="btn-cinematic hover-target hidden" id="btn-next-8" onclick="nextStep(8, 9)">Release Balloons 🎈</button>
         </div>
+    </div>
 
-        <div class="vibe-container">
-            <div class="section-header">
-                <h2>✨ My Vibe ✨</h2>
+    <div class="step-container" id="step-9">
+        <h1 class="heading glow-text" style="margin-top: 5vh; font-size: 2.2rem;">Tap to Release Magic 🎈</h1>
+        <div class="sky-container" id="balloon-sky">
             </div>
-            <div class="vibe-grid">
-                <div class="vibe-pill"><i class="fa-solid fa-person-dancing"></i> Dance</div>
-                <div class="vibe-pill"><i class="fa-solid fa-bag-shopping"></i> Lifestyle</div>
-                <div class="vibe-pill"><i class="fa-solid fa-masks-theater"></i> Entertainment</div>
-                <div class="vibe-pill"><i class="fa-solid fa-fire"></i> Trends</div>
-                <div class="vibe-pill"><i class="fa-solid fa-lightbulb"></i> Creativity</div>
-                <div class="vibe-pill"><i class="fa-solid fa-hand-sparkles"></i> Good Vibes</div>
-            </div>
+        <div id="balloon-msg-box" class="glass-panel hidden" style="position: absolute; bottom: 15vh; padding: 20px; width: auto; min-width: 300px; text-align: center;">
+            <h3 id="balloon-msg-text" style="font-family: var(--font-head); font-size: 1.5rem; font-style: italic;"></h3>
         </div>
-    </section>
+        <button class="btn-cinematic hover-target hidden" id="btn-next-9" style="position: absolute; bottom: 5vh;" onclick="nextStep(9, 10)">More Memories 📸</button>
+    </div>
 
-    <!-- Contact Banner -->
-    <section id="contact" class="contact-banner glass-card">
-        <div class="contact-text">
-            <h2>Let's Create Something Amazing Together! ✨</h2>
-            <p>For collaborations, promotions, or just to say hi, feel free to connect with me on Instagram!</p>
-            <a href="#" class="btn-primary"><i class="fa-brands fa-instagram"></i> DM on Instagram</a>
+    <div class="step-container" id="step-10">
+        <h1 class="heading glow-text" style="margin-top: 20px;">The Memory Wall 🎞️</h1>
+        <div class="masonry" id="masonry-wall">
+            </div>
+        <button class="btn-cinematic hover-target" onclick="nextStep(10, 11)" style="margin-bottom: 20px;">Grand Finale 🎉</button>
+    </div>
+
+    <div class="step-container" id="step-11">
+        <div class="moon"></div>
+        <div class="finale-text-wrap" style="max-width: 800px; padding: 20px;">
+            <h1 class="heading glow-text" style="font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 30px;">Happy Birthday Aaru ❤️</h1>
+            <p class="subtext glow-text" style="font-family: var(--font-head); font-size: 1.8rem; margin-bottom: 15px;">Thank You For Existing.</p>
+            <p class="subtext" style="font-size: 1.1rem; line-height: 1.8;">May every dream you wish for come true, and may your life always be filled with happiness, peace, love, success, beautiful memories, and endless smiles.</p>
+            <button class="btn-cinematic hover-target" style="margin-top: 50px;" onclick="location.reload()">Replay The Journey 🔄</button>
         </div>
-        <div class="contact-links">
-            <p><i class="fa-brands fa-instagram instagram-gradient"></i> Instagram<br>@chhavikokliyal</p>
-            <p><i class="fa-brands fa-youtube" style="color: red;"></i> YouTube<br>@chhavikokliyal</p>
+        
+        <div class="secret-heart hover-target" onclick="triggerSecret()">🤍</div>
+    </div>
+
+    <div class="step-container secret-page" id="step-12a">
+        <div class="glass-panel text-center" style="background: rgba(0,0,0,0.8); border-color: #ff2a70;">
+            <h1 class="heading glow-text" style="color: #ff2a70; font-size: 2rem;">Ek Aakhri Baat...</h1>
+            <p class="subtext mt-20" style="font-family: var(--font-head); font-size: 1.4rem; font-style: italic; line-height: 2;">
+                "Kuch baatein unkahi reh jati hain,<br>
+                Kuch yaadein hamesha dil mein thehar jati hain,<br>
+                Zindagi ke is safar mein chahe jo bhi ho,<br>
+                Tumhari khushi ki dua labon pe hamesha aati hai."
+            </p>
+            <button class="btn-cinematic hover-target" onclick="nextStep('12a', '12b')" style="border-color: #ff2a70;">Next ❤️</button>
         </div>
-    </section>
+    </div>
+
+    <div class="step-container secret-page" id="step-12b">
+        <div class="glass-panel text-center" style="background: rgba(0,0,0,0.8); padding: 50px;">
+            <div class="secret-handwriting">
+                <span id="typed-secret"></span>
+            </div>
+        </div>
+    </div>
 
     <script>
-        /* JAVASCRIPT STARTS HERE */
-        // Smooth scrolling navbar links ke liye
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+        // --- 1. Custom Cursor ---
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
+            cursorDot.style.left = e.clientX + 'px'; cursorDot.style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('.hover-target').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
         });
 
-        // Premium Scroll Reveal Animation
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
+        // --- 2. Canvas Starfield Background ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, stars = [];
+        function initStars() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            stars = [];
+            for (let i = 0; i < 200; i++) {
+                stars.push({
+                    x: Math.random() * width, y: Math.random() * height,
+                    r: Math.random() * 1.5,
+                    dx: (Math.random() - 0.5) * 0.2, dy: (Math.random() - 0.5) * 0.2,
+                    alpha: Math.random()
+                });
+            }
+        }
+        function drawStars() {
+            ctx.clearRect(0, 0, width, height);
+            stars.forEach(s => {
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
+                ctx.fill();
+                s.x += s.dx; s.y += s.dy;
+                if (s.x < 0 || s.x > width) s.dx *= -1;
+                if (s.y < 0 || s.y > height) s.dy *= -1;
+                s.alpha += (Math.random() - 0.5) * 0.05;
+                if(s.alpha < 0.1) s.alpha = 0.1; if(s.alpha > 1) s.alpha = 1;
+            });
+            requestAnimationFrame(drawStars);
+        }
+        window.addEventListener('resize', initStars);
+        initStars(); drawStars();
+
+        // --- 3. Step Navigation (GSAP) ---
+        function nextStep(current, next) {
+            const currentEl = document.getElementById(`step-${current}`);
+            const nextEl = document.getElementById(`step-${next}`);
+            
+            gsap.to(currentEl, {
+                opacity: 0, scale: 1.1, duration: 0.8, ease: "power2.inOut",
+                onComplete: () => {
+                    currentEl.classList.remove('active');
+                    nextEl.classList.add('active');
+                    gsap.fromTo(nextEl, {opacity: 0, scale: 0.9}, {opacity: 1, scale: 1, duration: 1, ease: "power2.out"});
+                    triggerStepLogic(next);
+                }
+            });
+        }
+
+        // Logical trigger for specific steps
+        // BUG FIXED: Removed `initLetter()` from step 4 check which was causing the Uncaught ReferenceError
+        function triggerStepLogic(step) {
+            if (step == 5) animateGallery4();
+            if (step == 6) initShayari();
+            if (step == 7) load200Reasons();
+            if (step == 9) createBalloons();
+            if (step == 10) animateMasonry();
+            if (step == 11) triggerFinale();
+            if (step == '12b') initSecretText();
+        }
+
+        // --- Step 1: Loading Simulation ---
+        window.onload = () => {
+            let progress = 0;
+            const bar = document.getElementById('loading-bar');
+            const inter = setInterval(() => {
+                progress += Math.random() * 12;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(inter);
+                    setTimeout(() => nextStep(1, 2), 600);
+                }
+                bar.style.width = progress + '%';
+            }, 300);
         };
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Sections aur cards ko scroll pe animate karne ke liye
-        document.querySelectorAll('section, .glass-card').forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(20px)';
-            section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-            observer.observe(section);
+        // --- Step 2: Secret Input ---
+        const secInput = document.getElementById('secret-input');
+        secInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') checkAnswer();
         });
-        /* JAVASCRIPT ENDS HERE */
+        function checkAnswer() {
+            const val = secInput.value.trim().toLowerCase();
+            const hint = document.getElementById('hint-msg');
+            if (val === 'aaru') {
+                document.getElementById('bg-music').play().catch(e => console.log("Audio blocked by browser."));
+                
+                secInput.style.borderColor = '#00ff88';
+                secInput.style.boxShadow = '0 0 20px rgba(0,255,136,0.5)';
+                document.getElementById('success-msg').classList.remove('hidden');
+                document.getElementById('btn-next-2').classList.remove('hidden');
+                hint.style.opacity = 0;
+                confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+            } else {
+                secInput.classList.remove('shake');
+                void secInput.offsetWidth; 
+                secInput.classList.add('shake');
+                secInput.value = '';
+                hint.style.opacity = 1;
+            }
+        }
+
+        // --- Step 3: Cake & Timer ---
+        function lightCandles() {
+            const flame = document.getElementById('flame');
+            flame.style.opacity = 1;
+            document.getElementById('cake-msg').innerText = "Close your eyes and make a beautiful wish...";
+            document.getElementById('candle-btn').style.pointerEvents = 'none';
+            
+            gsap.to('.aurora', {opacity: 0.2, duration: 2});
+            
+            const ring = document.getElementById('timer-ring');
+            const text = document.getElementById('timer-text');
+            ring.classList.remove('hidden'); text.classList.remove('hidden');
+            gsap.to([ring, text], {opacity: 1, duration: 1});
+
+            let time = 10;
+            const interval = setInterval(() => {
+                time--;
+                text.innerText = time;
+                if(time <= 0) {
+                    clearInterval(interval);
+                    text.innerText = "✨";
+                    triggerCakeFireworks();
+                }
+            }, 1000);
+        }
+        function triggerCakeFireworks() {
+            gsap.to('.aurora', {opacity: 1, duration: 2});
+            const duration = 3000; const end = Date.now() + duration;
+            (function frame() {
+                confetti({ particleCount: 7, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff2a70', '#00e5ff', '#ffffff'] });
+                confetti({ particleCount: 7, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff2a70', '#00e5ff', '#ffffff'] });
+                if (Date.now() < end) requestAnimationFrame(frame);
+                else document.getElementById('btn-next-3').classList.remove('hidden');
+            }());
+        }
+
+        // --- Step 4: Letter Typewriter ---
+        let letterTyped = false;
+        function openEnvelope() {
+            if(letterTyped) return;
+            const env = document.getElementById('envelope');
+            env.classList.add('open');
+            setTimeout(() => {
+                letterTyped = true;
+                // EDITABLE LETTER TEXT HERE
+                new Typed('#typed-letter', {
+                    strings: ["Dear Aaru,<br><br>Happy Birthday to the most amazing person in the world.<br><br>Your presence brings so much light, and your smile makes everything perfectly magical. I hope this day is exactly as beautiful as your heart.<br><br>With love. ❤️"],
+                    typeSpeed: 35, showCursor: false,
+                    onComplete: () => {
+                        const btn = document.getElementById('btn-next-4');
+                        btn.classList.remove('hidden');
+                        gsap.fromTo(btn, {opacity:0, y:20}, {display: 'inline-block', opacity:1, y:0, duration:1});
+                    }
+                });
+            }, 1500);
+        }
+
+        // --- Lightbox Logic ---
+        function openLightbox(src, cap) {
+            document.getElementById('lb-img').src = src;
+            document.getElementById('lb-cap').innerText = cap;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+
+        // --- Step 5: Gallery 4 Photos ---
+        let gal4Loaded = false;
+        function animateGallery4() {
+            if(gal4Loaded) return; gal4Loaded = true;
+            const captions = ["Golden Hour", "Perfect Smile", "Candid Magic", "My Favorite"];
+            const cont = document.getElementById('gallery-4');
+            let html = '';
+            for(let i=1; i<=4; i++) {
+                const rot = (Math.random() - 0.5) * 15;
+                html += `
+                    <div class="polaroid hover-target" style="transform: rotate(${rot}deg) translateY(30px);" onclick="openLightbox('photo${i}.jpg', '${captions[i-1]}')">
+                        <img src="photo${i}.jpg" onerror="this.src='https://via.placeholder.com/220x250/ff2a70/ffffff?text=Photo+${i}'" alt="Memory">
+                        <div class="polaroid-cap">${captions[i-1]}</div>
+                    </div>
+                `;
+            }
+            cont.innerHTML = html;
+            gsap.to('.polaroid', {opacity: 1, y: 0, stagger: 0.2, duration: 1, ease: "back.out(1.7)"});
+        }
+
+        // --- Step 6: Shayari ---
+        let shayariTyped = false;
+        function initShayari() {
+            if(shayariTyped) return; shayariTyped = true;
+            new Typed('#typed-shayari', {
+                strings: ["Chandni raaton mein sitaron ki tarah,<br>Tum zindagi mein aayi baharon ki tarah.<br>Dua hai labon par bas yahi ek meri,<br>Muskurati raho hamesha in nazaron ki tarah. ✨"],
+                typeSpeed: 45, showCursor: false,
+                onComplete: () => document.getElementById('btn-next-6').classList.remove('hidden')
+            });
+        }
+
+        // --- Step 7: 200 Reasons ---
+        let reasonsLoaded = false;
+        function load200Reasons() {
+            if(reasonsLoaded) return; reasonsLoaded = true;
+            const baseReasons = [
+                "Your beautiful smile", "The way you care", "Your pure heart", "Your cute anger", "Your magical eyes", 
+                "How you listen", "Your intelligence", "Your sense of humor", "The way you support", "You are my peace",
+                "Your kindness", "Your voice", "How strong you are", "Your innocent face", "Your elegance",
+                "The way you dress", "Your positive aura", "Your respect for others", "The way you laugh", "Your existence"
+            ];
+            const emojis = ["❤️", "✨", "🌸", "🦋", "🎀", "💖", "💫"];
+            const cont = document.getElementById('reasons-grid');
+            let html = '';
+            for(let i=1; i<=200; i++) {
+                const text = baseReasons[i % baseReasons.length];
+                const emoji = emojis[i % emojis.length];
+                html += `
+                    <div class="reason-card hover-target">
+                        <div class="reason-num">#${i}</div>
+                        <div style="font-size: 0.95rem; line-height: 1.5;">${text} ${emoji}</div>
+                    </div>
+                `;
+            }
+            cont.innerHTML = html;
+            
+            gsap.to('.reason-card', { opacity: 1, y: 0, stagger: 0.02, duration: 0.5, ease: "power1.out" });
+            document.getElementById('reason-progress').innerText = "Scroll to discover them all...";
+        }
+
+        // --- Step 8: Gift ---
+        function openGift() {
+            const gift = document.getElementById('gift');
+            if(gift.classList.contains('open')) return;
+            gift.classList.add('open');
+            
+            const partCont = document.getElementById('gift-particles');
+            const symbols = ['🦋', '✨', '💖', '🌸'];
+            for(let i=0; i<30; i++) {
+                const span = document.createElement('span');
+                span.className = 'butterfly';
+                span.innerText = symbols[Math.floor(Math.random()*symbols.length)];
+                partCont.appendChild(span);
+                
+                const angle = Math.random() * Math.PI * 2;
+                const dist = 100 + Math.random() * 200;
+                gsap.to(span, {
+                    x: Math.cos(angle) * dist,
+                    y: Math.sin(angle) * dist - 150,
+                    opacity: [0, 1, 0],
+                    rotation: Math.random() * 360,
+                    scale: 1 + Math.random(),
+                    duration: 2 + Math.random() * 2,
+                    ease: "power2.out"
+                });
+            }
+            
+            setTimeout(() => {
+                document.getElementById('gift-msg').classList.remove('hidden');
+                gsap.fromTo('#gift-msg', {scale:0.8, opacity:0}, {scale:1, opacity:1, duration:1, ease: "elastic.out(1, 0.5)"});
+                document.getElementById('btn-next-8').classList.remove('hidden');
+            }, 1000);
+        }
+
+        // --- Step 9: Balloons ---
+        let balloonsMade = false; let popped = 0;
+        function createBalloons() {
+            if(balloonsMade) return; balloonsMade = true;
+            const words = ["Happiness", "Dreams", "Hope", "Joy", "Success", "Peace", "Kindness", "Confidence", "Adventure", "Love"];
+            const sky = document.getElementById('balloon-sky');
+            
+            words.forEach((w, i) => {
+                const wrap = document.createElement('div');
+                wrap.className = 'balloon-wrap hover-target';
+                wrap.style.animationDelay = `${Math.random() * 2}s`;
+                
+                const b = document.createElement('div');
+                b.className = 'balloon';
+                const hue = 320 + (Math.random() * 40); 
+                b.style.background = `radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), hsl(${hue}, 100%, 60%))`;
+                
+                const span = document.createElement('span'); span.innerText = w;
+                b.appendChild(span); wrap.appendChild(b);
+                
+                wrap.onclick = () => releaseBalloon(wrap, w);
+                sky.appendChild(wrap);
+            });
+        }
+        function releaseBalloon(el, word) {
+            el.onclick = null; 
+            popped++;
+            gsap.to(el, {y: -window.innerHeight, opacity: 0, duration: 2, ease: "power1.in"});
+            
+            const msgBox = document.getElementById('balloon-msg-box');
+            msgBox.classList.remove('hidden');
+            document.getElementById('balloon-msg-text').innerText = `Wishing you endless ${word}! ✨`;
+            
+            if(popped >= 3) {
+                document.getElementById('btn-next-9').classList.remove('hidden');
+            }
+        }
+
+        // --- Step 10: Masonry ---
+        let masonryLoaded = false;
+        function animateMasonry() {
+            if(masonryLoaded) return; masonryLoaded = true;
+            const wall = document.getElementById('masonry-wall');
+            let html = '';
+            for(let i=5; i<=12; i++) {
+                html += `
+                    <div class="masonry-item hover-target" onclick="openLightbox('photo${i}.jpg', 'Beautiful Memory')">
+                        <img src="photo${i}.jpg" onerror="this.src='https://via.placeholder.com/300x${300 + (i%3)*100}/ff2a70/ffffff?text=Photo+${i}'" alt="Wall">
+                    </div>
+                `;
+            }
+            wall.innerHTML = html;
+            gsap.to('.masonry-item', {opacity: 1, scale: 1, stagger: 0.1, duration: 0.8, ease: "back.out(1.5)"});
+        }
+
+        // --- Step 11: Finale ---
+        function triggerFinale() {
+            setInterval(() => {
+                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff2a70', '#00e5ff'] });
+                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff2a70', '#00e5ff'] });
+            }, 1000);
+            
+            for(let i=0; i<15; i++) {
+                const lantern = document.createElement('div');
+                lantern.style.position = 'absolute';
+                lantern.style.width = '20px'; lantern.style.height = '30px';
+                lantern.style.background = '#ffcc00';
+                lantern.style.borderRadius = '5px';
+                lantern.style.boxShadow = '0 0 20px #ff9900';
+                lantern.style.bottom = '-50px';
+                lantern.style.left = `${Math.random() * 100}vw`;
+                lantern.style.opacity = '0.8';
+                document.getElementById('step-11').appendChild(lantern);
+                
+                gsap.to(lantern, {
+                    y: -window.innerHeight - 100,
+                    x: `+=${(Math.random()-0.5)*200}`,
+                    duration: 10 + Math.random()*10,
+                    repeat: -1,
+                    ease: "none"
+                });
+            }
+        }
+
+        // --- Step 12: Hidden Secret ---
+        function triggerSecret() {
+            const cur = document.getElementById('step-11');
+            const sec = document.getElementById('step-12a');
+            gsap.to(cur, {opacity: 0, duration: 0.5, onComplete: () => {
+                cur.classList.remove('active');
+                sec.classList.add('active');
+                gsap.to(sec, {opacity: 1, duration: 1});
+            }});
+        }
+
+        let secretTyped = false;
+        function initSecretText() {
+            if(secretTyped) return; secretTyped = true;
+            new Typed('#typed-secret', {
+                strings: ["Happy Birthday, Aaru. ❤️<br><br>I wish you a lifetime of happiness, peace, success, beautiful memories, and endless smiles.<br><br>Whatever happened, it wasn't my fault.<br><br>Take care. Bye. ❤️"],
+                typeSpeed: 40, showCursor: true, cursorChar: '|'
+            });
+        }
     </script>
 </body>
 </html>
