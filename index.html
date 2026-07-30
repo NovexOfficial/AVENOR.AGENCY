@@ -124,7 +124,7 @@
         .wax-seal { position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%); font-size: 2.5rem; z-index: 5; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)); transition: opacity 0.5s; }
         
         .letter { position: absolute; top: 10px; left: 5%; width: 90%; height: 90%; background: #fffde8; z-index: 2; border-radius: 5px; box-shadow: 0 0 15px rgba(0,0,0,0.5); padding: 25px; transform: translateY(0); transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); }
-        #typed-letter { color: #222; font-family: 'Playfair Display', serif; font-size: 1rem; line-height: 1.6; text-align: left; margin: 0; font-weight: 600; }
+        #typed-letter { color: #222; font-family: 'Playfair Display', serif; font-size: 1rem; line-height: 1.6; text-align: left; margin: 0; font-weight: 600; white-space: pre-line; }
         
         .envelope-container.open { margin-bottom: 220px; animation: none; transform: scale(1.05); }
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
@@ -134,7 +134,7 @@
         /* Step 5 & 10: Galleries & Sher */
         .gallery-wrap { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; width: 100%; max-width: 1000px; padding: 20px; overflow-y: auto; max-height: 60vh; }
         .gallery-wrap::-webkit-scrollbar { display: none; }
-        .polaroid { background: #fff; padding: 10px 10px 35px 10px; border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); cursor: pointer; transition: 0.4s; position: relative; opacity: 0; transform: translateY(30px); will-change: transform; }
+        .polaroid { background: #fff; padding: 10px 10px 35px 10px; border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); cursor: pointer; transition: 0.4s; position: relative; opacity: 1; transform: translateY(0); will-change: transform; }
         .polaroid img { width: 180px; height: 210px; object-fit: cover; border-radius: 2px; background: #222; }
         .polaroid-cap { position: absolute; bottom: 10px; left: 0; width: 100%; text-align: center; color: #333; font-family: 'Playfair Display'; font-weight: 600; font-size: 0.9rem; }
         .polaroid:hover { transform: scale(1.1) rotate(0deg) !important; z-index: 10; box-shadow: 0 20px 50px rgba(255,42,112,0.5); }
@@ -143,7 +143,7 @@
 
         .masonry { columns: 3 250px; column-gap: 20px; width: 95%; max-width: 1200px; padding: 20px; max-height: 70vh; overflow-y: auto; }
         .masonry::-webkit-scrollbar { display: none; }
-        .masonry-item { break-inside: avoid; margin-bottom: 20px; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; transform: scale(0.9); transition: 0.4s; will-change: transform; }
+        .masonry-item { break-inside: avoid; margin-bottom: 20px; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 1; transform: scale(1); transition: 0.4s; will-change: transform; }
         .masonry-item img { width: 100%; display: block; transition: 0.5s; background: #222; min-height: 200px; }
         .masonry-item:hover { box-shadow: 0 15px 40px rgba(255,42,112,0.5); transform: translateY(-5px); z-index: 5; }
         .masonry-item:hover img { transform: scale(1.1); filter: brightness(0.9); }
@@ -156,13 +156,13 @@
         .lb-close { position: absolute; top: 30px; right: 40px; font-size: 3rem; color: #fff; cursor: pointer; text-shadow: 0 0 10px rgba(255,42,112,0.8); }
         
         /* Step 6: Shayari */
-        .shayari-box { font-family: var(--font-head); font-size: clamp(1rem, 2.5vw, 1.5rem); line-height: 2; font-style: italic; color: #f5f5f5; text-align: center; margin: 30px 0; text-shadow: 0 2px 15px rgba(0,0,0,0.8); padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px; border-left: 3px solid var(--neon-pink); }
+        .shayari-box { font-family: var(--font-head); font-size: clamp(1rem, 2.5vw, 1.5rem); line-height: 2; font-style: italic; color: #f5f5f5; text-align: center; margin: 30px 0; text-shadow: 0 2px 15px rgba(0,0,0,0.8); padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px; border-left: 3px solid var(--neon-pink); white-space: pre-line;}
         
-        /* Step 7: 200 Reasons (Fixed Scroll & Overflow) */
+        /* Step 7: 200 Reasons */
         .reasons-container { width: 95%; max-width: 1000px; height: 60vh; overflow-y: auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; scroll-behavior: smooth; margin-top: 10px;}
         .reasons-container::-webkit-scrollbar { width: 6px; }
         .reasons-container::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 10px; }
-        .reason-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px 20px; border-radius: 16px; transition: 0.4s; position: relative; overflow: hidden; opacity: 0; transform: translateY(20px); text-align: left; display: flex; align-items: center; min-height: 80px; height: auto; word-wrap: break-word;}
+        .reason-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px 20px; border-radius: 16px; transition: 0.4s; position: relative; overflow: hidden; opacity: 1; transform: translateY(0); text-align: left; display: flex; align-items: center; min-height: 80px; height: auto; word-wrap: break-word;}
         .reason-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,42,112,0.15) 0%, transparent 70%); opacity: 0; transition: 0.5s; pointer-events: none; }
         .reason-card:hover { transform: translateY(-5px) scale(1.02); border-color: rgba(255,42,112,0.5); box-shadow: 0 10px 30px rgba(255,42,112,0.2); }
         .reason-card:hover::before { opacity: 1; }
@@ -180,7 +180,7 @@
         .ribbon-h { width: 100%; height: 20px; top: 50%; transform: translateY(-50%); }
         
         .surprise-photo-wrap { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%) scale(0); opacity: 0; z-index: 4; transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .surprise-photo { width: 200px; border-radius: 15px; border: 3px solid #fff; box-shadow: 0 10px 40px rgba(255,42,112,0.6); background: #222; min-height: 250px;}
+        .surprise-photo { width: 200px; border-radius: 15px; border: 3px solid #fff; box-shadow: 0 10px 40px rgba(255,42,112,0.6); background: #222; min-height: 250px; object-fit: cover; }
         
         .gift-box.open .box-lid { transform: translateY(-100px) rotateX(60deg) scale(1.1); opacity: 0; }
         .gift-box.open ~ .surprise-photo-wrap { transform: translateX(-50%) translateY(-120px) scale(1); opacity: 1; z-index: 10; }
@@ -190,16 +190,15 @@
         .balloon-wrap { position: relative; cursor: pointer; transition: 0.3s; animation: float-balloon 3s ease-in-out infinite alternate; z-index: 5; }
         .balloon { width: 6vw; min-width: 65px; height: 8vw; min-height: 85px; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,42,112,1)); border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; box-shadow: inset -5px -5px 15px rgba(0,0,0,0.4), 0 10px 20px rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; transition: 0.3s; }
         .balloon::after { content: ''; position: absolute; bottom: -40px; left: 50%; width: 1px; height: 40px; background: rgba(255,255,255,0.5); }
-        .balloon span { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); text-align: center; color: #fff; }
+        .balloon span { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); text-align: center; color: #fff; padding: 5px; }
         .balloon-wrap:hover .balloon { transform: scale(1.15); filter: brightness(1.2); box-shadow: 0 0 30px rgba(255,255,255,0.4); }
         @keyframes float-balloon { 0% { transform: translateY(0) rotate(-3deg); } 100% { transform: translateY(-20px) rotate(3deg); } }
 
-        /* Step 11: Finale (Face crop fix applied) */
+        /* Step 11: Finale */
         .finale-img-wrap { width: 220px; height: 220px; border-radius: 50%; padding: 5px; background: linear-gradient(45deg, #ff2a70, #d4af37); margin: 0 auto 20px; box-shadow: 0 0 50px rgba(255,42,112,0.6); overflow: hidden; position: relative; z-index: 5; }
-        /* Adjusted object-position to top so face is always visible */
         .finale-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: top; background: #222; } 
         
-        /* Hidden Secret (Step 12) Glowing Black Heart */
+        /* Secret Glow Heart */
         .secret-heart { position: absolute; bottom: 25px; right: 30px; font-size: 2rem; cursor: pointer; z-index: 1000; filter: grayscale(100%) brightness(0.1) drop-shadow(0 0 10px rgba(255,255,255,0.5)); animation: heartbeat 2s infinite; transition: 0.3s; }
         @keyframes heartbeat { 0%, 100% { transform: scale(1); filter: grayscale(100%) brightness(0.1) drop-shadow(0 0 10px rgba(255,255,255,0.5)); } 50% { transform: scale(1.2); filter: grayscale(100%) brightness(0.3) drop-shadow(0 0 25px rgba(255,42,112,0.8)); } }
         .secret-heart:hover { transform: scale(1.3); filter: grayscale(100%) brightness(0.5) drop-shadow(0 0 30px #ff2a70); animation: none; }
@@ -245,7 +244,7 @@
             <h1 class="heading glow-text" style="font-size: 2.2rem; margin-bottom: 10px;">Security Check 🌍</h1>
             <p class="subtext" style="color: #ff99aa;">Duniya ki sabse pyari ladki kaun hai?</p>
             
-            <div class="secret-input-wrapper">
+            <div class="secret-input-wrapper" id="input-wrap">
                 <input type="text" id="secret-input" class="secret-input hover-target" placeholder="Type name..." autocomplete="off">
                 <button class="btn-cinematic hover-target" onclick="checkAnswer()" style="margin-top: 10px; padding: 12px 40px;">Enter</button>
             </div>
@@ -327,9 +326,7 @@
         <h1 class="heading glow-text" style="font-size: 2rem; margin-bottom: 5px; margin-top: 20px;">200 Reasons Why You're Amazing 💖</h1>
         <p class="subtext scroll-indicator" id="scroll-hint">Scroll down completely to unlock the surprise... 👇</p>
         
-        <div class="reasons-container" id="reasons-grid">
-            <!-- Grid items injected by JS -->
-        </div>
+        <div class="reasons-container" id="reasons-grid"></div>
 
         <button class="btn-cinematic hover-target hidden" id="btn-next-7" style="margin-bottom: 20px; margin-top: 15px;" onclick="nextStep(7, 8)">Open Surprise 🎁</button>
     </div>
@@ -347,7 +344,6 @@
                 </div>
                 
                 <div class="surprise-photo-wrap" id="surprise-photo">
-                    <!-- .jpeg image fix applied -->
                     <img src="surprise.jpg" class="surprise-photo" alt="Surprise">
                 </div>
             </div>
@@ -397,47 +393,71 @@
             <p class="subtext" style="font-family: var(--font-head); font-size: 1.4rem; font-style: italic; line-height: 2; color: #ddd;">
                 "Kuch baatein unkahi reh jati hain,<br>
                 Kuch yaadein hamesha dil mein thehar jati hain,<br>
-                Zindagi ke is safar mein chahe jo bhi ho,<br>
-                Tumhari khushi ki dua labon pe hamesha aati hai."
+                Zindagi ke is safar mein chahe jitni bhi dooriyan aayein,<br>
+                Aaru, tum humesha mere dil ke sabse kareeb rahogi." ❤️
             </p>
-            <button class="btn-cinematic hover-target" onclick="nextStep('12a', '12b')" style="border-color: #fff; margin-top: 30px;">Next 🤍</button>
+            <button class="btn-cinematic hover-target" onclick="nextStep('12a', '12b')" style="margin-top: 30px;">Ek Aakhri Baat... ✨</button>
         </div>
     </div>
 
     <!-- Step 12b: Secret Part 2 -->
     <div class="step-container secret-page" id="step-12b">
-        <div class="glass-panel text-center" style="background: rgba(0,0,0,0.85); border-color: #555;">
-            <h1 class="heading glow-text" style="font-size: 2.2rem; color: #fff; margin-bottom: 20px;">Always & Forever ❤️</h1>
-            <p class="secret-handwriting">
-                You are my most precious reality, my calmest place, and my favorite reason to smile every single day. <br><br>
-                No matter where life takes us, you will always have a special place in my heart that nobody else can ever touch. Happy Birthday, Aaru 🤌👀💝! 💐✨
+        <div class="glass-panel text-center" style="background: rgba(0,0,0,0.85); border-color: var(--neon-pink);">
+            <h1 class="heading glow-text" style="font-size: 2.2rem;">Forever & Always ♾️</h1>
+            <p class="secret-handwriting" style="margin-top: 20px;">
+                You are my past, my present, and my entire future.<br>
+                Happy Birthday once again, my love! 💖
             </p>
-            <button class="btn-cinematic hover-target" onclick="nextStep('12b', 11)" style="border-color: #ff2a70; margin-top: 30px;">Back To Journey 💫</button>
+            <button class="btn-cinematic hover-target" onclick="nextStep('12b', 11)" style="margin-top: 30px;">Back to Finale 🌸</button>
         </div>
     </div>
 
-    <!-- JavaScript Core Script Engine -->
+    <!-- JavaScript Execution Logic -->
     <script>
-        // 1. Custom Mouse Cursor Physics & Hover Effects
+        // Audio playback helper
+        const bgMusic = document.getElementById('bg-music');
+        let musicStarted = false;
+        function playMusic() {
+            if(!musicStarted && bgMusic) {
+                bgMusic.volume = 0.5;
+                bgMusic.play().then(() => { musicStarted = true; }).catch(e => console.log(e));
+            }
+        }
+        document.addEventListener('click', playMusic, { once: true });
+
+        // Step Navigation
+        function nextStep(current, next) {
+            playMusic();
+            const currStr = typeof current === 'number' ? 'step-' + current : 'step-' + current;
+            const nextStr = typeof next === 'number' ? 'step-' + next : 'step-' + next;
+            
+            const currElem = document.getElementById(currStr);
+            const nextElem = document.getElementById(nextStr);
+            
+            if(currElem) currElem.classList.remove('active');
+            if(nextElem) {
+                nextElem.classList.add('active');
+                
+                // Triggers per step entry
+                if(next === 6) initShayariTyped();
+                if(next === 11) fireFinaleConfetti();
+            }
+        }
+
+        /* Custom Cursor Motion */
         const cursor = document.querySelector('.cursor');
         const cursorDot = document.querySelector('.cursor-dot');
-        const teddy = document.getElementById('teddy-bear');
-
         document.addEventListener('mousemove', (e) => {
             gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
             gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0.01 });
-            
-            // Subtle Teddy Bear tracking animation
-            const teddyX = (e.clientX - window.innerWidth / 2) / 35;
-            gsap.to(teddy, { x: teddyX, duration: 0.5 });
         });
 
-        document.querySelectorAll('.hover-target, button, input').forEach(el => {
+        document.querySelectorAll('.hover-target').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
         });
 
-        // 2. Interactive Background Canvas Particles
+        /* Background Particle Canvas */
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -446,138 +466,119 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-        resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        class CanvasParticle {
+        class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 this.size = Math.random() * 2 + 0.5;
-                this.speedY = Math.random() * -0.6 - 0.2;
-                this.opacity = Math.random() * 0.5 + 0.2;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.8 + 0.2;
             }
             update() {
+                this.x += this.speedX;
                 this.y += this.speedY;
-                if (this.y < 0) {
-                    this.y = canvas.height;
-                    this.x = Math.random() * canvas.width;
-                }
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
             }
             draw() {
-                ctx.fillStyle = `rgba(255, 42, 112, ${this.opacity})`;
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        for (let i = 0; i < 70; i++) particles.push(new CanvasParticle());
+        for (let i = 0; i < 70; i++) particles.push(new Particle());
 
-        function renderParticles() {
+        function animateCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(renderParticles);
+            requestAnimationFrame(animateCanvas);
         }
-        renderParticles();
+        animateCanvas();
 
-        // 3. Audio & Step Navigation
-        const bgMusic = document.getElementById('bg-music');
-
-        function playMusic() {
-            if (bgMusic.paused) {
-                bgMusic.play().catch(() => console.log('Audio autoplay blocked by browser policy'));
-            }
-        }
-
-        function nextStep(current, next) {
-            playMusic();
-            const currEl = document.getElementById(`step-${current}`);
-            const nextEl = document.getElementById(`step-${next}`);
-
-            if (currEl && nextEl) {
-                currEl.classList.remove('active');
-                setTimeout(() => {
-                    nextEl.classList.add('active');
-                    triggerStepCallbacks(next);
-                }, 400);
-            }
-        }
-
-        // 4. Initial Loader (Step 1)
-        let loadPercent = 0;
-        const loadBar = document.getElementById('loading-bar');
+        /* Step 1 Loader Logic */
+        const loadingBar = document.getElementById('loading-bar');
+        let progress = 0;
         const loadInterval = setInterval(() => {
-            loadPercent += 2;
-            loadBar.style.width = loadPercent + '%';
-            if (loadPercent >= 100) {
+            progress += 2;
+            loadingBar.style.width = progress + '%';
+            if (progress >= 100) {
                 clearInterval(loadInterval);
                 setTimeout(() => nextStep(1, 2), 500);
             }
         }, 30);
 
-        // 5. Security Gate Verification (Step 2)
+        /* Step 2 Security Answer Check */
         function checkAnswer() {
-            const inputVal = document.getElementById('secret-input').value.trim().toLowerCase();
+            const val = document.getElementById('secret-input').value.trim().toLowerCase();
             const hint = document.getElementById('hint-msg');
             const success = document.getElementById('success-msg');
             const btnNext = document.getElementById('btn-next-2');
+            const inputWrap = document.getElementById('input-wrap');
 
-            // Accepting Aaru and variations
-            if (inputVal.includes('aaru')) {
+            if (val === "aaru") {
+                inputWrap.classList.add('hidden');
+                hint.style.opacity = 0;
                 success.classList.remove('hidden');
                 btnNext.classList.remove('hidden');
-                hint.style.opacity = '0';
                 confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
             } else {
-                const card = document.querySelector('#step-2 .glass-panel');
-                card.classList.add('shake');
-                hint.style.opacity = '1';
-                setTimeout(() => card.classList.remove('shake'), 500);
+                inputWrap.classList.add('shake');
+                hint.style.opacity = 1;
+                setTimeout(() => inputWrap.classList.remove('shake'), 500);
             }
         }
+        document.getElementById('secret-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkAnswer();
+        });
 
-        // 6. Cake Candle Light & Countdown (Step 3)
+        /* Step 3 Candle Logic */
         let candleLit = false;
         function lightCandles() {
             if (candleLit) return;
             candleLit = true;
-
-            document.getElementById('flame').style.opacity = '1';
-            document.getElementById('cake-msg').innerText = "Make a wish! Blowing candle in...";
+            document.getElementById('flame').style.opacity = 1;
+            document.getElementById('cake-msg').innerText = "Make a wish... ✨";
             
             const timerRing = document.getElementById('timer-ring');
             const timerText = document.getElementById('timer-text');
             timerRing.classList.remove('hidden');
             timerText.classList.remove('hidden');
+            
+            confetti({ particleCount: 100, spread: 80, origin: { y: 0.5 } });
 
-            let count = 10;
-            const cd = setInterval(() => {
-                count--;
-                timerText.innerText = count;
-                if (count <= 0) {
-                    clearInterval(cd);
-                    document.getElementById('flame').style.opacity = '0';
+            let timeLeft = 10;
+            const timer = setInterval(() => {
+                timeLeft--;
+                timerText.innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
                     timerRing.classList.add('hidden');
                     timerText.classList.add('hidden');
-                    document.getElementById('cake-msg').innerText = "Wish Made! May your year be magical! ✨";
+                    document.getElementById('cake-msg').innerText = "Your wish has been sent to the stars! ✨";
                     document.getElementById('btn-next-3').classList.remove('hidden');
-                    confetti({ particleCount: 150, spread: 90, origin: { y: 0.5 } });
                 }
             }, 1000);
         }
 
-        // 7. Envelope Open & Letter Typing (Step 4)
+        /* Step 4 Envelope & Typed Letter */
         let envelopeOpened = false;
         function openEnvelope() {
             if (envelopeOpened) return;
             envelopeOpened = true;
             document.getElementById('envelope').classList.add('open');
-
+            
             setTimeout(() => {
                 new Typed('#typed-letter', {
                     strings: [
-                        "Dearest Aaru 🤌👀💝,<br><br>Happy Birthday to the most amazing person in my universe! You bring so much bright energy, grace, and smiles wherever you go.<br><br>May this new chapter bring you endless success, happiness, and peace. Always keep shining bright! ❤️"
+                        "Dear Aaru,\n\nOn this magical day, I want to remind you how deeply special you are to me. Your laughter heals my worst days, your presence brings peace to my soul, and your love makes my world infinitely brighter.\n\nThank you for being you—for every smile, every word, and every precious moment we share. Here's to making countless more beautiful memories together.\n\nHappy Birthday, my love! 💖"
                     ],
                     typeSpeed: 35,
                     showCursor: false,
@@ -585,40 +586,45 @@
                         document.getElementById('btn-next-4').classList.remove('hidden');
                     }
                 });
-            }, 1000);
+            }, 1200);
         }
 
-        // 8. Polaroid Gallery Rendering (Step 5)
-        const polaroidPhotos = [
-            { src: 'photo1.jpg', cap: 'Special Moments' },
-            { src: 'photo2.jpg', cap: 'Your Cute Smile' },
-            { src: 'photo3.jpg', cap: 'Pure Sunshine' },
-            { src: 'photo4.jpg', cap: 'Unforgettable Days' }
+        /* Step 5 & 10 Lightbox Modal */
+        function openLightbox(src, caption) {
+            const lb = document.getElementById('lightbox');
+            document.getElementById('lb-img').src = src;
+            document.getElementById('lb-cap').innerText = caption || '';
+            lb.classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Initialize Polaroid Gallery (Step 5)
+        const gallery4 = document.getElementById('gallery-4');
+        const polaroidData = [
+            { src: 'photo1.jpg', cap: 'Your Cute Smile ✨' },
+            { src: 'photo2.jpg', cap: 'Magical Moments 🌸' },
+            { src: 'photo3.jpg', cap: 'Forever Cherished 💖' },
+            { src: 'photo4.jpg', cap: 'Pure Joy 🥰' }
         ];
+        polaroidData.forEach((item, idx) => {
+            const pol = document.createElement('div');
+            pol.className = 'polaroid hover-target';
+            pol.style.transform = `rotate(${(idx % 2 === 0 ? -1 : 1) * (idx + 3)}deg)`;
+            pol.onclick = () => openLightbox(item.src, item.cap);
+            pol.innerHTML = `<img src="${item.src}" alt="Memory"><div class="polaroid-cap">${item.cap}</div>`;
+            gallery4.appendChild(pol);
+        });
 
-        function loadPolaroidGallery() {
-            const container = document.getElementById('gallery-4');
-            container.innerHTML = '';
-            polaroidPhotos.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = 'polaroid hover-target';
-                const rot = (index % 2 === 0 ? 1 : -1) * (3 + index * 2);
-                card.style.transform = `rotate(${rot}deg)`;
-                card.onclick = () => openLightbox(item.src, item.cap);
-                card.innerHTML = `<img src="${item.src}" alt="${item.cap}"><div class="polaroid-cap">${item.cap}</div>`;
-                container.appendChild(card);
-                gsap.to(card, { opacity: 1, y: 0, delay: index * 0.15, duration: 0.6 });
-            });
-        }
-
-        // 9. Shayari Typing Engine (Step 6)
-        let shayariTyped = false;
-        function initShayari() {
-            if (shayariTyped) return;
-            shayariTyped = true;
+        /* Step 6 Shayari */
+        let shayariTypedInit = false;
+        function initShayariTyped() {
+            if (shayariTypedInit) return;
+            shayariTypedInit = true;
             new Typed('#typed-shayari', {
                 strings: [
-                    "Chaand se pyari hai chandni,<br>Chandni se pyari hai raat,<br>Raat se pyari hai zindagi,<br>Aur zindagi se pyari hai aapki ek meethi muskaan. ✨"
+                    "Chand se pyari hai soorat teri,\nDil ko chhoo jaati hai har baat teri,\nZindagi bhar ka saath maanga hai khuda se,\nBas yahi hai ek chhoti si khwahish meri... ❤️"
                 ],
                 typeSpeed: 45,
                 showCursor: false,
@@ -628,139 +634,109 @@
             });
         }
 
-        // 10. 200 Reasons Dynamic Grid & Scroll Trigger (Step 7)
-        function load200Reasons() {
-            const grid = document.getElementById('reasons-grid');
-            if (grid.children.length > 0) return;
-
-            const reasonList = [
-                "Your infectious smile.", "The kindness in your heart.", "Your unconditional positivity.",
-                "How you brighten up any room.", "Your unmatched intellect.", "Your adorable sense of humor.",
-                "The way you care for people.", "Your beautiful eyes.", "How genuine you are.",
-                "Because you're simply one of a kind!", "The way you inspire everyone around you.",
-                "Your warmth and sweetness."
-            ];
-
-            for (let i = 1; i <= 200; i++) {
-                const text = reasonList[(i - 1) % reasonList.length];
-                const card = document.createElement('div');
-                card.className = 'reason-card';
-                card.innerHTML = `<span class="reason-text">#${i}. ${text}</span>`;
-                grid.appendChild(card);
-                gsap.to(card, { opacity: 1, y: 0, delay: Math.min(i * 0.01, 1), duration: 0.4 });
-            }
-
-            // Scroll Detection for Button Reveal
-            grid.addEventListener('scroll', () => {
-                // Check if user has scrolled close to the bottom (within 50px tolerance)
-                if (grid.scrollTop + grid.clientHeight >= grid.scrollHeight - 50) {
-                    document.getElementById('btn-next-7').classList.remove('hidden');
-                    document.getElementById('scroll-hint').style.opacity = '0';
-                }
-            });
-
-            // Safety check for large screens where scroll might not be needed
-            setTimeout(() => {
-                if(grid.scrollHeight <= grid.clientHeight) {
-                    document.getElementById('btn-next-7').classList.remove('hidden');
-                    document.getElementById('scroll-hint').style.display = 'none';
-                }
-            }, 1000);
+        /* Step 7 Generate 200 Reasons */
+        const reasonsGrid = document.getElementById('reasons-grid');
+        const sweetPhrases = [
+            "Your beautiful smile that brightens my day.",
+            "The cute way you laugh at silly jokes.",
+            "Your kind and empathetic heart.",
+            "How you always care so deeply.",
+            "Your incredible grace and charm.",
+            "The way your eyes light up when happy.",
+            "Your voice that instantly calms me down.",
+            "How you make every moment special.",
+            "Your unwavering support and trust.",
+            "Because you are uniquely, perfectly YOU!"
+        ];
+        for (let i = 1; i <= 200; i++) {
+            const card = document.createElement('div');
+            card.className = 'reason-card hover-target';
+            const phrase = sweetPhrases[(i - 1) % sweetPhrases.length];
+            card.innerHTML = `<p class="reason-text"><strong>#${i}</strong> - ${phrase}</p>`;
+            reasonsGrid.appendChild(card);
         }
 
-        // 11. Gift Box Open Event (Step 8)
+        // Unlock next step on scroll or fallback timer
+        let step7Unlocked = false;
+        reasonsGrid.addEventListener('scroll', () => {
+            if (!step7Unlocked && (reasonsGrid.scrollTop + reasonsGrid.clientHeight >= reasonsGrid.scrollHeight - 100)) {
+                step7Unlocked = true;
+                document.getElementById('btn-next-7').classList.remove('hidden');
+            }
+        });
+        setTimeout(() => {
+            if(!step7Unlocked) {
+                step7Unlocked = true;
+                document.getElementById('btn-next-7').classList.remove('hidden');
+            }
+        }, 5000);
+
+        /* Step 8 Gift Logic */
         let giftOpened = false;
         function openGift() {
-            if (giftOpened) return;
+            if(giftOpened) return;
             giftOpened = true;
             document.getElementById('gift').classList.add('open');
-            setTimeout(() => {
-                document.getElementById('gift-msg').classList.remove('hidden');
-                document.getElementById('btn-next-8').classList.remove('hidden');
-                confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
-            }, 800);
+            document.getElementById('gift-msg').classList.remove('hidden');
+            document.getElementById('btn-next-8').classList.remove('hidden');
+            confetti({ particleCount: 120, spread: 90, origin: { y: 0.6 } });
         }
 
-        // 12. Balloons Generation & Pop (Step 9)
-        const balloonWishes = ["Happiness Always 🌟", "Endless Smiles 😊", "Good Health 💖", "All Dreams True ✨", "Success & Joy 🎉"];
+        /* Step 9 Balloons Logic */
+        const balloonSky = document.getElementById('balloon-sky');
+        const wishes = [
+            "Unlimited Happiness 💖",
+            "Eternal Love ✨",
+            "All Dreams Come True 🌟",
+            "Endless Smiles 😊",
+            "Good Health 🍀",
+            "Success Everywhere 🚀",
+            "My Heart Forever 💗"
+        ];
         let poppedCount = 0;
 
-        function loadBalloons() {
-            const sky = document.getElementById('balloon-sky');
-            if (sky.children.length > 0) return;
+        wishes.forEach((wish, idx) => {
+            const wrap = document.createElement('div');
+            wrap.className = 'balloon-wrap hover-target';
+            wrap.style.animationDelay = `${idx * 0.4}s`;
+            wrap.innerHTML = `<div class="balloon"><span>Wish ${idx + 1}</span></div>`;
+            wrap.onclick = () => {
+                confetti({ particleCount: 40, spread: 50, origin: { x: (idx + 1) / (wishes.length + 1), y: 0.6 } });
+                document.getElementById('balloon-msg-box').classList.remove('hidden');
+                document.getElementById('balloon-msg-text').innerText = wish;
+                wrap.style.visibility = 'hidden';
+                poppedCount++;
+                if (poppedCount >= 3) {
+                    document.getElementById('btn-next-9').classList.remove('hidden');
+                }
+            };
+            balloonSky.appendChild(wrap);
+        });
 
-            balloonWishes.forEach((wish, i) => {
-                const wrap = document.createElement('div');
-                wrap.className = 'balloon-wrap hover-target';
-                wrap.style.animationDelay = `${i * 0.4}s`;
-                wrap.onclick = () => popBalloon(wrap, wish);
-                wrap.innerHTML = `<div class="balloon"><span>Wish ${i + 1}</span></div>`;
-                sky.appendChild(wrap);
-            });
+        /* Step 10 Masonry Wall */
+        const masonry = document.getElementById('masonry-wall');
+        for (let i = 1; i <= 12; i++) {
+            const item = document.createElement('div');
+            item.className = 'masonry-item hover-target';
+            item.onclick = () => openLightbox(`photo${i}.jpg`, `Precious Memory #${i}`);
+            item.innerHTML = `<img src="photo${i}.jpg" loading="lazy" alt="Memory ${i}">`;
+            masonry.appendChild(item);
         }
 
-        function popBalloon(element, wishText) {
-            gsap.to(element, { scale: 1.4, opacity: 0, duration: 0.3, onComplete: () => {
-                element.style.visibility = 'hidden';
-            }});
-            const msgBox = document.getElementById('balloon-msg-box');
-            const msgText = document.getElementById('balloon-msg-text');
-            msgBox.classList.remove('hidden');
-            msgText.innerText = ` Wish Popped: ${wishText}`;
+        /* Step 11 Finale Confetti & Secrets */
+        function fireFinaleConfetti() {
+            const duration = 3 * 1000;
+            const end = Date.now() + duration;
 
-            poppedCount++;
-            confetti({ particleCount: 50, spread: 50 });
-
-            if (poppedCount >= 3) {
-                document.getElementById('btn-next-9').classList.remove('hidden');
-            }
+            (function frame() {
+                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 } });
+                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 } });
+                if (Date.now() < end) requestAnimationFrame(frame);
+            })();
         }
 
-        // 13. Masonry Gallery Wall (Step 10) -> Added all remaining photos for perfect layout
-        const masonryPhotos = [
-            'photo1.jpg', 'photo2.jpg', 'photo3.jpg', 
-            'photo4.jpg', 'photo5.jpg', 'photo6.jpg', 
-            'photo7.jpg', 'photo8.jpg', 'photo9.jpg', 
-            'photo10.jpeg', 'photo11.jpeg'
-        ];
-
-        function loadMasonryWall() {
-            const wall = document.getElementById('masonry-wall');
-            if (wall.children.length > 0) return;
-
-            masonryPhotos.forEach((src, idx) => {
-                const item = document.createElement('div');
-                item.className = 'masonry-item hover-target';
-                item.onclick = () => openLightbox(src, `Memory ${idx + 1}`);
-                item.innerHTML = `<img src="${src}" alt="Memory" loading="lazy">`;
-                wall.appendChild(item);
-                gsap.to(item, { opacity: 1, scale: 1, delay: idx * 0.1, duration: 0.5 });
-            });
-        }
-
-        // 14. Lightbox Modal
-        function openLightbox(src, caption) {
-            document.getElementById('lb-img').src = src;
-            document.getElementById('lb-cap').innerText = caption;
-            document.getElementById('lightbox').classList.add('active');
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('active');
-        }
-
-        // 15. Hidden Secret Page Handler (Step 12)
         function triggerSecret() {
             nextStep(11, '12a');
-        }
-
-        // 16. Step Callbacks Switch Engine
-        function triggerStepCallbacks(stepNum) {
-            if (stepNum == 5) loadPolaroidGallery();
-            if (stepNum == 6) initShayari();
-            if (stepNum == 7) load200Reasons();
-            if (stepNum == 9) loadBalloons();
-            if (stepNum == 10) loadMasonryWall();
         }
     </script>
 </body>
