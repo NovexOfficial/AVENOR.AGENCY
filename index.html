@@ -344,7 +344,7 @@
                 </div>
                 
                 <div class="surprise-photo-wrap" id="surprise-photo">
-                    <img src="surprise.jpg" class="surprise-photo" alt="Surprise">
+                    <img src="surprise.jpg" loading="lazy" class="surprise-photo" alt="Surprise">
                 </div>
             </div>
 
@@ -364,24 +364,18 @@
         <button class="btn-cinematic hover-target hidden" id="btn-next-9" style="position: absolute; bottom: 5vh;" onclick="nextStep(9, 10)">More Memories 📸</button>
     </div>
 
-/* Step 10 Masonry Wall (Fixed for exactly 8 photos) */
-const masonry = document.getElementById('masonry-wall');
-masonry.innerHTML = ''; // Pehle ka clear karne ke liye
-for (let i = 1; i <= 8; i++) { // Loop exactly 8 par set hai
-    const item = document.createElement('div');
-    item.className = 'masonry-item hover-target';
-    item.onclick = () => openLightbox(`photo${i}.jpg`, `Precious Memory #${i}`);
-    
-    // loading="lazy" pehle se hai, but layout break na ho isliye ek wrapper lagaya hai
-    item.innerHTML = `<img src="photo${i}.jpg" loading="lazy" alt="Aaru Memory ${i}">`;
-    masonry.appendChild(item);
-}
+    <!-- Step 10: Masonry Memory Wall -->
+    <div class="step-container" id="step-10">
+        <h1 class="heading glow-text" style="margin-top: 20px;">The Memory Wall 🎞️</h1>
+        <div class="masonry" id="masonry-wall"></div>
+        <button class="btn-cinematic hover-target" onclick="nextStep(10, 11)" style="margin-bottom: 20px;">Grand Finale 🎉</button>
+    </div>
 
     <!-- Step 11: Finale -->
     <div class="step-container" id="step-11">
         <div class="finale-text-wrap" style="max-width: 800px; padding: 20px; z-index: 10; text-align: center;">
             <div class="finale-img-wrap">
-                <img src="photo12.jpg" loading="lazy" class="finale-img" alt="Finale">
+                <img src="photo8.jpg" loading="lazy" class="finale-img" alt="Finale">
             </div>
             
             <h1 class="heading glow-text" style="font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 20px;">Happy Birthday Aaru 🤌👀💝</h1>
@@ -619,7 +613,7 @@ for (let i = 1; i <= 8; i++) { // Loop exactly 8 par set hai
             pol.className = 'polaroid hover-target';
             pol.style.transform = `rotate(${(idx % 2 === 0 ? -1 : 1) * (idx + 3)}deg)`;
             pol.onclick = () => openLightbox(item.src, item.cap);
-            pol.innerHTML = `<img src="${item.src}" alt="Memory"><div class="polaroid-cap">${item.cap}</div>`;
+            pol.innerHTML = `<img src="${item.src}" loading="lazy" alt="Memory"><div class="polaroid-cap">${item.cap}</div>`;
             gallery4.appendChild(pol);
         });
 
@@ -719,14 +713,17 @@ for (let i = 1; i <= 8; i++) { // Loop exactly 8 par set hai
             balloonSky.appendChild(wrap);
         });
 
-        /* Step 10 Masonry Wall */
+        /* Step 10 Masonry Wall (Exactly 8 Photos) */
         const masonry = document.getElementById('masonry-wall');
-        for (let i = 1; i <= 12; i++) {
-            const item = document.createElement('div');
-            item.className = 'masonry-item hover-target';
-            item.onclick = () => openLightbox(`photo${i}.jpg`, `Precious Memory #${i}`);
-            item.innerHTML = `<img src="photo${i}.jpg" loading="lazy" alt="Memory ${i}">`;
-            masonry.appendChild(item);
+        if(masonry) {
+            masonry.innerHTML = ''; 
+            for (let i = 1; i <= 8; i++) { 
+                const item = document.createElement('div');
+                item.className = 'masonry-item hover-target';
+                item.onclick = () => openLightbox(`photo${i}.jpg`, `Precious Memory #${i}`);
+                item.innerHTML = `<img src="photo${i}.jpg" loading="lazy" alt="Aaru Memory ${i}">`;
+                masonry.appendChild(item);
+            }
         }
 
         /* Step 11 Finale Confetti & Secrets */
