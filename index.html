@@ -340,7 +340,6 @@
                 </div>
                 
                 <div class="surprise-photo-wrap" id="surprise-photo">
-                    <!-- Changed from surprice.HEIC to surprice.jpg -->
                     <img src="surprice.jpg" class="surprise-photo" alt="Surprise">
                 </div>
             </div>
@@ -400,42 +399,37 @@
     <!-- Step 12b: Secret Part 2 -->
     <div class="step-container secret-page" id="step-12b">
         <div class="glass-panel text-center" style="background: rgba(0,0,0,0.85); border-color: #555;">
-            <h1 class="heading glow-text" style="font-size: 2rem; color: #fff;">Always & Forever ❤️</h1>
-            <p class="secret-handwriting" style="margin-top: 20px;">
-                Tum meri zindagi ka sabse khoobsurat hissa ho. Aaru, thank you har us moment ke liye jo tumne special banaya. Happy Birthday once again, my love! ✨
+            <h1 class="heading glow-text" style="font-size: 2.2rem; color: #fff; margin-bottom: 20px;">Always & Forever ❤️</h1>
+            <p class="secret-handwriting">
+                You are my most precious reality, my calmest place, and my favorite reason to smile every single day. <br><br>
+                No matter where life takes us, you will always have a special place in my heart that nobody else can ever touch. Happy Birthday, Aaru! 💐✨
             </p>
-            <button class="btn-cinematic hover-target" onclick="nextStep('12b', 11)" style="border-color: #ff2a70; margin-top: 30px;">Back To Finale 🌹</button>
+            <button class="btn-cinematic hover-target" onclick="nextStep('12b', 11)" style="border-color: #ff2a70; margin-top: 30px;">Back To Journey 💫</button>
         </div>
     </div>
 
-    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <!-- JavaScript Core Script Engine -->
     <script>
-        /* 1. Custom Cursor & Interactive Audio Handler */
+        // 1. Custom Mouse Cursor Physics & Hover Effects
         const cursor = document.querySelector('.cursor');
         const cursorDot = document.querySelector('.cursor-dot');
-        const bgMusic = document.getElementById('bg-music');
+        const teddy = document.getElementById('teddy-bear');
 
         document.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.15 });
-            gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0.05 });
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+            gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0.01 });
+            
+            // Subtle Teddy Bear tracking animation
+            const teddyX = (e.clientX - window.innerWidth / 2) / 35;
+            gsap.to(teddy, { x: teddyX, duration: 0.5 });
         });
 
-        document.addEventListener('mouseover', (e) => {
-            if (e.target.classList.contains('hover-target') || e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') {
-                document.body.classList.add('hover-active');
-            } else {
-                document.body.classList.remove('hover-active');
-            }
+        document.querySelectorAll('.hover-target, button, input').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
         });
 
-        function playMusic() {
-            if(bgMusic.paused) {
-                bgMusic.play().catch(() => console.log('Audio autoplay blocked'));
-            }
-        }
-        document.addEventListener('click', playMusic, { once: true });
-
-        /* 2. Interactive Background Canvas */
+        // 2. Interactive Background Canvas Particles
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -447,262 +441,299 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        class Particle {
+        class CanvasParticle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-                this.opacity = Math.random() * 0.8 + 0.2;
+                this.speedY = Math.random() * -0.6 - 0.2;
+                this.opacity = Math.random() * 0.5 + 0.2;
             }
             update() {
-                this.x += this.speedX;
                 this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+                if (this.y < 0) {
+                    this.y = canvas.height;
+                    this.x = Math.random() * canvas.width;
+                }
             }
             draw() {
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.fillStyle = `rgba(255, 42, 112, ${this.opacity})`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        for (let i = 0; i < 80; i++) particles.push(new Particle());
+        for (let i = 0; i < 70; i++) particles.push(new CanvasParticle());
 
-        function animateCanvas() {
+        function renderParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animateCanvas);
+            requestAnimationFrame(renderParticles);
         }
-        animateCanvas();
+        renderParticles();
 
-        /* Global Photos Shuffle Logic (1 to 12) */
-        const allPhotos = [];
-        for(let i = 1; i <= 12; i++) {
-            allPhotos.push(`photo${i}.jpg`);
-        }
-        for (let i = allPhotos.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [allPhotos[i], allPhotos[j]] = [allPhotos[j], allPhotos[i]];
-        }
-        const polaroidPhotos = allPhotos.slice(0, 4);
-        const masonryPhotos = allPhotos.slice(4, 12);
+        // 3. Audio & Step Navigation
+        const bgMusic = document.getElementById('bg-music');
 
-
-        /* 3. Global Navigation Logic */
-        function nextStep(current, next) {
-            playMusic();
-            const currentEl = document.getElementById(`step-${current}`);
-            const nextEl = document.getElementById(`step-${next}`);
-
-            if (currentEl) currentEl.classList.remove('active');
-            if (nextEl) {
-                nextEl.classList.add('active');
-                if (next === 5) initPolaroidGallery();
-                if (next === 6) initShayari();
-                if (next === 7) initReasonsGrid();
-                if (next === 9) initBalloons();
-                if (next === 10) initMasonryWall();
-                if (next === 11) confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        function playMusic() {
+            if (bgMusic.paused) {
+                bgMusic.play().catch(() => console.log('Audio autoplay blocked by browser policy'));
             }
         }
 
-        /* 4. Step 1: Loading Progress */
-        let progress = 0;
-        const loadingBar = document.getElementById('loading-bar');
+        function nextStep(current, next) {
+            playMusic();
+            const currEl = document.getElementById(`step-${current}`);
+            const nextEl = document.getElementById(`step-${next}`);
+
+            if (currEl && nextEl) {
+                currEl.classList.remove('active');
+                setTimeout(() => {
+                    nextEl.classList.add('active');
+                    triggerStepCallbacks(next);
+                }, 400);
+            }
+        }
+
+        // 4. Initial Loader (Step 1)
+        let loadPercent = 0;
+        const loadBar = document.getElementById('loading-bar');
         const loadInterval = setInterval(() => {
-            progress += 2;
-            loadingBar.style.width = `${progress}%`;
-            if (progress >= 100) {
+            loadPercent += 2;
+            loadBar.style.width = loadPercent + '%';
+            if (loadPercent >= 100) {
                 clearInterval(loadInterval);
                 setTimeout(() => nextStep(1, 2), 500);
             }
         }, 30);
 
-        /* 5. Step 2: Answer Check (STRICTLY 'aaru') */
+        // 5. Security Gate Verification (Step 2)
         function checkAnswer() {
-            const input = document.getElementById('secret-input');
-            const val = input.value.trim().toLowerCase(); // converts Aaru to aaru
-            const successMsg = document.getElementById('success-msg');
-            const btnNext = document.getElementById('btn-next-2');
+            const inputVal = document.getElementById('secret-input').value.trim().toLowerCase();
             const hint = document.getElementById('hint-msg');
+            const success = document.getElementById('success-msg');
+            const btnNext = document.getElementById('btn-next-2');
 
-            // Strictly check for 'aaru'
-            if (val === 'aaru') {
-                successMsg.classList.remove('hidden');
+            if (inputVal === 'aaru' || inputVal === 'aaru ❤️') {
+                success.classList.remove('hidden');
                 btnNext.classList.remove('hidden');
                 hint.style.opacity = '0';
-                confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
+                confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
             } else {
-                input.classList.add('shake');
+                const card = document.querySelector('#step-2 .glass-panel');
+                card.classList.add('shake');
                 hint.style.opacity = '1';
-                setTimeout(() => input.classList.remove('shake'), 400);
+                setTimeout(() => card.classList.remove('shake'), 500);
             }
         }
 
-        /* 6. Step 3: Candle Lighting & Timer */
+        // 6. Cake Candle Light & Countdown (Step 3)
         let candleLit = false;
         function lightCandles() {
             if (candleLit) return;
             candleLit = true;
+
             document.getElementById('flame').style.opacity = '1';
-            document.getElementById('cake-msg').innerText = "Wishing you all the joy in the world! 🎉";
-            confetti({ particleCount: 80, spread: 80, origin: { y: 0.6 } });
+            document.getElementById('cake-msg').innerText = "Make a wish! Blowing candle in...";
+            
             const timerRing = document.getElementById('timer-ring');
             const timerText = document.getElementById('timer-text');
             timerRing.classList.remove('hidden');
             timerText.classList.remove('hidden');
+
             let count = 10;
-            const timer = setInterval(() => {
+            const cd = setInterval(() => {
                 count--;
                 timerText.innerText = count;
                 if (count <= 0) {
-                    clearInterval(timer);
+                    clearInterval(cd);
+                    document.getElementById('flame').style.opacity = '0';
                     timerRing.classList.add('hidden');
                     timerText.classList.add('hidden');
+                    document.getElementById('cake-msg').innerText = "Wish Made! May your year be magical! ✨";
                     document.getElementById('btn-next-3').classList.remove('hidden');
+                    confetti({ particleCount: 150, spread: 90, origin: { y: 0.5 } });
                 }
             }, 1000);
         }
 
-        /* 7. Step 4: Typed Letter Logic */
-        let letterOpened = false;
+        // 7. Envelope Open & Letter Typing (Step 4)
+        let envelopeOpened = false;
         function openEnvelope() {
-            if (letterOpened) return;
-            letterOpened = true;
+            if (envelopeOpened) return;
+            envelopeOpened = true;
             document.getElementById('envelope').classList.add('open');
+
             setTimeout(() => {
                 new Typed('#typed-letter', {
-                    strings: ["Dear Aaru, ❤️<br><br>Happy Birthday to the most amazing, wonderful, and special person! Every single moment with you brings warmth, joy, and unforgettable memories.<br><br>May your day be filled with endless smiles, sweet moments, and all the love you deserve. Always keep shining bright! ✨"],
+                    strings: [
+                        "Dearest Aaru,<br><br>Happy Birthday to the most amazing person in my universe! You bring so much bright energy, grace, and smiles wherever you go.<br><br>May this new chapter bring you endless success, happiness, and peace. Always keep shining bright! ❤️"
+                    ],
                     typeSpeed: 35,
                     showCursor: false,
-                    onComplete: () => { document.getElementById('btn-next-4').classList.remove('hidden'); }
+                    onComplete: () => {
+                        document.getElementById('btn-next-4').classList.remove('hidden');
+                    }
                 });
             }, 1000);
         }
 
-        /* 8. Step 5: Polaroid Gallery Generator */
-        function initPolaroidGallery() {
-            const gallery = document.getElementById('gallery-4');
-            if (gallery.children.length > 0) return;
-            const captions = ['Sweet Moments ✨', 'Your Cute Smile 😊', 'Unforgettable Memories 💖', 'Forever Cherished 🌸'];
+        // 8. Polaroid Gallery Rendering (Step 5)
+        const polaroidPhotos = [
+            { src: 'photo1.jpg', cap: 'Special Moments' },
+            { src: 'photo2.jpg', cap: 'Your Cute Smile' },
+            { src: 'photo3.jpg', cap: 'Pure Sunshine' },
+            { src: 'photo4.jpg', cap: 'Unforgettable Days' }
+        ];
 
-            polaroidPhotos.forEach((src, idx) => {
+        function loadPolaroidGallery() {
+            const container = document.getElementById('gallery-4');
+            container.innerHTML = '';
+            polaroidPhotos.forEach((item, index) => {
                 const card = document.createElement('div');
                 card.className = 'polaroid hover-target';
-                card.style.transform = `rotate(${(idx % 2 === 0 ? -1 : 1) * (idx + 2)}deg)`;
-                // Removed 'onerror' fallback so ONLY local photos load.
-                card.innerHTML = `<img src="${src}" alt="Memory"><div class="polaroid-cap">${captions[idx]}</div>`;
-                card.onclick = () => openLightbox(src, captions[idx]);
-                gallery.appendChild(card);
+                const rot = (index % 2 === 0 ? 1 : -1) * (3 + index * 2);
+                card.style.transform = `rotate(${rot}deg)`;
+                card.onclick = () => openLightbox(item.src, item.cap);
+                card.innerHTML = `<img src="${item.src}" alt="${item.cap}"><div class="polaroid-cap">${item.cap}</div>`;
+                container.appendChild(card);
+                gsap.to(card, { opacity: 1, y: 0, delay: index * 0.15, duration: 0.6 });
             });
-            gsap.to('.polaroid', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2 });
         }
 
-        /* 9. Step 6: Shayari Typed Logic */
-        let shayariDone = false;
+        // 9. Shayari Typing Engine (Step 6)
+        let shayariTyped = false;
         function initShayari() {
-            if (shayariDone) return;
-            shayariDone = true;
+            if (shayariTyped) return;
+            shayariTyped = true;
             new Typed('#typed-shayari', {
-                strings: ["\"Chehre par aapke hamesha muskaan rahe,<br>Har mod par khushiyon ka paigaam rahe,<br>Saja de zindagi aapki phoolon jaisi,<br>Aapke saath hamesha hamara pyara naam rahe.\" ✨❤️"],
-                typeSpeed: 40,
+                strings: [
+                    "Chaand se pyari hai chandni,<br>Chandni se pyari hai raat,<br>Raat se pyari hai zindagi,<br>Aur zindagi se pyari hai aapki ek meethi muskaan. ✨"
+                ],
+                typeSpeed: 45,
                 showCursor: false,
-                onComplete: () => { document.getElementById('btn-next-6').classList.remove('hidden'); }
+                onComplete: () => {
+                    document.getElementById('btn-next-6').classList.remove('hidden');
+                }
             });
         }
 
-        /* 10. Step 7: 200 Reasons Generator */
-        function initReasonsGrid() {
+        // 10. 200 Reasons Dynamic Grid Populator (Step 7)
+        function load200Reasons() {
             const grid = document.getElementById('reasons-grid');
             if (grid.children.length > 0) return;
-            const words = [
-                "Your smile", "Your eyes", "Your voice", "Your laugh", "Your kindness",
-                "The way you care", "Your warm hugs", "Your cute anger", "Your endless support",
-                "Your beautiful heart", "Your innocence", "The way you talk", "Your style",
-                "How you make me feel", "Your silly jokes", "Your positive energy", "Your honesty",
-                "The way you look at me", "Your intelligence", "Your unconditional love",
-                "Your sleepy voice", "Your madness", "How pure your soul is", "Your magical touch"
+
+            const reasonList = [
+                "Your infectious smile.", "The kindness in your heart.", "Your unconditional positivity.",
+                "How you brighten up any room.", "Your unmatched intellect.", "Your adorable sense of humor.",
+                "The way you care for people.", "Your beautiful eyes.", "How genuine you are.",
+                "Because you're simply one of a kind!", "The way you inspire everyone around you.",
+                "Your warmth and sweetness."
             ];
+
             for (let i = 1; i <= 200; i++) {
+                const text = reasonList[(i - 1) % reasonList.length];
                 const card = document.createElement('div');
-                card.className = 'reason-card hover-target';
-                const text = words[(i - 1) % words.length];
-                card.innerHTML = `<div class="reason-text">${i}. ${text}</div>`;
+                card.className = 'reason-card';
+                card.innerHTML = `<span class="reason-text">#${i}. ${text}</span>`;
                 grid.appendChild(card);
+                gsap.to(card, { opacity: 1, y: 0, delay: Math.min(i * 0.01, 1), duration: 0.4 });
             }
-            gsap.to('.reason-card', { opacity: 1, y: 0, duration: 0.5, stagger: 0.02 });
         }
 
-        /* 11. Step 8: Gift Reveal */
+        // 11. Gift Box Open Event (Step 8)
         let giftOpened = false;
         function openGift() {
             if (giftOpened) return;
             giftOpened = true;
             document.getElementById('gift').classList.add('open');
-            document.getElementById('gift-msg').classList.remove('hidden');
-            document.getElementById('btn-next-8').classList.remove('hidden');
-            confetti({ particleCount: 100, spread: 80, origin: { y: 0.5 } });
+            setTimeout(() => {
+                document.getElementById('gift-msg').classList.remove('hidden');
+                document.getElementById('btn-next-8').classList.remove('hidden');
+                confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+            }, 800);
         }
 
-        /* 12. Step 9: Balloons Blast */
+        // 12. Balloons Generation & Pop (Step 9)
+        const balloonWishes = ["Happiness Always 🌟", "Endless Smiles 😊", "Good Health 💖", "All Dreams True ✨", "Success & Joy 🎉"];
         let poppedCount = 0;
-        function initBalloons() {
+
+        function loadBalloons() {
             const sky = document.getElementById('balloon-sky');
             if (sky.children.length > 0) return;
-            const wishes = ["Happiness 💖", "Health 🌸", "Joy ✨", "Success 🌟", "Peace 🕊️"];
-            wishes.forEach((wish) => {
+
+            balloonWishes.forEach((wish, i) => {
                 const wrap = document.createElement('div');
                 wrap.className = 'balloon-wrap hover-target';
-                wrap.innerHTML = `<div class="balloon"><span>POP ME</span></div>`;
-                wrap.onclick = () => {
-                    confetti({ particleCount: 30, spread: 50, origin: { y: 0.6 } });
-                    document.getElementById('balloon-msg-box').classList.remove('hidden');
-                    document.getElementById('balloon-msg-text').innerText = wish;
-                    wrap.style.visibility = 'hidden';
-                    poppedCount++;
-                    if (poppedCount >= 3) {
-                        document.getElementById('btn-next-9').classList.remove('hidden');
-                    }
-                };
+                wrap.style.animationDelay = `${i * 0.4}s`;
+                wrap.onclick = () => popBalloon(wrap, wish);
+                wrap.innerHTML = `<div class="balloon"><span>Wish ${i + 1}</span></div>`;
                 sky.appendChild(wrap);
             });
         }
 
-        /* 13. Step 10: Masonry Wall Generator */
-        function initMasonryWall() {
+        function popBalloon(element, wishText) {
+            gsap.to(element, { scale: 1.4, opacity: 0, duration: 0.3, onComplete: () => {
+                element.style.visibility = 'hidden';
+            }});
+            const msgBox = document.getElementById('balloon-msg-box');
+            const msgText = document.getElementById('balloon-msg-text');
+            msgBox.classList.remove('hidden');
+            msgText.innerText = ` Wish Popped: ${wishText}`;
+
+            poppedCount++;
+            confetti({ particleCount: 50, spread: 50 });
+
+            if (poppedCount >= 3) {
+                document.getElementById('btn-next-9').classList.remove('hidden');
+            }
+        }
+
+        // 13. Masonry Gallery Wall (Step 10)
+        const masonryPhotos = [
+            'photo5.jpg', 'photo6.jpg', 'photo7.jpg',
+            'photo8.jpg', 'photo9.jpg', 'photo10.jpeg',
+            'photo11.jpeg'
+        ];
+
+        function loadMasonryWall() {
             const wall = document.getElementById('masonry-wall');
             if (wall.children.length > 0) return;
+
             masonryPhotos.forEach((src, idx) => {
                 const item = document.createElement('div');
                 item.className = 'masonry-item hover-target';
-                // Removed 'onerror' fallback so ONLY local photos load.
-                item.innerHTML = `<img src="${src}" alt="Memory">`;
-                item.onclick = () => openLightbox(src, `Sweet Memory`);
+                item.onclick = () => openLightbox(src, `Memory ${idx + 5}`);
+                item.innerHTML = `<img src="${src}" alt="Memory" loading="lazy">`;
                 wall.appendChild(item);
+                gsap.to(item, { opacity: 1, scale: 1, delay: idx * 0.1, duration: 0.5 });
             });
-            gsap.to('.masonry-item', { opacity: 1, scale: 1, duration: 0.6, stagger: 0.1 });
         }
 
-        /* 14. Lightbox Handlers */
-        function openLightbox(src, cap) {
-            const lb = document.getElementById('lightbox');
-            const lbImg = document.getElementById('lb-img');
-            const lbCap = document.getElementById('lb-cap');
-            lbImg.src = src;
-            lbCap.innerText = cap || '';
-            lb.classList.add('active');
+        // 14. Lightbox Modal
+        function openLightbox(src, caption) {
+            document.getElementById('lb-img').src = src;
+            document.getElementById('lb-cap').innerText = caption;
+            document.getElementById('lightbox').classList.add('active');
         }
+
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
         }
 
-        /* 15. Secret Heart Callback */
+        // 15. Hidden Secret Page Handler (Step 12)
         function triggerSecret() {
             nextStep(11, '12a');
+        }
+
+        // 16. Step Callbacks Switch Engine
+        function triggerStepCallbacks(stepNum) {
+            if (stepNum == 5) loadPolaroidGallery();
+            if (stepNum == 6) initShayari();
+            if (stepNum == 7) load200Reasons();
+            if (stepNum == 9) loadBalloons();
+            if (stepNum == 10) loadMasonryWall();
         }
     </script>
 </body>
