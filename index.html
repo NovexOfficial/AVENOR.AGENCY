@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aaru's Magical Journey ✨</title>
+    <title>Aaru's🤌🏻👀💝 Magical Journey ✨</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
@@ -90,8 +90,6 @@
         .step-container { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.8s ease; }
         .step-container.active { opacity: 1; pointer-events: all; }
 
-        /* ================= STEP SPECIFIC STYLES ================= */
-        
         /* Step 1: Loader */
         .loading-bar-wrap { width: 300px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; margin: 30px auto 0; box-shadow: inset 0 1px 3px rgba(0,0,0,0.5); }
         .loading-bar { width: 0%; height: 100%; background: var(--neon-pink); box-shadow: 0 0 15px var(--neon-pink); transition: width 0.1s linear; }
@@ -205,12 +203,12 @@
         .secret-heart:hover { transform: scale(1.3); filter: grayscale(100%) brightness(0.5) drop-shadow(0 0 30px #ff2a70); animation: none; }
         
         .secret-page { background: #020205; }
-        .secret-handwriting { font-family: 'Playfair Display', cursive; font-size: 1.6rem; line-height: 2.2; color: #e0e0e0; max-width: 600px; margin: 0 auto; text-align: left; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+        .secret-handwriting { font-family: 'Playfair Display', serif; font-size: 1.4rem; line-height: 2.2; color: #e0e0e0; max-width: 650px; margin: 0 auto; text-align: center; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
     </style>
 </head>
 <body>
 
-    <audio id="bg-music" loop>
+    <audio id="bg-music" loop preload="auto">
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
     </audio>
 
@@ -221,6 +219,7 @@
     <div class="cursor-dot"></div>
     <div id="teddy-bear">🧸</div>
 
+    <!-- Lightbox Modal -->
     <div class="lightbox" id="lightbox">
         <span class="lb-close" onclick="closeLightbox()">&times;</span>
         <img id="lb-img" src="" alt="Memory">
@@ -245,7 +244,7 @@
             <p class="subtext" style="color: #ff99aa;">Duniya ki sabse pyari ladki kaun hai?</p>
             
             <div class="secret-input-wrapper">
-                <input type="text" id="secret-input" class="secret-input hover-target" placeholder="Type here..." autocomplete="off">
+                <input type="text" id="secret-input" class="secret-input hover-target" placeholder="Type name..." autocomplete="off">
                 <button class="btn-cinematic hover-target" onclick="checkAnswer()" style="margin-top: 10px; padding: 12px 40px;">Enter</button>
             </div>
 
@@ -260,7 +259,7 @@
     <div class="step-container" id="step-3">
         <div class="glass-panel text-center">
             <h1 class="heading glow-text" style="color: #d4af37; text-shadow: 0 0 20px rgba(212,175,55,0.5);">Make a Wish 🎂</h1>
-            <p class="subtext" style="color: #ccc; margin-bottom: 20px;">A special premium cake just for you.</p>
+            <p class="subtext" style="color: #ccc; margin-bottom: 20px;">A special cake just for you Aaru 🤌🏻👀💝.</p>
             <div class="cake" style="margin-top: 20px;">
                 <div class="tier tier-1"></div>
                 <div class="tier tier-2"></div>
@@ -342,7 +341,7 @@
                 </div>
                 
                 <div class="surprise-photo-wrap" id="surprise-photo">
-                    <img src="surprice.HEIC" class="surprise-photo" alt="Surprise">
+                    <img src="surprice.HEIC" class="surprise-photo" alt="Surprise" onerror="this.src='https://picsum.photos/300/400'">
                 </div>
             </div>
 
@@ -373,10 +372,10 @@
     <div class="step-container" id="step-11">
         <div class="finale-text-wrap" style="max-width: 800px; padding: 20px; z-index: 10; text-align: center;">
             <div class="finale-img-wrap">
-                <img src="photo12.jpg" loading="lazy" class="finale-img" alt="Finale">
+                <img src="photo12.jpg" loading="lazy" class="finale-img" alt="Finale" onerror="this.src='https://picsum.photos/300/300'">
             </div>
             
-            <h1 class="heading glow-text" style="font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 20px;">Happy Birthday Aaru ❤️</h1>
+            <h1 class="heading glow-text" style="font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 20px;">Happy Birthday Aaru 🤌🏻👀💝</h1>
             <p class="subtext glow-text" style="font-family: var(--font-head); font-size: 1.8rem; margin-bottom: 15px; color: #ff99aa;">Thank You For Existing.</p>
             <p class="subtext" style="font-size: 1.1rem; line-height: 1.8; max-width: 700px;">May every dream you wish for come true, and may your life always be filled with happiness, peace, love, success, beautiful memories, and endless smiles.</p>
             <button class="btn-cinematic hover-target" style="margin-top: 40px; background: rgba(255,42,112,0.2);" onclick="location.reload()">Replay The Journey 🔄</button>
@@ -400,217 +399,223 @@
 
     <!-- Step 12b: Secret Part 2 -->
     <div class="step-container secret-page" id="step-12b">
-        <div class="glass-panel text-center" style="background: rgba(0,0,0,0.8); padding: 50px; border-color: #333;">
-            <div class="secret-handwriting">
-                <span id="typed-secret"></span>
-            </div>
+        <div class="glass-panel text-center" style="background: rgba(0,0,0,0.85); border-color: #555;">
+            <h1 class="heading glow-text" style="font-size: 2rem; color: #fff;">Always & Forever ❤️</h1>
+            <p class="secret-handwriting" style="margin-top: 20px;">
+                Tum meri zindagi ka sabse khoobsurat hissa ho. Aaru 🤌🏻👀💝, thank you har us moment ke liye jo tumne special banaya. Happy Birthday once again, my love! ✨
+            </p>
+            <button class="btn-cinematic hover-target" onclick="nextStep('12b', 11)" style="border-color: #ff2a70; margin-top: 30px;">Back To Finale 🌹</button>
         </div>
     </div>
 
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
     <script>
-        // --- 1. Custom Cursor & Teddy Bear Logic ---
+        /* 1. Custom Cursor & Interactive Audio Handler */
         const cursor = document.querySelector('.cursor');
         const cursorDot = document.querySelector('.cursor-dot');
-        const teddy = document.getElementById('teddy-bear');
         const bgMusic = document.getElementById('bg-music');
 
         document.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.15 });
             gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0.05 });
-            if (teddy) {
-                gsap.to(teddy, { x: (e.clientX - window.innerWidth / 2) * 0.05, duration: 1 });
+        });
+
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.classList.contains('hover-target') || e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') {
+                document.body.classList.add('hover-active');
+            } else {
+                document.body.classList.remove('hover-active');
             }
         });
 
-        document.querySelectorAll('.hover-target').forEach(item => {
-            item.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
-            item.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
-        });
-
-        function playAudio() {
-            if (bgMusic && bgMusic.paused) {
-                bgMusic.volume = 0.5;
-                bgMusic.play().catch(() => {});
+        // Auto-play music on first user interaction
+        function playMusic() {
+            if(bgMusic.paused) {
+                bgMusic.play().catch(() => console.log('Audio autoplay blocked'));
             }
         }
+        document.addEventListener('click', playMusic, { once: true });
 
-        // --- 2. Step Navigation ---
-        function nextStep(current, next) {
-            playAudio();
-            const currEl = document.getElementById(`step-${current}`);
-            const nextEl = document.getElementById(`step-${next}`);
-
-            if (currEl) currEl.classList.remove('active');
-            if (nextEl) nextEl.classList.add('active');
-
-            if (next === 5) renderGallery();
-            if (next === 6) startShayari();
-            if (next === 7) renderReasons();
-            if (next === 9) renderBalloons();
-            if (next === 10) renderMasonry();
-            if (next === 11) triggerFinaleConfetti();
-            if (next === '12b') startSecretTyped();
-        }
-
-        // --- 3. Background Canvas Particles ---
+        /* 2. Interactive Background Canvas (Stars/Particles) */
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
-        let stars = [];
+        let particles = [];
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-        window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-        for (let i = 0; i < 150; i++) {
-            stars.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                size: Math.random() * 2,
-                speed: Math.random() * 0.5 + 0.1,
-                opacity: Math.random()
-            });
-        }
-
-        function animateStars() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            stars.forEach(star => {
-                star.y -= star.speed;
-                if (star.y < 0) star.y = canvas.height;
-                ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.8 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
                 ctx.beginPath();
-                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
-            });
-            requestAnimationFrame(animateStars);
+            }
         }
-        animateStars();
 
-        // --- 4. Step 1: Loading Bar ---
+        for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        /* 3. Global Navigation Logic */
+        function nextStep(current, next) {
+            playMusic();
+            const currentEl = document.getElementById(`step-${current}`);
+            const nextEl = document.getElementById(`step-${next}`);
+
+            if (currentEl) currentEl.classList.remove('active');
+            if (nextEl) {
+                nextEl.classList.add('active');
+                
+                // Trigger specific step initializations
+                if (next === 5) initPolaroidGallery();
+                if (next === 6) initShayari();
+                if (next === 7) initReasonsGrid();
+                if (next === 9) initBalloons();
+                if (next === 10) initMasonryWall();
+                if (next === 11) confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            }
+        }
+
+        /* 4. Step 1: Loading Progress */
         let progress = 0;
         const loadingBar = document.getElementById('loading-bar');
         const loadInterval = setInterval(() => {
             progress += 2;
-            if (loadingBar) loadingBar.style.width = progress + '%';
+            loadingBar.style.width = `${progress}%`;
             if (progress >= 100) {
                 clearInterval(loadInterval);
-                nextStep(1, 2);
+                setTimeout(() => nextStep(1, 2), 500);
             }
-        }, 40);
+        }, 30);
 
-        // --- 5. Step 2: Answer Check ---
+        /* 5. Step 2: Answer Check */
         function checkAnswer() {
-            playAudio();
-            const input = document.getElementById('secret-input').value.trim().toLowerCase();
+            const input = document.getElementById('secret-input');
+            const val = input.value.trim().toLowerCase();
+            const successMsg = document.getElementById('success-msg');
+            const btnNext = document.getElementById('btn-next-2');
             const hint = document.getElementById('hint-msg');
-            const success = document.getElementById('success-msg');
-            const btn = document.getElementById('btn-next-2');
-            const inputEl = document.getElementById('secret-input');
 
-            if (input === "" || input.includes("aaru") || input.includes("you") || input.includes("tum") || input.includes("aap")) {
-                if (hint) hint.style.opacity = '0';
-                if (success) success.classList.remove('hidden');
-                if (btn) btn.classList.remove('hidden');
-                inputEl.disabled = true;
-                confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+            if (val.includes('aaru 🤌🏻👀💝') || val.includes('aarohi') || val.length > 0) {
+                successMsg.classList.remove('hidden');
+                btnNext.classList.remove('hidden');
+                hint.style.opacity = '0';
+                confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
             } else {
-                inputEl.classList.add('shake');
-                if (hint) hint.style.opacity = '1';
-                setTimeout(() => inputEl.classList.remove('shake'), 400);
+                input.classList.add('shake');
+                hint.style.opacity = '1';
+                setTimeout(() => input.classList.remove('shake'), 400);
             }
         }
 
-        // --- 6. Step 3: Candle Light & Wish ---
+        /* 6. Step 3: Candle Lighting & Timer */
         let candleLit = false;
         function lightCandles() {
             if (candleLit) return;
             candleLit = true;
-            playAudio();
             document.getElementById('flame').style.opacity = '1';
-            document.getElementById('cake-msg').innerText = "Make your wish! Countdown starting...";
+            document.getElementById('cake-msg').innerText = "Wishing you all the joy in the world! 🎉";
+            
+            confetti({ particleCount: 80, spread: 80, origin: { y: 0.6 } });
 
-            const ring = document.getElementById('timer-ring');
-            const text = document.getElementById('timer-text');
-            ring.classList.remove('hidden');
-            text.classList.remove('hidden');
+            const timerRing = document.getElementById('timer-ring');
+            const timerText = document.getElementById('timer-text');
+            timerRing.classList.remove('hidden');
+            timerText.classList.remove('hidden');
 
             let count = 10;
-            text.innerText = count;
-
             const timer = setInterval(() => {
                 count--;
-                text.innerText = count;
+                timerText.innerText = count;
                 if (count <= 0) {
                     clearInterval(timer);
-                    ring.classList.add('hidden');
-                    text.classList.add('hidden');
-                    document.getElementById('flame').style.opacity = '0';
-                    document.getElementById('cake-msg').innerText = "Wish granted! Happy Birthday My Love! ❤️";
+                    timerRing.classList.add('hidden');
+                    timerText.classList.add('hidden');
                     document.getElementById('btn-next-3').classList.remove('hidden');
-                    confetti({ particleCount: 100, spread: 80, origin: { y: 0.5 } });
                 }
             }, 1000);
         }
 
-        // --- 7. Step 4: Envelope Letter ---
-        let letterTyped = false;
+        /* 7. Step 4: Typed Letter Logic */
+        let letterOpened = false;
         function openEnvelope() {
-            playAudio();
-            const env = document.getElementById('envelope');
-            env.classList.add('open');
-            if (!letterTyped) {
-                letterTyped = true;
-                setTimeout(() => {
-                    new Typed('#typed-letter', {
-                        strings: [
-                            "Dearest Aaru,<br><br>Happy Birthday to the most amazing person in my life. Every single moment spent with you is a memory I cherish forever.<br><br>Your smile brings so much brightness into my world, and your warmth makes everything better.<br><br>Thank you for being you. I love you so much! ❤️"
-                        ],
-                        typeSpeed: 30,
-                        showCursor: false,
-                        onComplete: () => {
-                            document.getElementById('btn-next-4').classList.remove('hidden');
-                        }
-                    });
-                }, 800);
-            }
+            if (letterOpened) return;
+            letterOpened = true;
+            document.getElementById('envelope').classList.add('open');
+
+            setTimeout(() => {
+                new Typed('#typed-letter', {
+                    strings: [
+                        "Dear Aaru🤌🏻👀💝, ❤️<br><br>Happy Birthday to the most amazing, wonderful, and special person! Every single moment with you brings warmth, joy, and unforgettable memories.<br><br>May your day be filled with endless smiles, sweet moments, and all the love you deserve. Always keep shining bright! ✨"
+                    ],
+                    typeSpeed: 35,
+                    showCursor: false,
+                    onComplete: () => {
+                        document.getElementById('btn-next-4').classList.remove('hidden');
+                    }
+                });
+            }, 1000);
         }
 
-        // --- 8. Step 5: Render Polaroids ---
-        let galleryRendered = false;
-        function renderGallery() {
-            if (galleryRendered) return;
-            galleryRendered = true;
-            const wrap = document.getElementById('gallery-4');
-            const images = [
-                { src: 'photo1.jpg', cap: 'Cutest Smile ✨' },
-                { src: 'photo2.jpg', cap: 'My Sunshine ☀️' },
-                { src: 'photo3.jpg', cap: 'Precious Moments 💖' },
-                { src: 'photo4.jpg', cap: 'Forever Favorite 🌹' }
+        /* 8. Step 5: Polaroid Gallery Generator */
+        function initPolaroidGallery() {
+            const gallery = document.getElementById('gallery-4');
+            if (gallery.children.length > 0) return;
+
+            const photos = [
+                { src: 'photo1.jpg', cap: 'Sweet Moments ✨' },
+                { src: 'photo2.jpg', cap: 'Your Cute Smile 😊' },
+                { src: 'photo3.jpg', cap: 'Unforgettable Memories 💖' },
+                { src: 'photo4.jpg', cap: 'Forever Cherished 🌸' }
             ];
 
-            images.forEach((img, idx) => {
-                const rot = (idx % 2 === 0 ? 1 : -1) * (Math.random() * 8 + 2);
+            photos.forEach((item, idx) => {
                 const card = document.createElement('div');
                 card.className = 'polaroid hover-target';
-                card.style.transform = `rotate(${rot}deg)`;
-                card.onclick = () => openLightbox(img.src, img.cap);
-                card.innerHTML = `<img src="${img.src}" alt="Memory"><div class="polaroid-cap">${img.cap}</div>`;
-                wrap.appendChild(card);
-
-                gsap.to(card, { opacity: 1, y: 0, duration: 0.6, delay: idx * 0.15 });
+                card.style.transform = `rotate(${(idx % 2 === 0 ? -1 : 1) * (idx + 2)}deg)`;
+                card.innerHTML = `<img src="${item.src}" onerror="this.src='https://picsum.photos/200/220?random=${idx}'" alt="Memory"><div class="polaroid-cap">${item.cap}</div>`;
+                card.onclick = () => openLightbox(item.src, item.cap);
+                gallery.appendChild(card);
             });
+
+            gsap.to('.polaroid', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2 });
         }
 
-        // --- 9. Step 6: Shayari ---
-        let shayariTyped = false;
-        function startShayari() {
-            if (shayariTyped) return;
-            shayariTyped = true;
+        /* 9. Step 6: Shayari Typed Logic */
+        let shayariDone = false;
+        function initShayari() {
+            if (shayariDone) return;
+            shayariDone = true;
             new Typed('#typed-shayari', {
                 strings: [
-                    "Tere chehre ki muskaan se hi meri har subah hoti hai,<br>Tu paas na ho toh bhi har jagah teri hi kami hoti hai.<br>Mubarak ho tumhe tumhara ye khaas din,<br>Mera har din tumse aur har khushi tumhi se hoti hai. ❤️"
+                    "\"Chehre par aapke hamesha muskaan rahe,<br>Har mod par khushiyon ka paigaam rahe,<br>Saja de zindagi aapki phoolon jaisi,<br>Aapke saath hamesha hamara pyara naam rahe.\" ✨❤️"
                 ],
                 typeSpeed: 40,
                 showCursor: false,
@@ -620,159 +625,103 @@
             });
         }
 
-        // --- 10. Step 7: 200 Reasons ---
-        let reasonsRendered = false;
-        function renderReasons() {
-            if (reasonsRendered) return;
-            reasonsRendered = true;
+        /* 10. Step 7: 200 Reasons Generator */
+        function initReasonsGrid() {
             const grid = document.getElementById('reasons-grid');
-            
-            const reasonsList = [
-                "Your sweet and caring smile",
-                "The way you make my heart skip a beat",
-                "Your beautiful eyes that tell a story",
-                "How you always know how to make me feel better",
-                "Your kind and compassionate heart",
-                "The cute way you laugh at jokes",
-                "How deeply you love and care",
-                "Your unique and wonderful personality",
-                "The peace I feel when I think of you",
-                "How you make every ordinary day special"
+            if (grid.children.length > 0) return;
+
+            const baseReasons = [
+                "Your infectious cute smile", "The way your eyes shine", "Your kind and gentle heart",
+                "How you care for everyone", "Your amazing sense of style", "Your comforting presence",
+                "The way you say my name", "Your sweet voice", "Your silly goofy side",
+                "How strong you are", "Your innocent laugh", "Your supportive nature"
             ];
 
             for (let i = 1; i <= 200; i++) {
                 const card = document.createElement('div');
                 card.className = 'reason-card hover-target';
-                const reasonText = reasonsList[(i - 1) % reasonsList.length];
+                const text = baseReasons[(i - 1) % baseReasons.length];
                 card.innerHTML = `
                     <div class="reason-num">Reason #${i}</div>
-                    <div class="reason-text">${reasonText}</div>
+                    <div class="reason-text">${text} #${i}</div>
                 `;
                 grid.appendChild(card);
-                gsap.to(card, { opacity: 1, y: 0, duration: 0.4, delay: Math.min(i * 0.02, 1.2) });
             }
+
+            gsap.to('.reason-card', { opacity: 1, y: 0, duration: 0.5, stagger: 0.02 });
         }
 
-        // --- 11. Step 8: Gift Box ---
+        /* 11. Step 8: Gift Reveal */
         let giftOpened = false;
         function openGift() {
             if (giftOpened) return;
             giftOpened = true;
-            playAudio();
-            const gift = document.getElementById('gift');
-            gift.classList.add('open');
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-            
-            setTimeout(() => {
-                document.getElementById('gift-msg').classList.remove('hidden');
-                document.getElementById('btn-next-8').classList.remove('hidden');
-            }, 1000);
+            document.getElementById('gift').classList.add('open');
+            document.getElementById('gift-msg').classList.remove('hidden');
+            document.getElementById('btn-next-8').classList.remove('hidden');
+            confetti({ particleCount: 100, spread: 80, origin: { y: 0.5 } });
         }
 
-        // --- 12. Step 9: Balloon Blast ---
-        let balloonsRendered = false;
-        function renderBalloons() {
-            if (balloonsRendered) return;
-            balloonsRendered = true;
+        /* 12. Step 9: Balloons Blast */
+        let poppedCount = 0;
+        function initBalloons() {
             const sky = document.getElementById('balloon-sky');
-            const wishes = [
-                "Endless Joy ✨",
-                "Infinite Smiles 😊",
-                "Good Health 🌸",
-                "True Happiness ❤️",
-                "Success Always 🌟",
-                "Eternal Love 💞"
-            ];
+            if (sky.children.length > 0) return;
 
-            wishes.forEach((wish, idx) => {
+            const wishes = ["Happiness 💖", "Health 🌸", "Joy ✨", "Success 🌟", "Peace 🕊️"];
+            wishes.forEach((wish) => {
                 const wrap = document.createElement('div');
                 wrap.className = 'balloon-wrap hover-target';
-                wrap.style.animationDelay = `${idx * 0.3}s`;
-                wrap.onclick = () => popBalloon(wrap, wish);
-                wrap.innerHTML = `<div class="balloon"><span>Pop Me</span></div>`;
+                wrap.innerHTML = `<div class="balloon"><span>POP ME</span></div>`;
+                wrap.onclick = () => {
+                    confetti({ particleCount: 30, spread: 50, origin: { y: 0.6 } });
+                    document.getElementById('balloon-msg-box').classList.remove('hidden');
+                    document.getElementById('balloon-msg-text').innerText = wish;
+                    wrap.style.visibility = 'hidden';
+                    poppedCount++;
+                    if (poppedCount >= 3) {
+                        document.getElementById('btn-next-9').classList.remove('hidden');
+                    }
+                };
                 sky.appendChild(wrap);
             });
         }
 
-        let poppedCount = 0;
-        function popBalloon(el, msg) {
-            confetti({ particleCount: 30, spread: 50, origin: { x: 0.5, y: 0.5 } });
-            el.style.transform = 'scale(0)';
-            el.style.opacity = '0';
-            el.style.pointerEvents = 'none';
-
-            const msgBox = document.getElementById('balloon-msg-box');
-            const msgText = document.getElementById('balloon-msg-text');
-            msgBox.classList.remove('hidden');
-            msgText.innerText = msg;
-
-            poppedCount++;
-            if (poppedCount >= 3) {
-                document.getElementById('btn-next-9').classList.remove('hidden');
-            }
-        }
-
-        // --- 13. Step 10: Masonry Wall ---
-        let masonryRendered = false;
-        function renderMasonry() {
-            if (masonryRendered) return;
-            masonryRendered = true;
+        /* 13. Step 10: Masonry Wall Generator */
+        function initMasonryWall() {
             const wall = document.getElementById('masonry-wall');
-            const photos = ['photo5.jpg', 'photo6.jpg', 'photo7.jpg', 'photo8.jpg', 'photo9.jpg', 'photo10.jpg'];
+            if (wall.children.length > 0) return;
 
-            photos.forEach((src, idx) => {
+            for (let i = 1; i <= 9; i++) {
                 const item = document.createElement('div');
                 item.className = 'masonry-item hover-target';
-                item.onclick = () => openLightbox(src, `Sweet Memory #${idx + 1}`);
-                item.innerHTML = `<img src="${src}" alt="Memory">`;
+                const imgSrc = `photo${i}.jpg`;
+                item.innerHTML = `<img src="${imgSrc}" onerror="this.src='https://picsum.photos/300/400?random=${i}'" alt="Memory ${i}">`;
+                item.onclick = () => openLightbox(imgSrc, `Sweet Memory #${i}`);
                 wall.appendChild(item);
-                gsap.to(item, { opacity: 1, scale: 1, duration: 0.5, delay: idx * 0.1 });
-            });
+            }
+
+            gsap.to('.masonry-item', { opacity: 1, scale: 1, duration: 0.6, stagger: 0.1 });
         }
 
-        // --- 14. Step 11: Finale Confetti ---
-        function triggerFinaleConfetti() {
-            const duration = 3 * 1000;
-            const animationEnd = Date.now() + duration;
-            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-            const interval = setInterval(function() {
-                const timeLeft = animationEnd - Date.now();
-                if (timeLeft <= 0) return clearInterval(interval);
-                const particleCount = 50 * (timeLeft / duration);
-                confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random() * 0.3 + 0.1, y: Math.random() - 0.2 } }));
-                confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random() * 0.3 + 0.6, y: Math.random() - 0.2 } }));
-            }, 250);
-        }
-
-        // --- 15. Step 12: Secret Triggers ---
-        function triggerSecret() {
-            nextStep(11, '12a');
-        }
-
-        let secretTyped = false;
-        function startSecretTyped() {
-            if (secretTyped) return;
-            secretTyped = true;
-            new Typed('#typed-secret', {
-                strings: [
-                    "You found the secret message... 🖤<br><br>Always remember, no matter where life takes us, you will always hold a very special place in my heart."
-                ],
-                typeSpeed: 40,
-                showCursor: false
-            });
-        }
-
-        // --- 16. Lightbox Helper Functions ---
+        /* 14. Lightbox Handlers */
         function openLightbox(src, cap) {
             const lb = document.getElementById('lightbox');
-            document.getElementById('lb-img').src = src;
-            document.getElementById('lb-cap').innerText = cap || '';
+            const lbImg = document.getElementById('lb-img');
+            const lbCap = document.getElementById('lb-cap');
+
+            lbImg.src = src;
+            lbCap.innerText = cap || '';
             lb.classList.add('active');
         }
 
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
+        }
+
+        /* 15. Secret Heart Callback */
+        function triggerSecret() {
+            nextStep(11, '12a');
         }
     </script>
 </body>
