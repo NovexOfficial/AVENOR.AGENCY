@@ -137,7 +137,7 @@
         .gallery-wrap { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; width: 100%; max-width: 1000px; padding: 20px; overflow-y: auto; max-height: 60vh; }
         .gallery-wrap::-webkit-scrollbar { display: none; }
         .polaroid { background: #fff; padding: 10px 10px 35px 10px; border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); cursor: pointer; transition: 0.4s; position: relative; opacity: 0; transform: translateY(30px); will-change: transform; }
-        .polaroid img { width: 180px; height: 210px; object-fit: cover; border-radius: 2px; background: #eee; }
+        .polaroid img { width: 180px; height: 210px; object-fit: cover; border-radius: 2px; background: #222; }
         .polaroid-cap { position: absolute; bottom: 10px; left: 0; width: 100%; text-align: center; color: #333; font-family: 'Playfair Display'; font-weight: 600; font-size: 0.9rem; }
         .polaroid:hover { transform: scale(1.1) rotate(0deg) !important; z-index: 10; box-shadow: 0 20px 50px rgba(255,42,112,0.5); }
         
@@ -146,7 +146,7 @@
         .masonry { columns: 3 180px; column-gap: 20px; width: 95%; max-width: 1200px; padding: 20px; max-height: 70vh; overflow-y: auto; }
         .masonry::-webkit-scrollbar { display: none; }
         .masonry-item { break-inside: avoid; margin-bottom: 20px; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; transform: scale(0.9); transition: 0.4s; will-change: transform; }
-        .masonry-item img { width: 100%; display: block; transition: 0.5s; background: #222; }
+        .masonry-item img { width: 100%; display: block; transition: 0.5s; background: #222; min-height: 200px; }
         .masonry-item:hover { box-shadow: 0 15px 40px rgba(255,42,112,0.5); transform: translateY(-5px); z-index: 5; }
         .masonry-item:hover img { transform: scale(1.1); filter: brightness(0.9); }
 
@@ -181,7 +181,7 @@
         .ribbon-h { width: 100%; height: 20px; top: 50%; transform: translateY(-50%); }
         
         .surprise-photo-wrap { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%) scale(0); opacity: 0; z-index: 4; transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .surprise-photo { width: 200px; border-radius: 15px; border: 3px solid #fff; box-shadow: 0 10px 40px rgba(255,42,112,0.6); }
+        .surprise-photo { width: 200px; border-radius: 15px; border: 3px solid #fff; box-shadow: 0 10px 40px rgba(255,42,112,0.6); background: #222; min-height: 250px;}
         
         .gift-box.open .box-lid { transform: translateY(-100px) rotateX(60deg) scale(1.1); opacity: 0; }
         .gift-box.open ~ .surprise-photo-wrap { transform: translateX(-50%) translateY(-120px) scale(1); opacity: 1; z-index: 10; }
@@ -337,7 +337,7 @@
                 </div>
                 
                 <div class="surprise-photo-wrap" id="surprise-photo">
-                    <img src="surprice.HEIC" onerror="this.src='https://via.placeholder.com/200x250/ff2a70/ffffff?text=Surprise!'" class="surprise-photo" alt="Surprise">
+                    <img src="surprice.HEIC" class="surprise-photo" alt="Surprise">
                 </div>
             </div>
 
@@ -367,7 +367,7 @@
     <div class="step-container" id="step-11">
         <div class="finale-text-wrap" style="max-width: 800px; padding: 20px; z-index: 10;">
             <div class="finale-img-wrap">
-                <img src="photo12.jpg" loading="lazy" onerror="this.src='https://via.placeholder.com/220/ff2a70/ffffff?text=Happy+Bday'" class="finale-img" alt="Finale">
+                <img src="photo12.jpg" loading="lazy" class="finale-img" alt="Finale">
             </div>
             
             <h1 class="heading glow-text" style="font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 20px;">Happy Birthday Aaru ❤️</h1>
@@ -477,20 +477,22 @@
             if (step == '12b') initSecretText();
         }
 
-        // --- Step 1: Loading Simulation ---
-        window.onload = () => {
+        // --- Step 1: Loading Simulation (FIXED: DOMContentLoaded instead of window.onload) ---
+        document.addEventListener('DOMContentLoaded', () => {
             let progress = 0;
             const bar = document.getElementById('loading-bar');
+            
+            // Runs immediately, does not wait for external images to download
             const inter = setInterval(() => {
-                progress += Math.random() * 12;
+                progress += Math.random() * 15;
                 if (progress >= 100) {
                     progress = 100;
                     clearInterval(inter);
                     setTimeout(() => nextStep(1, 2), 600);
                 }
                 bar.style.width = progress + '%';
-            }, 300);
-        };
+            }, 150);
+        });
 
         // --- Step 2: Secret Input ---
         const secInput = document.getElementById('secret-input');
@@ -582,7 +584,7 @@
                 const rot = (Math.random() - 0.5) * 15;
                 html += `
                     <div class="polaroid hover-target" style="transform: rotate(${rot}deg) translateY(30px);" onclick="openLightbox('photo${i}.jpg', '${captions[i-1]}')">
-                        <img src="photo${i}.jpg" loading="lazy" onerror="this.src='https://via.placeholder.com/220x250/ff2a70/ffffff?text=Photo+${i}'" alt="Memory">
+                        <img src="photo${i}.jpg" loading="lazy" alt="Memory">
                         <div class="polaroid-cap">${captions[i-1]}</div>
                     </div>
                 `;
@@ -607,7 +609,6 @@
         function load200Reasons() {
             if(reasonsLoaded) return; reasonsLoaded = true;
             
-            // Array from your prompt (approx 130 items, we will loop them to fill exactly 200)
             const rawReasons = [
                 "🎙️ Your Voice", "😊 Your Smile", "👀 Your Eyes", "😂 Your Laugh", "❤️ Your Kindness", "🤝 Your Honesty",
                 "🛡️ Your Loyalty", "💖 Your Care", "🙏 Your Respect", "🫶 Your Understanding", "⏳ Your Patience", "💪 Your Confidence",
@@ -740,7 +741,7 @@
             for(let i=1; i<=12; i++) {
                 html += `
                     <div class="masonry-item hover-target" onclick="openLightbox('photo${i}.jpg', 'Beautiful Memory')">
-                        <img src="photo${i}.jpg" loading="lazy" onerror="this.src='https://via.placeholder.com/300x${300 + (i%3)*100}/ff2a70/ffffff?text=Photo+${i}'" alt="Wall">
+                        <img src="photo${i}.jpg" loading="lazy" alt="Wall">
                     </div>
                 `;
             }
