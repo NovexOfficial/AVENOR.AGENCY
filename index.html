@@ -364,12 +364,18 @@
         <button class="btn-cinematic hover-target hidden" id="btn-next-9" style="position: absolute; bottom: 5vh;" onclick="nextStep(9, 10)">More Memories 📸</button>
     </div>
 
-    <!-- Step 10: Masonry Memory Wall -->
-    <div class="step-container" id="step-10">
-        <h1 class="heading glow-text" style="margin-top: 20px;">The Memory Wall 🎞️</h1>
-        <div class="masonry" id="masonry-wall"></div>
-        <button class="btn-cinematic hover-target" onclick="nextStep(10, 11)" style="margin-bottom: 20px;">Grand Finale 🎉</button>
-    </div>
+/* Step 10 Masonry Wall (Fixed for exactly 8 photos) */
+const masonry = document.getElementById('masonry-wall');
+masonry.innerHTML = ''; // Pehle ka clear karne ke liye
+for (let i = 1; i <= 8; i++) { // Loop exactly 8 par set hai
+    const item = document.createElement('div');
+    item.className = 'masonry-item hover-target';
+    item.onclick = () => openLightbox(`photo${i}.jpg`, `Precious Memory #${i}`);
+    
+    // loading="lazy" pehle se hai, but layout break na ho isliye ek wrapper lagaya hai
+    item.innerHTML = `<img src="photo${i}.jpg" loading="lazy" alt="Aaru Memory ${i}">`;
+    masonry.appendChild(item);
+}
 
     <!-- Step 11: Finale -->
     <div class="step-container" id="step-11">
