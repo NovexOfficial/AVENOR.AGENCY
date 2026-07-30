@@ -162,12 +162,11 @@
         .reasons-container { width: 95%; max-width: 1000px; height: 60vh; overflow-y: auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; scroll-behavior: smooth; margin-top: 10px;}
         .reasons-container::-webkit-scrollbar { width: 6px; }
         .reasons-container::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 10px; }
-        .reason-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 16px; transition: 0.4s; position: relative; overflow: hidden; opacity: 0; transform: translateY(20px); text-align: left; }
+        .reason-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 16px; transition: 0.4s; position: relative; overflow: hidden; opacity: 0; transform: translateY(20px); text-align: left; display: flex; align-items: center;}
         .reason-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,42,112,0.15) 0%, transparent 70%); opacity: 0; transition: 0.5s; pointer-events: none; }
         .reason-card:hover { transform: translateY(-5px) scale(1.02); border-color: rgba(255,42,112,0.5); box-shadow: 0 10px 30px rgba(255,42,112,0.2); }
         .reason-card:hover::before { opacity: 1; }
-        .reason-num { font-family: var(--font-head); font-size: 1.3rem; color: var(--neon-pink); font-weight: bold; margin-bottom: 5px; opacity: 0.9; text-shadow: 0 0 5px rgba(255,42,112,0.4); }
-        .reason-text { color: #ffffff; font-size: 0.95rem; line-height: 1.5; font-weight: 500; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
+        .reason-text { font-family: var(--font-body); font-size: 1.05rem; font-weight: 500; color: #ff99aa; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
         
         /* Step 8: Gift & Surprise Photo */
         .gift-box { position: relative; width: 150px; height: 150px; margin: 20px auto; cursor: pointer; perspective: 1000px; transform-style: preserve-3d; transition: transform 0.3s; z-index: 5; }
@@ -341,7 +340,8 @@
                 </div>
                 
                 <div class="surprise-photo-wrap" id="surprise-photo">
-                    <img src="surprice.HEIC" class="surprise-photo" alt="Surprise" onerror="this.src='https://picsum.photos/300/400'">
+                    <!-- Changed from surprice.HEIC to surprice.jpg -->
+                    <img src="surprice.jpg" class="surprise-photo" alt="Surprise">
                 </div>
             </div>
 
@@ -372,7 +372,7 @@
     <div class="step-container" id="step-11">
         <div class="finale-text-wrap" style="max-width: 800px; padding: 20px; z-index: 10; text-align: center;">
             <div class="finale-img-wrap">
-                <img src="photo12.jpg" loading="lazy" class="finale-img" alt="Finale" onerror="this.src='https://picsum.photos/300/300'">
+                <img src="photo12.jpg" loading="lazy" class="finale-img" alt="Finale">
             </div>
             
             <h1 class="heading glow-text" style="font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 20px;">Happy Birthday Aaru ❤️</h1>
@@ -428,7 +428,6 @@
             }
         });
 
-        // Auto-play music on first user interaction
         function playMusic() {
             if(bgMusic.paused) {
                 bgMusic.play().catch(() => console.log('Audio autoplay blocked'));
@@ -436,7 +435,7 @@
         }
         document.addEventListener('click', playMusic, { once: true });
 
-        /* 2. Interactive Background Canvas (Stars/Particles) */
+        /* 2. Interactive Background Canvas */
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -475,13 +474,23 @@
 
         function animateCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
+            particles.forEach(p => { p.update(); p.draw(); });
             requestAnimationFrame(animateCanvas);
         }
         animateCanvas();
+
+        /* Global Photos Shuffle Logic (1 to 12) */
+        const allPhotos = [];
+        for(let i = 1; i <= 12; i++) {
+            allPhotos.push(`photo${i}.jpg`);
+        }
+        for (let i = allPhotos.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [allPhotos[i], allPhotos[j]] = [allPhotos[j], allPhotos[i]];
+        }
+        const polaroidPhotos = allPhotos.slice(0, 4);
+        const masonryPhotos = allPhotos.slice(4, 12);
+
 
         /* 3. Global Navigation Logic */
         function nextStep(current, next) {
@@ -492,8 +501,6 @@
             if (currentEl) currentEl.classList.remove('active');
             if (nextEl) {
                 nextEl.classList.add('active');
-                
-                // Trigger specific step initializations
                 if (next === 5) initPolaroidGallery();
                 if (next === 6) initShayari();
                 if (next === 7) initReasonsGrid();
@@ -515,15 +522,16 @@
             }
         }, 30);
 
-        /* 5. Step 2: Answer Check */
+        /* 5. Step 2: Answer Check (STRICTLY 'aaru') */
         function checkAnswer() {
             const input = document.getElementById('secret-input');
-            const val = input.value.trim().toLowerCase();
+            const val = input.value.trim().toLowerCase(); // converts Aaru to aaru
             const successMsg = document.getElementById('success-msg');
             const btnNext = document.getElementById('btn-next-2');
             const hint = document.getElementById('hint-msg');
 
-            if (val.includes('aaru') || val.includes('aarohi') || val.length > 0) {
+            // Strictly check for 'aaru'
+            if (val === 'aaru') {
                 successMsg.classList.remove('hidden');
                 btnNext.classList.remove('hidden');
                 hint.style.opacity = '0';
@@ -542,14 +550,11 @@
             candleLit = true;
             document.getElementById('flame').style.opacity = '1';
             document.getElementById('cake-msg').innerText = "Wishing you all the joy in the world! 🎉";
-            
             confetti({ particleCount: 80, spread: 80, origin: { y: 0.6 } });
-
             const timerRing = document.getElementById('timer-ring');
             const timerText = document.getElementById('timer-text');
             timerRing.classList.remove('hidden');
             timerText.classList.remove('hidden');
-
             let count = 10;
             const timer = setInterval(() => {
                 count--;
@@ -569,17 +574,12 @@
             if (letterOpened) return;
             letterOpened = true;
             document.getElementById('envelope').classList.add('open');
-
             setTimeout(() => {
                 new Typed('#typed-letter', {
-                    strings: [
-                        "Dear Aaru, ❤️<br><br>Happy Birthday to the most amazing, wonderful, and special person! Every single moment with you brings warmth, joy, and unforgettable memories.<br><br>May your day be filled with endless smiles, sweet moments, and all the love you deserve. Always keep shining bright! ✨"
-                    ],
+                    strings: ["Dear Aaru, ❤️<br><br>Happy Birthday to the most amazing, wonderful, and special person! Every single moment with you brings warmth, joy, and unforgettable memories.<br><br>May your day be filled with endless smiles, sweet moments, and all the love you deserve. Always keep shining bright! ✨"],
                     typeSpeed: 35,
                     showCursor: false,
-                    onComplete: () => {
-                        document.getElementById('btn-next-4').classList.remove('hidden');
-                    }
+                    onComplete: () => { document.getElementById('btn-next-4').classList.remove('hidden'); }
                 });
             }, 1000);
         }
@@ -588,23 +588,17 @@
         function initPolaroidGallery() {
             const gallery = document.getElementById('gallery-4');
             if (gallery.children.length > 0) return;
+            const captions = ['Sweet Moments ✨', 'Your Cute Smile 😊', 'Unforgettable Memories 💖', 'Forever Cherished 🌸'];
 
-            const photos = [
-                { src: 'photo1.jpg', cap: 'Sweet Moments ✨' },
-                { src: 'photo2.jpg', cap: 'Your Cute Smile 😊' },
-                { src: 'photo3.jpg', cap: 'Unforgettable Memories 💖' },
-                { src: 'photo4.jpg', cap: 'Forever Cherished 🌸' }
-            ];
-
-            photos.forEach((item, idx) => {
+            polaroidPhotos.forEach((src, idx) => {
                 const card = document.createElement('div');
                 card.className = 'polaroid hover-target';
                 card.style.transform = `rotate(${(idx % 2 === 0 ? -1 : 1) * (idx + 2)}deg)`;
-                card.innerHTML = `<img src="${item.src}" onerror="this.src='https://picsum.photos/200/220?random=${idx}'" alt="Memory"><div class="polaroid-cap">${item.cap}</div>`;
-                card.onclick = () => openLightbox(item.src, item.cap);
+                // Removed 'onerror' fallback so ONLY local photos load.
+                card.innerHTML = `<img src="${src}" alt="Memory"><div class="polaroid-cap">${captions[idx]}</div>`;
+                card.onclick = () => openLightbox(src, captions[idx]);
                 gallery.appendChild(card);
             });
-
             gsap.to('.polaroid', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2 });
         }
 
@@ -614,14 +608,10 @@
             if (shayariDone) return;
             shayariDone = true;
             new Typed('#typed-shayari', {
-                strings: [
-                    "\"Chehre par aapke hamesha muskaan rahe,<br>Har mod par khushiyon ka paigaam rahe,<br>Saja de zindagi aapki phoolon jaisi,<br>Aapke saath hamesha hamara pyara naam rahe.\" ✨❤️"
-                ],
+                strings: ["\"Chehre par aapke hamesha muskaan rahe,<br>Har mod par khushiyon ka paigaam rahe,<br>Saja de zindagi aapki phoolon jaisi,<br>Aapke saath hamesha hamara pyara naam rahe.\" ✨❤️"],
                 typeSpeed: 40,
                 showCursor: false,
-                onComplete: () => {
-                    document.getElementById('btn-next-6').classList.remove('hidden');
-                }
+                onComplete: () => { document.getElementById('btn-next-6').classList.remove('hidden'); }
             });
         }
 
@@ -629,25 +619,21 @@
         function initReasonsGrid() {
             const grid = document.getElementById('reasons-grid');
             if (grid.children.length > 0) return;
-
-            const baseReasons = [
-                "Your infectious cute smile", "The way your eyes shine", "Your kind and gentle heart",
-                "How you care for everyone", "Your amazing sense of style", "Your comforting presence",
-                "The way you say my name", "Your sweet voice", "Your silly goofy side",
-                "How strong you are", "Your innocent laugh", "Your supportive nature"
+            const words = [
+                "Your smile", "Your eyes", "Your voice", "Your laugh", "Your kindness",
+                "The way you care", "Your warm hugs", "Your cute anger", "Your endless support",
+                "Your beautiful heart", "Your innocence", "The way you talk", "Your style",
+                "How you make me feel", "Your silly jokes", "Your positive energy", "Your honesty",
+                "The way you look at me", "Your intelligence", "Your unconditional love",
+                "Your sleepy voice", "Your madness", "How pure your soul is", "Your magical touch"
             ];
-
             for (let i = 1; i <= 200; i++) {
                 const card = document.createElement('div');
                 card.className = 'reason-card hover-target';
-                const text = baseReasons[(i - 1) % baseReasons.length];
-                card.innerHTML = `
-                    <div class="reason-num">Reason #${i}</div>
-                    <div class="reason-text">${text} #${i}</div>
-                `;
+                const text = words[(i - 1) % words.length];
+                card.innerHTML = `<div class="reason-text">${i}. ${text}</div>`;
                 grid.appendChild(card);
             }
-
             gsap.to('.reason-card', { opacity: 1, y: 0, duration: 0.5, stagger: 0.02 });
         }
 
@@ -667,7 +653,6 @@
         function initBalloons() {
             const sky = document.getElementById('balloon-sky');
             if (sky.children.length > 0) return;
-
             const wishes = ["Happiness 💖", "Health 🌸", "Joy ✨", "Success 🌟", "Peace 🕊️"];
             wishes.forEach((wish) => {
                 const wrap = document.createElement('div');
@@ -691,16 +676,14 @@
         function initMasonryWall() {
             const wall = document.getElementById('masonry-wall');
             if (wall.children.length > 0) return;
-
-            for (let i = 1; i <= 9; i++) {
+            masonryPhotos.forEach((src, idx) => {
                 const item = document.createElement('div');
                 item.className = 'masonry-item hover-target';
-                const imgSrc = `photo${i}.jpg`;
-                item.innerHTML = `<img src="${imgSrc}" onerror="this.src='https://picsum.photos/300/400?random=${i}'" alt="Memory ${i}">`;
-                item.onclick = () => openLightbox(imgSrc, `Sweet Memory #${i}`);
+                // Removed 'onerror' fallback so ONLY local photos load.
+                item.innerHTML = `<img src="${src}" alt="Memory">`;
+                item.onclick = () => openLightbox(src, `Sweet Memory`);
                 wall.appendChild(item);
-            }
-
+            });
             gsap.to('.masonry-item', { opacity: 1, scale: 1, duration: 0.6, stagger: 0.1 });
         }
 
@@ -709,12 +692,10 @@
             const lb = document.getElementById('lightbox');
             const lbImg = document.getElementById('lb-img');
             const lbCap = document.getElementById('lb-cap');
-
             lbImg.src = src;
             lbCap.innerText = cap || '';
             lb.classList.add('active');
         }
-
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
         }
