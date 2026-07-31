@@ -136,14 +136,44 @@
 
         #surprise-img { width: 280px; max-width: 90%; border-radius: 12px; margin-top: 20px; box-shadow: 0 10px 40px rgba(255,42,112,0.7); }
 
-        /* ================= STEP 8: MASONRY MEMORY WALL ================= */
-        .masonry { columns: 3 250px; column-gap: 20px; width: 95%; max-width: 1200px; padding: 20px; max-height: 75vh; overflow-y: auto; }
+        /* ================= STEP 8: MASONRY MEMORY WALL (FIXED) ================= */
+        .masonry { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 20px; 
+            width: 95%; 
+            max-width: 1200px; 
+            padding: 20px; 
+            max-height: 75vh; 
+            overflow-y: auto; 
+            align-items: start; 
+        }
         .masonry::-webkit-scrollbar { display: none; }
-        .masonry-item { break-inside: avoid; margin-bottom: 20px; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: 0.4s; }
-        .masonry-item img { width: 100%; display: block; transition: 0.5s; }
-        .masonry-item:hover { box-shadow: 0 15px 40px rgba(255,42,112,0.5); transform: translateY(-5px); z-index: 5; }
-        .masonry-item:hover img { transform: scale(1.1); filter: brightness(0.9); }
+        .masonry-item { 
+            border-radius: 16px; 
+            overflow: hidden; 
+            position: relative; 
+            cursor: pointer; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            transition: transform 0.3s, box-shadow 0.3s; 
+        }
+        .masonry-item img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            transition: 0.5s; 
+        }
+        .masonry-item:hover { 
+            box-shadow: 0 15px 40px rgba(255,42,112,0.6); 
+            transform: translateY(-8px); 
+            z-index: 5; 
+        }
+        .masonry-item:hover img { 
+            transform: scale(1.08); 
+            filter: brightness(0.9); 
+        }
 
+        /* Lightbox & Finale */
         .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.4s; }
         .lightbox.active { opacity: 1; pointer-events: all; }
         .lightbox img { max-width: 85%; max-height: 75vh; border-radius: 12px; }
@@ -522,7 +552,7 @@
             gallery4.appendChild(pol);
         }
 
-        /* --- STEP 8: MASONRY WALL (ALL 1 to 12 PHOTOS) --- */
+        /* --- STEP 8: MASONRY WALL (FIXED JAVASCRIPT) --- */
         const masonry = document.getElementById('masonry-wall');
         for (let i = 1; i <= 12; i++) { 
             const item = document.createElement('div');
@@ -532,7 +562,11 @@
             masonry.appendChild(item);
         }
         function animateMemoryWall() {
-            gsap.from(".masonry-item", { duration: 1.4, scale: 0, rotation: 720, y: 200, opacity: 0, stagger: 0.12, ease: "back.out(1.2)" });
+            // Smooth pop-up animation fixed for all photos
+            gsap.fromTo(".masonry-item", 
+                { opacity: 0, scale: 0.5, y: 100 }, 
+                { duration: 1, opacity: 1, scale: 1, y: 0, stagger: 0.1, ease: "back.out(1.5)" }
+            );
         }
 
         function openLightbox(src, caption) {
