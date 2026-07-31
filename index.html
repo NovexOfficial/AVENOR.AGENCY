@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aaru's Magical Journey ✨</title>
+    <title>Drishu's Magical Birthday Journey ✨</title>
 
+    <!-- Fonts & Libraries -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -22,189 +22,124 @@
             --font-head: 'Playfair Display', serif;
             --font-body: 'Poppins', sans-serif;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background: var(--bg-dark); color: #fff; overflow: hidden;
-            font-family: var(--font-body); width: 100vw; height: 100vh;
-            cursor: none; 
-        }
-        
-        /* Background Canvas & Aurora */
-        #bg-canvas { position: absolute; top: 0; left: 0; z-index: 1; pointer-events: none; }
-        .aurora {
-            position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 42, 112, 0.08), transparent 60%),
-                        radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.05), transparent 50%);
-            animation: aurora-move 20s infinite alternate; z-index: 0; pointer-events: none;
-        }
-        @keyframes aurora-move { 0% { transform: rotate(0deg) scale(1); } 100% { transform: rotate(15deg) scale(1.1); } }
 
-        /* Custom Cursor */
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+        body { background: var(--bg-dark); color: #fff; overflow: hidden; font-family: var(--font-body); width: 100vw; height: 100vh; cursor: default; }
+
+        /* Background & Cursor */
+        #bg-canvas { position: absolute; top: 0; left: 0; z-index: 1; pointer-events: none; }
         .cursor { width: 20px; height: 20px; border: 2px solid var(--neon-pink); border-radius: 50%; position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s; box-shadow: 0 0 15px var(--neon-pink); }
         .cursor-dot { width: 5px; height: 5px; background: #fff; border-radius: 50%; position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); }
-        .hover-active .cursor { width: 50px; height: 50px; background: rgba(255,42,112,0.1); border-color: transparent; }
+        #teddy-bear { position: fixed; bottom: 20px; left: 20px; font-size: 3rem; z-index: 9990; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); pointer-events: none; }
 
-        /* Teddy Bear Companion */
-        #teddy-bear {
-            position: fixed; bottom: 20px; left: 20px; font-size: 3rem; z-index: 9990;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); transition: transform 0.3s;
-            transform-origin: bottom center; pointer-events: none;
-        }
-
-        /* Typography & Utilities */
-        .heading { font-family: var(--font-head); font-weight: 700; font-size: clamp(2.5rem, 5vw, 4.5rem); text-align: center; margin-bottom: 20px; text-shadow: 0 0 20px rgba(255,255,255,0.2); }
+        /* Typography & UI Components */
+        .heading { font-family: var(--font-head); font-weight: 700; font-size: clamp(2.2rem, 5vw, 4rem); text-align: center; margin-bottom: 20px; }
         .subtext { font-size: 1.1rem; text-align: center; max-width: 600px; margin: 0 auto; color: #ddd; line-height: 1.8; }
         .glow-text { text-shadow: 0 0 15px rgba(255, 42, 112, 0.8), 0 0 30px rgba(255, 42, 112, 0.5); }
         .hidden { display: none !important; }
-        
-        /* Black Rose Theme CSS */
-        .black-rose {
-            position: absolute; font-size: 2.5rem; opacity: 0.8;
-            filter: grayscale(100%) contrast(150%) brightness(0.2) drop-shadow(0 0 10px rgba(255,255,255,0.3));
-            animation: float-rose 6s ease-in-out infinite alternate; z-index: 2; pointer-events: none;
-        }
-        @keyframes float-rose { 0% { transform: translateY(0) rotate(-10deg); } 100% { transform: translateY(-20px) rotate(10deg); } }
 
-        /* Glassmorphism Cards */
-        .glass-panel {
-            background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border); border-radius: 24px; padding: 40px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
-            position: relative; overflow: hidden; width: 90%; max-width: 800px; margin: 0 auto;
-            display: flex; flex-direction: column; align-items: center;
-        }
+        .glass-panel { background: var(--glass-bg); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); position: relative; width: 90%; max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
 
-        /* Premium Buttons */
-        .btn-cinematic {
-            background: rgba(0,0,0,0.5); color: #fff; border: 1px solid var(--neon-pink);
-            padding: 12px 35px; border-radius: 50px; font-family: var(--font-body); font-weight: 500;
-            letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative; overflow: hidden; display: inline-block; font-size: 0.9rem;
-            box-shadow: 0 0 20px rgba(255,42,112,0.2) inset; z-index: 10; margin-top: 20px;
-        }
-        .btn-cinematic::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: 0.5s; }
-        .btn-cinematic:hover { background: var(--neon-pink); box-shadow: 0 0 30px var(--neon-pink), 0 0 60px rgba(255,42,112,0.5); border-color: var(--neon-pink); transform: translateY(-3px); }
-        .btn-cinematic:hover::before { left: 100%; }
+        .btn-cinematic { background: rgba(0,0,0,0.5); color: #fff; border: 1px solid var(--neon-pink); padding: 12px 35px; border-radius: 50px; font-family: var(--font-body); text-transform: uppercase; cursor: pointer; transition: 0.4s; position: relative; overflow: hidden; display: inline-block; box-shadow: 0 0 20px rgba(255,42,112,0.2) inset; z-index: 10; margin-top: 20px; }
+        .btn-cinematic:hover { background: var(--neon-pink); box-shadow: 0 0 30px var(--neon-pink); transform: translateY(-3px); }
 
-        /* Screens Setup */
-        .step-container { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.8s ease; }
-        .step-container.active { opacity: 1; pointer-events: all; }
+        /* Screens Base */
+        .step-container { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; opacity: 0; visibility: hidden; }
+        .step-container.active { opacity: 1; visibility: visible; }
 
-        /* Step 1: Loader */
-        .loading-bar-wrap { width: 300px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; margin: 30px auto 0; box-shadow: inset 0 1px 3px rgba(0,0,0,0.5); }
-        .loading-bar { width: 0%; height: 100%; background: var(--neon-pink); box-shadow: 0 0 15px var(--neon-pink); transition: width 0.1s linear; }
+        /* ================= STEP 0: CURTAINS ================= */
+        #step-curtain { z-index: 1000; display: flex; justify-content: center; align-items: center; visibility: visible; opacity: 1; background: #000; }
+        .curtain-panel { position: absolute; top: 0; width: 50%; height: 100%; background: linear-gradient(to right, #3a000c, #700018, #3a000c); border-right: 4px solid var(--neon-gold); box-shadow: 0 0 30px rgba(0,0,0,0.9); z-index: 1001; transition: transform 2s cubic-bezier(0.77, 0, 0.175, 1); }
+        .curtain-panel.left { left: 0; transform-origin: left; }
+        .curtain-panel.right { right: 0; border-left: 4px solid var(--neon-gold); border-right: none; transform-origin: right; }
+        .curtain-open .curtain-panel.left { transform: translateX(-100%); }
+        .curtain-open .curtain-panel.right { transform: translateX(100%); }
+        .curtain-btn { z-index: 1002; font-size: 1.2rem; padding: 15px 40px; box-shadow: 0 0 40px rgba(255,42,112,0.8); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 60px #ff2a70; } 100% { transform: scale(1); } }
 
-        /* Step 2: Secret Input */
-        .secret-input-wrapper { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 25px; width: 100%; }
-        .secret-input { width: 100%; max-width: 320px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.2); padding: 14px 25px; border-radius: 50px; color: #fff; font-size: 1.1rem; text-align: center; font-family: var(--font-body); outline: none; transition: 0.3s; box-shadow: inset 0 2px 15px rgba(0,0,0,0.8); }
+        /* ================= STEP 0.5: REAL BOW & ARROW GAME ================= */
+        #step-game { background: radial-gradient(circle, #2a0815 0%, #050508 100%); overflow: hidden; }
+        .game-title { position: absolute; top: 6vh; text-align: center; width: 100%; z-index: 20; pointer-events: none; }
+        .game-canvas-area { position: relative; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: space-between; padding: 0 8vw; }
+        .bow-wrapper { position: relative; width: 200px; height: 300px; z-index: 15; touch-action: none; cursor: grab; }
+        .bow-wrapper:active { cursor: grabbing; }
+        .bow-svg { width: 100%; height: 100%; overflow: visible; }
+        .target-container { position: absolute; right: 12vw; top: 35vh; z-index: 15; width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; }
+        .target-heart { font-size: 5rem; filter: drop-shadow(0 0 25px #ff2a70); transition: transform 0.1s; }
+        #dynamic-arrow { position: absolute; z-index: 30; pointer-events: none; display: none; width: 80px; height: 20px; }
+        .arrow-graphic { width: 100%; height: 100%; display: flex; align-items: center; font-size: 2rem; color: #fff; filter: drop-shadow(0 0 8px #ff2a70); }
+        .blast-ring { position: absolute; border: 4px solid var(--neon-pink); border-radius: 50%; opacity: 0; pointer-events: none; z-index: 25; }
+
+        /* ================= OTHER STEPS STYLES ================= */
+        .secret-input { width: 100%; max-width: 320px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.2); padding: 14px 25px; border-radius: 50px; color: #fff; font-size: 1.1rem; text-align: center; font-family: var(--font-body); outline: none; margin-top: 15px; }
         .secret-input:focus { border-color: var(--neon-pink); box-shadow: 0 0 20px rgba(255,42,112,0.4); }
-        .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
-        @keyframes shake { 10%, 90% { transform: translate3d(-2px, 0, 0); } 20%, 80% { transform: translate3d(4px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-6px, 0, 0); } 40%, 60% { transform: translate3d(6px, 0, 0); } }
-        
-        /* Step 3: Dark Chocolate Cake */
-        .cake { position: relative; width: 250px; height: 200px; margin: 0 auto 30px; perspective: 1000px; transform-style: preserve-3d; }
-        .tier { position: absolute; background: linear-gradient(145deg, #301711, #140805); border-radius: 50%; box-shadow: 0 15px 35px rgba(0,0,0,0.8), inset 0 5px 15px rgba(255,255,255,0.05); display: flex; justify-content: center; border: 1px solid #4a2511; border-bottom: 4px solid var(--neon-gold); }
-        .tier-1 { width: 250px; height: 100px; bottom: 0; z-index: 1; }
-        .tier-2 { width: 180px; height: 80px; bottom: 60px; left: 35px; z-index: 2; }
-        .tier-3 { width: 120px; height: 60px; bottom: 110px; left: 65px; z-index: 3; }
-        .candle-wrap { position: absolute; bottom: 155px; left: 115px; width: 20px; height: 50px; z-index: 4; display: flex; flex-direction: column; align-items: center; cursor: pointer; }
-        .candle-stick { width: 12px; height: 40px; background: repeating-linear-gradient(45deg, #fff, #fff 5px, #d4af37 5px, #d4af37 10px); border-radius: 3px; box-shadow: 2px 2px 5px rgba(0,0,0,0.5); }
-        .flame { width: 14px; height: 22px; background: #ffcc00; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; position: absolute; top: -18px; box-shadow: 0 0 20px #ffcc00, 0 0 40px #ff6600; opacity: 0; transition: opacity 1s; animation: flicker 0.1s infinite alternate; }
-        @keyframes flicker { 0% { transform: scale(1) rotate(-1deg); } 100% { transform: scale(1.1) rotate(1deg); } }
-        .timer-circle { position: absolute; width: 120px; height: 120px; border: 3px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; opacity: 1; pointer-events: none; border-top-color: var(--neon-gold); animation: spin 1s linear infinite; }
-        .timer-text { font-family: var(--font-head); font-size: 3rem; color: var(--neon-gold); opacity: 1; text-shadow: 0 0 20px var(--neon-gold); position: absolute; line-height: 120px; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* Step 4: 3D Envelope & Letter */
-        .envelope-container { position: relative; width: 320px; height: 220px; margin: 40px auto; cursor: pointer; perspective: 1200px; transition: margin 1.5s cubic-bezier(0.4, 0, 0.2, 1); animation: float-3d 4s ease-in-out infinite; }
-        @keyframes float-3d { 0%, 100% { transform: translateY(0) rotateX(5deg) rotateY(-5deg); box-shadow: 0 20px 40px rgba(0,0,0,0.5); } 50% { transform: translateY(-15px) rotateX(0deg) rotateY(0deg); box-shadow: 0 35px 50px rgba(255,42,112,0.3); } }
-        .envelope-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #cc1b54, #ff2a70); border-radius: 10px; z-index: 1; }
-        .envelope-front { position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(135deg, #e62061, #ff3377); z-index: 3; border-radius: 0 0 10px 10px; clip-path: polygon(0 100%, 100% 100%, 100% 0, 50% -30%, 0 0); }
-        .envelope-flap { position: absolute; top: 0; left: 0; width: 100%; height: 70%; background: linear-gradient(135deg, #ff3377, #e62061); z-index: 4; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .wax-seal { position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%); font-size: 2.5rem; z-index: 5; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)); transition: opacity 0.5s; }
+        /* ================= PREMIUM CAKE & TIMER ================= */
+        #countdown-timer { font-size: 6rem; font-family: var(--font-head); font-weight: bold; color: var(--neon-pink); text-shadow: 0 0 30px rgba(255,42,112,0.8); display: none; }
         
-        .letter { position: absolute; top: 10px; left: 5%; width: 90%; height: 90%; background: #fffde8; z-index: 2; border-radius: 5px; box-shadow: 0 0 15px rgba(0,0,0,0.5); padding: 25px; transform: translateY(0); transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); }
-        #typed-letter { color: #222; font-family: 'Playfair Display', serif; font-size: 1rem; line-height: 1.6; text-align: left; margin: 0; font-weight: 600; white-space: pre-line; }
+        #cake-container { display: none; margin-top: 30px; }
+        .cake { position: relative; width: 250px; height: 200px; margin: 0 auto 40px; perspective: 1000px; transform-style: preserve-3d; }
         
-        .envelope-container.open { margin-bottom: 220px; animation: none; transform: scale(1.05); }
+        .plate { position: absolute; bottom: -20px; left: -25px; width: 300px; height: 40px; background: radial-gradient(ellipse at center, #444 0%, #111 100%); border-radius: 50%; box-shadow: 0 15px 25px rgba(0,0,0,0.8); border: 2px solid #555; z-index: 0; }
+        
+        .tier { position: absolute; border-radius: 12px; z-index: 1; box-shadow: inset 0 -10px 20px rgba(0,0,0,0.3), 0 10px 20px rgba(0,0,0,0.5); }
+        
+        /* Bottom Pink Layer */
+        .tier-1 { width: 250px; height: 90px; bottom: 0; background: linear-gradient(145deg, #ff6688, #ff2a70); }
+        .tier-1::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 35px; background: #fff; border-radius: 12px 12px 25px 25px; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
+        
+        /* Top Pink Layer */
+        .tier-2 { width: 180px; height: 80px; bottom: 90px; left: 35px; background: linear-gradient(145deg, #ff6688, #ff2a70); z-index: 2; }
+        .tier-2::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 30px; background: #fff; border-radius: 12px 12px 20px 20px; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
+        
+        .candle-wrap { position: absolute; bottom: 170px; left: 115px; width: 20px; height: 60px; z-index: 4; cursor: pointer; }
+        .candle-stick { width: 14px; height: 45px; background: repeating-linear-gradient(45deg, #fff, #fff 5px, #ff2a70 5px, #ff2a70 10px); border-radius: 4px; border: 1px solid #ddd; margin: 0 auto; }
+        .flame { width: 18px; height: 28px; background: #ffcc00; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; position: absolute; top: -22px; left: 1px; box-shadow: 0 0 20px #ffcc00, 0 0 40px #ff6600; opacity: 0; transition: opacity 1s; animation: flicker 0.1s infinite alternate; }
+        @keyframes flicker { 0% { transform: scale(1) rotate(-2deg); } 100% { transform: scale(1.1) rotate(2deg); } }
+        /* ======================================================= */
+
+        .envelope-container { position: relative; width: 320px; height: 220px; margin: 40px auto; cursor: pointer; transition: 1s; animation: float-3d 4s infinite ease-in-out; }
+        @keyframes float-3d { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .envelope-back { position: absolute; width: 100%; height: 100%; background: #ff2a70; border-radius: 10px; z-index: 1; }
+        .envelope-front { position: absolute; bottom: 0; width: 100%; height: 60%; background: #e62061; z-index: 3; clip-path: polygon(0 100%, 100% 100%, 100% 0, 50% -30%, 0 0); }
+        .envelope-flap { position: absolute; top: 0; width: 100%; height: 70%; background: #ff3377; z-index: 4; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform 1.5s; }
+        .letter { position: absolute; top: 10px; left: 5%; width: 90%; height: 90%; background: #fffde8; z-index: 2; padding: 25px; transition: transform 1.5s; }
+        #typed-letter { color: #222; font-family: 'Playfair Display'; font-weight: 600; white-space: pre-line; }
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
-        .envelope-container.open .wax-seal { opacity: 0; }
-        .envelope-container.open .letter { transform: translateY(-80px) scale(1.1); z-index: 5; height: 380px; overflow-y: auto; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); cursor: default; }
+        .envelope-container.open .letter { transform: translateY(-80px) scale(1.1); z-index: 5; height: 380px; overflow-y: auto; cursor: default; }
 
-        /* Step 5 & 10: Galleries & Sher */
         .gallery-wrap { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; width: 100%; max-width: 1000px; padding: 20px; overflow-y: auto; max-height: 60vh; }
-        .gallery-wrap::-webkit-scrollbar { display: none; }
-        .polaroid { background: #fff; padding: 10px 10px 35px 10px; border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); cursor: pointer; transition: 0.4s; position: relative; opacity: 1; transform: translateY(0); will-change: transform; }
-        .polaroid img { width: 180px; height: 210px; object-fit: cover; border-radius: 2px; background: #222; }
-        .polaroid-cap { position: absolute; bottom: 10px; left: 0; width: 100%; text-align: center; color: #333; font-family: 'Playfair Display'; font-weight: 600; font-size: 0.9rem; }
-        .polaroid:hover { transform: scale(1.1) rotate(0deg) !important; z-index: 10; box-shadow: 0 20px 50px rgba(255,42,112,0.5); }
-        
-        .love-sher { font-family: var(--font-head); font-size: 1.1rem; color: #ff99aa; line-height: 1.8; text-align: center; margin-top: 20px; font-style: italic; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 15px; border: 1px solid rgba(255,42,112,0.3); }
+        .polaroid { background: #fff; padding: 10px 10px 35px 10px; border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); cursor: pointer; transition: 0.4s; position: relative; }
+        .polaroid img { width: 180px; height: 210px; object-fit: cover; }
+        .polaroid-cap { position: absolute; bottom: 10px; left: 0; width: 100%; text-align: center; color: #333; font-family: 'Playfair Display'; font-weight: 600; }
+        .polaroid:hover { transform: scale(1.1) rotate(0deg) !important; z-index: 10; }
 
-        .masonry { columns: 3 250px; column-gap: 20px; width: 95%; max-width: 1200px; padding: 20px; max-height: 70vh; overflow-y: auto; }
+        .shayari-box { font-family: var(--font-head); font-size: 1.5rem; line-height: 2; font-style: italic; color: #f5f5f5; text-align: center; padding: 20px; border-left: 3px solid var(--neon-pink); white-space: pre-line; }
+
+        .reasons-container { width: 95%; max-width: 1000px; height: 60vh; overflow-y: auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+        .reason-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 16px; transition: 0.4s; }
+        .reason-card:hover { transform: translateY(-5px) scale(1.02); border-color: rgba(255,42,112,0.5); }
+        .reason-text { font-family: var(--font-body); font-size: 0.95rem; color: #ff99aa; }
+
+        .gift-box { position: relative; width: 150px; height: 150px; margin: 20px auto; cursor: pointer; transition: 0.3s; z-index: 5; }
+        .box-body { width: 100%; height: 100px; background: linear-gradient(135deg, #1b28cc, #00e5ff); position: absolute; bottom: 0; border-radius: 8px; }
+        .box-lid { width: 110%; height: 40px; background: linear-gradient(135deg, #00e5ff, #1b28cc); position: absolute; bottom: 90px; left: -5%; transition: transform 1s; transform-origin: bottom; border-radius: 8px; }
+        .gift-box.open .box-lid { transform: translateY(-100px) rotateX(60deg) scale(1.1); opacity: 0; }
+
+        /* Masonry Memory Wall */
+        .masonry { columns: 3 250px; column-gap: 20px; width: 95%; max-width: 1200px; padding: 20px; max-height: 75vh; overflow-y: auto; }
         .masonry::-webkit-scrollbar { display: none; }
-        .masonry-item { break-inside: avoid; margin-bottom: 20px; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 1; transform: scale(1); transition: 0.4s; will-change: transform; }
-        .masonry-item img { width: 100%; display: block; transition: 0.5s; background: #222; min-height: 200px; }
+        .masonry-item { break-inside: avoid; margin-bottom: 20px; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: 0.4s; }
+        .masonry-item img { width: 100%; display: block; transition: 0.5s; }
         .masonry-item:hover { box-shadow: 0 15px 40px rgba(255,42,112,0.5); transform: translateY(-5px); z-index: 5; }
         .masonry-item:hover img { transform: scale(1.1); filter: brightness(0.9); }
 
-        /* Lightbox */
-        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.4s; backdrop-filter: blur(10px); }
+        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.4s; }
         .lightbox.active { opacity: 1; pointer-events: all; }
-        .lightbox img { max-width: 85%; max-height: 75vh; border-radius: 12px; box-shadow: 0 0 50px rgba(255,255,255,0.1); transform: scale(0.95); transition: 0.4s; }
-        .lightbox.active img { transform: scale(1); }
-        .lb-close { position: absolute; top: 30px; right: 40px; font-size: 3rem; color: #fff; cursor: pointer; text-shadow: 0 0 10px rgba(255,42,112,0.8); }
-        
-        /* Step 6: Shayari */
-        .shayari-box { font-family: var(--font-head); font-size: clamp(1rem, 2.5vw, 1.5rem); line-height: 2; font-style: italic; color: #f5f5f5; text-align: center; margin: 30px 0; text-shadow: 0 2px 15px rgba(0,0,0,0.8); padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px; border-left: 3px solid var(--neon-pink); white-space: pre-line;}
-        
-        /* Step 7: 200 Reasons */
-        .reasons-container { width: 95%; max-width: 1000px; height: 60vh; overflow-y: auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; scroll-behavior: smooth; margin-top: 10px;}
-        .reasons-container::-webkit-scrollbar { width: 6px; }
-        .reasons-container::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 10px; }
-        .reason-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px 20px; border-radius: 16px; transition: 0.4s; position: relative; overflow: hidden; opacity: 1; transform: translateY(0); text-align: left; display: flex; align-items: center; min-height: 80px; height: auto; word-wrap: break-word;}
-        .reason-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,42,112,0.15) 0%, transparent 70%); opacity: 0; transition: 0.5s; pointer-events: none; }
-        .reason-card:hover { transform: translateY(-5px) scale(1.02); border-color: rgba(255,42,112,0.5); box-shadow: 0 10px 30px rgba(255,42,112,0.2); }
-        .reason-card:hover::before { opacity: 1; }
-        .reason-text { font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; color: #ff99aa; text-shadow: 0 1px 3px rgba(0,0,0,0.8); line-height: 1.5; white-space: normal; }
-        .scroll-indicator { color: #d4af37; font-size: 0.9rem; margin-top: 10px; animation: blink 1.5s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .lightbox img { max-width: 85%; max-height: 75vh; border-radius: 12px; }
+        .lb-close { position: absolute; top: 30px; right: 40px; font-size: 3rem; color: #fff; cursor: pointer; }
 
-        /* Step 8: Gift & Surprise Photo */
-        .gift-box { position: relative; width: 150px; height: 150px; margin: 20px auto; cursor: pointer; perspective: 1000px; transform-style: preserve-3d; transition: transform 0.3s; z-index: 5; }
-        .gift-box:hover { transform: scale(1.05) rotate(2deg); }
-        .box-body { width: 100%; height: 100px; background: linear-gradient(135deg, #1b28cc, #00e5ff); position: absolute; bottom: 0; border-radius: 5px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 15px 35px rgba(0,0,0,0.8); }
-        .box-lid { width: 110%; height: 40px; background: linear-gradient(135deg, #00e5ff, #1b28cc); position: absolute; bottom: 90px; left: -5%; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); z-index: 6; transition: transform 1s cubic-bezier(0.5, -0.5, 0.5, 1.5); transform-origin: bottom center; }
-        .ribbon { position: absolute; background: #ff2a70; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
-        .ribbon-v { width: 20px; height: 100%; left: 50%; transform: translateX(-50%); }
-        .ribbon-h { width: 100%; height: 20px; top: 50%; transform: translateY(-50%); }
-        
-        .surprise-photo-wrap { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%) scale(0); opacity: 0; z-index: 4; transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .surprise-photo { width: 200px; border-radius: 15px; border: 3px solid #fff; box-shadow: 0 10px 40px rgba(255,42,112,0.6); background: #222; min-height: 250px; object-fit: cover; }
-        
-        .gift-box.open .box-lid { transform: translateY(-100px) rotateX(60deg) scale(1.1); opacity: 0; }
-        .gift-box.open ~ .surprise-photo-wrap { transform: translateX(-50%) translateY(-120px) scale(1); opacity: 1; z-index: 10; }
-        
-        /* Step 9: Balloons Blast */
-        .sky-container { position: relative; width: 100vw; height: 70vh; overflow: hidden; display: flex; justify-content: center; align-items: flex-end; gap: 3vw; padding-bottom: 20px; }
-        .balloon-wrap { position: relative; cursor: pointer; transition: 0.3s; animation: float-balloon 3s ease-in-out infinite alternate; z-index: 5; }
-        .balloon { width: 6vw; min-width: 65px; height: 8vw; min-height: 85px; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,42,112,1)); border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; box-shadow: inset -5px -5px 15px rgba(0,0,0,0.4), 0 10px 20px rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; transition: 0.3s; }
-        .balloon::after { content: ''; position: absolute; bottom: -40px; left: 50%; width: 1px; height: 40px; background: rgba(255,255,255,0.5); }
-        .balloon span { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); text-align: center; color: #fff; padding: 5px; }
-        .balloon-wrap:hover .balloon { transform: scale(1.15); filter: brightness(1.2); box-shadow: 0 0 30px rgba(255,255,255,0.4); }
-        @keyframes float-balloon { 0% { transform: translateY(0) rotate(-3deg); } 100% { transform: translateY(-20px) rotate(3deg); } }
-
-        /* Step 11: Finale */
-        .finale-img-wrap { width: 220px; height: 220px; border-radius: 50%; padding: 5px; background: linear-gradient(45deg, #ff2a70, #d4af37); margin: 0 auto 20px; box-shadow: 0 0 50px rgba(255,42,112,0.6); overflow: hidden; position: relative; z-index: 5; }
-        .finale-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: top; background: #222; } 
-        
-        /* Secret Glow Heart */
-        .secret-heart { position: absolute; bottom: 25px; right: 30px; font-size: 2rem; cursor: pointer; z-index: 1000; filter: grayscale(100%) brightness(0.1) drop-shadow(0 0 10px rgba(255,255,255,0.5)); animation: heartbeat 2s infinite; transition: 0.3s; }
-        @keyframes heartbeat { 0%, 100% { transform: scale(1); filter: grayscale(100%) brightness(0.1) drop-shadow(0 0 10px rgba(255,255,255,0.5)); } 50% { transform: scale(1.2); filter: grayscale(100%) brightness(0.3) drop-shadow(0 0 25px rgba(255,42,112,0.8)); } }
-        .secret-heart:hover { transform: scale(1.3); filter: grayscale(100%) brightness(0.5) drop-shadow(0 0 30px #ff2a70); animation: none; }
-        
-        .secret-page { background: #020205; }
-        .secret-handwriting { font-family: 'Playfair Display', serif; font-size: 1.4rem; line-height: 2.2; color: #e0e0e0; max-width: 650px; margin: 0 auto; text-align: center; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+        .finale-img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 5px solid var(--neon-pink); box-shadow: 0 0 50px rgba(255,42,112,0.6); }
     </style>
 </head>
 <body>
@@ -213,9 +148,7 @@
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="aurora"></div>
     <canvas id="bg-canvas"></canvas>
-
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
     <div id="teddy-bear">🧸</div>
@@ -227,519 +160,465 @@
         <p id="lb-cap" class="subtext" style="font-family: var(--font-head); font-size: 1.5rem; margin-top: 20px;"></p>
     </div>
 
-    <!-- Step 1: Loader -->
-    <div class="step-container active" id="step-1">
-        <div class="black-rose" style="top: 10%; left: 10%;">🌹</div>
-        <div class="black-rose" style="top: 20%; right: 15%; animation-delay: 1s;">🌹</div>
-        <div class="black-rose" style="bottom: 15%; left: 20%; animation-delay: 2s;">🌹</div>
-        <div class="black-rose" style="bottom: 25%; right: 10%; animation-delay: 0.5s;">🌹</div>
-
-        <h1 class="heading glow-text" style="font-size: 2.5rem;">A Special Birthday Surprise Is Loading...</h1>
-        <div class="loading-bar-wrap"><div class="loading-bar" id="loading-bar"></div></div>
+    <!-- Dynamic Flying Arrow Object -->
+    <div id="dynamic-arrow">
+        <div class="arrow-graphic">🏹➔</div>
     </div>
 
-    <!-- Step 2: Security Check -->
-    <div class="step-container" id="step-2">
+    <!-- Blast Ring Shockwave -->
+    <div class="blast-ring" id="blast-ring"></div>
+
+    <!-- Step 0: Curtain Reveal -->
+    <div class="step-container active" id="step-curtain">
+        <div class="curtain-panel left"></div>
+        <div class="curtain-panel right"></div>
+        <button class="btn-cinematic curtain-btn" id="open-btn" onclick="openCurtains()">Tap to Unveil the Magic ✨</button>
+    </div>
+
+    <!-- Step 0.5: Real Drag & Release Bow Arrow Game -->
+    <div class="step-container" id="step-game">
+        <div class="game-title">
+            <h2 class="heading glow-text" style="font-size: 2rem;">Pull Back & Release to Hit Drishu's Heart 💘</h2>
+            <p class="subtext" style="color: #ff99aa;">Drag the bow string backward & release it!</p>
+        </div>
+
+        <div class="game-canvas-area">
+            <div class="bow-wrapper" id="bow-wrapper">
+                <svg class="bow-svg" viewBox="0 0 200 300">
+                    <path d="M 60 20 Q 160 150 60 280" stroke="#d4af37" stroke-width="10" fill="none" stroke-linecap="round" filter="drop-shadow(0 0 8px #d4af37)"/>
+                    <path d="M 60 20 Q 150 150 60 280" stroke="#ff2a70" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path id="bow-string-path" d="M 60 20 Q 60 150 60 280" stroke="#ffffff" stroke-width="3" fill="none"/>
+                    <g id="bow-arrow-group">
+                        <line id="arrow-line" x1="60" y1="150" x2="150" y2="150" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+                        <polygon id="arrow-head" points="150,143 165,150 150,157" fill="#ff2a70"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="target-container" id="target-container">
+                <div class="target-heart" id="target-heart">❤️</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 1: Security Check -->
+    <div class="step-container" id="step-1">
         <div class="glass-panel text-center">
-            <h1 class="heading glow-text" style="font-size: 2.2rem; margin-bottom: 10px;">Security Check 🌍</h1>
+            <h1 class="heading glow-text" style="font-size: 2.2rem;">Security Check 🌍</h1>
             <p class="subtext" style="color: #ff99aa;">Duniya ki sabse pyari ladki kaun hai?</p>
             
-            <div class="secret-input-wrapper" id="input-wrap">
-                <input type="text" id="secret-input" class="secret-input hover-target" placeholder="Type name..." autocomplete="off">
-                <button class="btn-cinematic hover-target" onclick="checkAnswer()" style="margin-top: 10px; padding: 12px 40px;">Enter</button>
-            </div>
+            <input type="text" id="secret-input" class="secret-input" placeholder="Type name..." autocomplete="off">
+            <button class="btn-cinematic" onclick="checkAnswer()">Enter</button>
 
             <p id="hint-msg" class="subtext" style="color: #ff99aa; font-size: 0.9rem; opacity: 0; margin-top: 15px;">Hint: Jiska Birthday Hai 😊</p>
             <p id="success-msg" class="heading glow-text hidden" style="font-size: 1.5rem; margin-top: 15px; color: #00ff88;">Correct Answer ❤️</p>
             
-            <button class="btn-cinematic hover-target hidden" id="btn-next-2" onclick="nextStep(2, 3)">Unlock Magic ✨</button>
+            <button class="btn-cinematic hidden" id="btn-next-1" onclick="transitionStep('step-1', 'step-2')">Unlock Magic ✨</button>
         </div>
     </div>
 
-    <!-- Step 3: Cake -->
-    <div class="step-container" id="step-3">
+    <!-- Step 2: Birthday Timer & Premium Cake -->
+    <div class="step-container" id="step-2">
         <div class="glass-panel text-center">
-            <h1 class="heading glow-text" style="color: #d4af37; text-shadow: 0 0 20px rgba(212,175,55,0.5);">Make a Wish 🎂</h1>
-            <p class="subtext" style="color: #ccc; margin-bottom: 20px;">A special premium cake just for you.</p>
-            <div class="cake" style="margin-top: 20px;">
-                <div class="tier tier-1"></div>
-                <div class="tier tier-2"></div>
-                <div class="tier tier-3"></div>
-                <div class="candle-wrap hover-target" onclick="lightCandles()" id="candle-btn">
-                    <div class="flame" id="flame"></div>
-                    <div class="candle-stick"></div>
+            <h1 class="heading glow-text" style="color: #d4af37;">Make a Wish Drishu 🎂</h1>
+            
+            <!-- Magic Countdown Timer -->
+            <div id="countdown-timer">5</div>
+
+            <!-- Premium Cake (Hidden initially) -->
+            <div id="cake-container">
+                <div class="cake">
+                    <div class="plate"></div>
+                    <div class="tier tier-1"></div>
+                    <div class="tier tier-2"></div>
+                    <div class="candle-wrap" onclick="lightCandles()">
+                        <div class="flame" id="flame"></div>
+                        <div class="candle-stick"></div>
+                    </div>
                 </div>
             </div>
-            <div style="position: relative; display: flex; justify-content: center; height: 100px;">
-                <div class="timer-circle hidden" id="timer-ring"></div>
-                <div class="timer-text hidden" id="timer-text">10</div>
-            </div>
-            <p id="cake-msg" class="subtext" style="font-style: italic; margin-top: 10px;">Click the candle to light it up.</p>
-            <button class="btn-cinematic hover-target hidden" id="btn-next-3" onclick="nextStep(3, 4)" style="border-color: #d4af37;">Continue Journey</button>
+
+            <p id="cake-msg" class="subtext hidden" style="font-style: italic; margin-top: 10px;">Click the candle to light it up.</p>
+            <button class="btn-cinematic hidden" id="btn-next-2" onclick="transitionStep('step-2', 'step-3')">Continue</button>
         </div>
     </div>
 
-    <!-- Step 4: Letter -->
-    <div class="step-container" id="step-4">
+    <!-- Step 3: Letter -->
+    <div class="step-container" id="step-3">
         <div class="glass-panel text-center" style="max-width: 600px;">
             <h1 class="heading glow-text" style="font-size: 2.5rem;">A Letter For You 💌</h1>
-            <p class="subtext" style="color: #ff99aa;">Click the floating envelope to open.</p>
-            <div class="envelope-container hover-target" id="envelope" onclick="openEnvelope()">
+            <div class="envelope-container" id="envelope" onclick="openEnvelope()">
                 <div class="envelope-back"></div>
                 <div class="envelope-flap"></div>
                 <div class="envelope-front"></div>
-                <div class="wax-seal">❤️</div>
-                <div class="letter">
-                    <span id="typed-letter"></span>
-                </div>
+                <div class="letter"><span id="typed-letter"></span></div>
             </div>
-            <button class="btn-cinematic hover-target hidden" id="btn-next-4" onclick="nextStep(4, 5)">See Memories 📸</button>
+            <button class="btn-cinematic hidden" id="btn-next-3" onclick="transitionStep('step-3', 'step-4')">See Memories 📸</button>
         </div>
     </div>
 
-    <!-- Step 5: Memories Polaroid -->
-    <div class="step-container" id="step-5">
+    <!-- Step 4: Beautiful Memories (Photo 1 to 4) -->
+    <div class="step-container" id="step-4">
         <h1 class="heading glow-text">Beautiful Memories 🎞️</h1>
         <div class="gallery-wrap" id="gallery-4"></div>
-        <div class="love-sher">
-            Dil ki dhadkan ban kar dil mein rahoge,<br>
-            Khwabon mein aakar humse milte rahoge.<br>
-            Zindagi ke is safar mein chahe jo ho jaye,<br>
-            Hamare labon par hamesha tumhara hi naam rahega. ❤️
-        </div>
-        <button class="btn-cinematic hover-target" onclick="nextStep(5, 6)">Next Chapter 📖</button>
+        <button class="btn-cinematic" onclick="transitionStep('step-4', 'step-5')">Next Chapter 📖</button>
     </div>
 
-    <!-- Step 6: Shayari -->
-    <div class="step-container" id="step-6">
+    <!-- Step 5: Shayari -->
+    <div class="step-container" id="step-5">
         <div class="glass-panel text-center">
-            <h1 class="heading glow-text" style="font-size: 2rem;">Kuch lafz aapke liye 🌙</h1>
-            <div class="shayari-box">
-                <span id="typed-shayari"></span>
-            </div>
-            <button class="btn-cinematic hover-target hidden" id="btn-next-6" onclick="nextStep(6, 7)">Continue ❤️</button>
+            <h1 class="heading glow-text" style="font-size: 2rem;">Kuch lafz Drishu ke liye 🌙</h1>
+            <div class="shayari-box"><span id="typed-shayari"></span></div>
+            <button class="btn-cinematic hidden" id="btn-next-5" onclick="transitionStep('step-5', 'step-6')">Continue ❤️</button>
         </div>
     </div>
 
-    <!-- Step 7: 200 Reasons -->
-    <div class="step-container" id="step-7">
-        <h1 class="heading glow-text" style="font-size: 2rem; margin-bottom: 5px; margin-top: 20px;">200 Reasons Why You're Amazing 💖</h1>
-        <p class="subtext scroll-indicator" id="scroll-hint">Scroll down completely to unlock the surprise... 👇</p>
-        
+    <!-- Step 6: 200 Reasons -->
+    <div class="step-container" id="step-6">
+        <h1 class="heading glow-text" style="font-size: 2rem;">200 Reasons Why I Love You 💖</h1>
         <div class="reasons-container" id="reasons-grid"></div>
-
-        <button class="btn-cinematic hover-target hidden" id="btn-next-7" style="margin-bottom: 20px; margin-top: 15px;" onclick="nextStep(7, 8)">Open Surprise 🎁</button>
+        <button class="btn-cinematic" id="btn-next-6" style="margin-top: 15px;" onclick="transitionStep('step-6', 'step-7')">Open Surprise 🎁</button>
     </div>
 
-    <!-- Step 8: Gift -->
-    <div class="step-container" id="step-8">
+    <!-- Step 7: Gift -->
+    <div class="step-container" id="step-7">
         <div class="glass-panel text-center">
             <h1 class="heading glow-text">A Special Surprise 🎀</h1>
-            <p class="subtext" style="color:#ff99aa; margin-bottom: 20px;">Tap the box to open your gift.</p>
-            
-            <div style="position: relative; height: 200px;">
-                <div class="gift-box hover-target" id="gift" onclick="openGift()">
-                    <div class="box-lid"><div class="ribbon ribbon-h"></div><div class="ribbon ribbon-v"></div></div>
-                    <div class="box-body"><div class="ribbon ribbon-h"></div><div class="ribbon ribbon-v"></div></div>
-                </div>
-                
-                <div class="surprise-photo-wrap" id="surprise-photo">
-                    <img src="surprise.jpg" loading="lazy" class="surprise-photo" alt="Surprise">
-                </div>
+            <div class="gift-box" id="gift" onclick="openGift()">
+                <div class="box-lid"></div><div class="box-body"></div>
             </div>
-
-            <h2 id="gift-msg" class="heading glow-text hidden" style="font-size: 1.6rem; margin-top: 40px; line-height: 1.5; z-index: 11; position: relative;">Your smile is the most beautiful gift today. ❤️</h2>
-            <button class="btn-cinematic hover-target hidden" id="btn-next-8" onclick="nextStep(8, 9)">Release Balloons 🎈</button>
+            <h2 id="gift-msg" class="heading glow-text hidden" style="margin-top: 40px;">Your smile is my favorite gift! ❤️</h2>
+            <button class="btn-cinematic hidden" id="btn-next-7" onclick="transitionStep('step-7', 'step-8')">Open Memory Wall 📸</button>
         </div>
     </div>
 
-    <!-- Step 9: Balloons -->
-    <div class="step-container" id="step-9">
-        <h1 class="heading glow-text" style="margin-top: 5vh; font-size: 2.2rem;">Pop the Balloons 🎈</h1>
-        <p class="subtext">Click on balloons to see your wishes.</p>
-        <div class="sky-container" id="balloon-sky"></div>
-        <div id="balloon-msg-box" class="glass-panel hidden" style="position: absolute; bottom: 15vh; padding: 20px; width: auto; min-width: 300px; text-align: center; border-color: #00e5ff; box-shadow: 0 0 30px rgba(0,229,255,0.3);">
-            <h3 id="balloon-msg-text" style="font-family: var(--font-head); font-size: 1.5rem; font-style: italic; color: #00e5ff;"></h3>
-        </div>
-        <button class="btn-cinematic hover-target hidden" id="btn-next-9" style="position: absolute; bottom: 5vh;" onclick="nextStep(9, 10)">More Memories 📸</button>
-    </div>
-
-    <!-- Step 10: Masonry Memory Wall -->
-    <div class="step-container" id="step-10">
+    <!-- Step 8: Masonry Memory Wall (Photo 5 to 12) -->
+    <div class="step-container" id="step-8">
         <h1 class="heading glow-text" style="margin-top: 20px;">The Memory Wall 🎞️</h1>
         <div class="masonry" id="masonry-wall"></div>
-        <button class="btn-cinematic hover-target" onclick="nextStep(10, 11)" style="margin-bottom: 20px;">Grand Finale 🎉</button>
+        <button class="btn-cinematic" onclick="transitionStep('step-8', 'step-9')" style="margin-bottom: 20px; margin-top: 20px;">Grand Finale 🎉</button>
     </div>
 
-    <!-- Step 11: Finale -->
-    <div class="step-container" id="step-11">
-        <div class="finale-text-wrap" style="max-width: 800px; padding: 20px; z-index: 10; text-align: center;">
-            <div class="finale-img-wrap">
-                <img src="photo8.jpg" loading="lazy" class="finale-img" alt="Finale">
-            </div>
-            
-            <h1 class="heading glow-text" style="font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 20px;">Happy Birthday Aaru 🤌👀💝</h1>
-            <p class="subtext glow-text" style="font-family: var(--font-head); font-size: 1.8rem; margin-bottom: 15px; color: #ff99aa;">Thank You For Existing.</p>
-            <p class="subtext" style="font-size: 1.1rem; line-height: 1.8; max-width: 700px;">May every dream you wish for come true, and may your life always be filled with happiness, peace, love, success, beautiful memories, and endless smiles.</p>
-            <button class="btn-cinematic hover-target" style="margin-top: 40px; background: rgba(255,42,112,0.2);" onclick="location.reload()">Replay The Journey 🔄</button>
-        </div>
-        
-        <div class="secret-heart hover-target" onclick="triggerSecret()">🖤</div>
-    </div>
-
-    <!-- Step 12a: Secret Part 1 -->
-    <div class="step-container secret-page" id="step-12a">
-        <div class="glass-panel text-center" style="background: rgba(0,0,0,0.8); border-color: #555;">
-            <p class="subtext" style="font-family: var(--font-head); font-size: 1.4rem; font-style: italic; line-height: 2; color: #ddd;">
-                "Kuch baatein unkahi reh jati hain,<br>
-                Kuch yaadein hamesha dil mein thehar jati hain,<br>
-                Zindagi ke is safar mein chahe jitni bhi dooriyan aayein,<br>
-                Aaru, tum humesha mere dil ke sabse kareeb rahogi." ❤️
-            </p>
-            <button class="btn-cinematic hover-target" onclick="nextStep('12a', '12b')" style="margin-top: 30px;">Ek Aakhri Baat... ✨</button>
+    <!-- Step 9: Finale -->
+    <div class="step-container" id="step-9">
+        <div class="text-center" style="z-index: 10;">
+            <img src="photo12.jpg" class="finale-img" alt="Finale">
+            <h1 class="heading glow-text" style="font-size: 3.8rem; margin-top: 20px;">Happy Birthday Drishu 🤌👀💝</h1>
+            <p class="subtext glow-text" style="font-size: 1.8rem; color: #ff99aa;">Thank You For Existing.</p>
+            <p class="subtext" style="font-size: 1.1rem; line-height: 1.8; max-width: 700px; margin-top: 20px;">May every dream you wish for come true, and may your life always be filled with happiness, peace, love, success, and endless smiles.</p>
         </div>
     </div>
 
-    <!-- Step 12b: Secret Part 2 -->
-    <div class="step-container secret-page" id="step-12b">
-        <div class="glass-panel text-center" style="background: rgba(0,0,0,0.85); border-color: var(--neon-pink);">
-            <h1 class="heading glow-text" style="font-size: 2.2rem;">Forever & Always ♾️</h1>
-            <p class="secret-handwriting" style="margin-top: 20px;">
-                You are my past, my present, and my entire future.<br>
-                Happy Birthday once again, my love! 💖
-            </p>
-            <button class="btn-cinematic hover-target" onclick="nextStep('12b', 11)" style="margin-top: 30px;">Back to Finale 🌸</button>
-        </div>
-    </div>
-
-    <!-- JavaScript Execution Logic -->
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
     <script>
-        // Audio playback helper
-        const bgMusic = document.getElementById('bg-music');
+        // Start Background Audio
         let musicStarted = false;
         function playMusic() {
-            if(!musicStarted && bgMusic) {
-                bgMusic.volume = 0.5;
-                bgMusic.play().then(() => { musicStarted = true; }).catch(e => console.log(e));
+            if(!musicStarted) {
+                const audio = document.getElementById('bg-music');
+                audio.volume = 0.5;
+                audio.play().catch(e => console.log(e));
+                musicStarted = true;
             }
         }
         document.addEventListener('click', playMusic, { once: true });
 
-        // Step Navigation
-        function nextStep(current, next) {
-            playMusic();
-            const currStr = typeof current === 'number' ? 'step-' + current : 'step-' + current;
-            const nextStr = typeof next === 'number' ? 'step-' + next : 'step-' + next;
-            
-            const currElem = document.getElementById(currStr);
-            const nextElem = document.getElementById(nextStr);
-            
-            if(currElem) currElem.classList.remove('active');
-            if(nextElem) {
-                nextElem.classList.add('active');
-                
-                // Triggers per step entry
-                if(next === 6) initShayariTyped();
-                if(next === 11) fireFinaleConfetti();
-            }
-        }
-
-        /* Custom Cursor Motion */
-        const cursor = document.querySelector('.cursor');
-        const cursorDot = document.querySelector('.cursor-dot');
-        document.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
-            gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0.01 });
-        });
-
-        document.querySelectorAll('.hover-target').forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
-        });
-
-        /* Background Particle Canvas */
+        // Particles Canvas Background
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        for (let i = 0; i < 70; i++) particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, size: Math.random()*2+0.5, sx: Math.random()*0.5-0.25, sy: Math.random()*0.5-0.25, o: Math.random()*0.8+0.2 });
+        function drawParticles() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            particles.forEach(p => { p.x+=p.sx; p.y+=p.sy; if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0; if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0; ctx.fillStyle=`rgba(255,255,255,${p.o})`; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill(); });
+            requestAnimationFrame(drawParticles);
         }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        drawParticles();
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.opacity = Math.random() * 0.8 + 0.2;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.y < 0) this.y = canvas.height;
-                if (this.y > canvas.height) this.y = 0;
-            }
-            draw() {
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < 70; i++) particles.push(new Particle());
-
-        function animateCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animateCanvas);
-        }
-        animateCanvas();
-
-        /* Step 1 Loader Logic */
-        const loadingBar = document.getElementById('loading-bar');
-        let progress = 0;
-        const loadInterval = setInterval(() => {
-            progress += 2;
-            loadingBar.style.width = progress + '%';
-            if (progress >= 100) {
-                clearInterval(loadInterval);
-                setTimeout(() => nextStep(1, 2), 500);
-            }
-        }, 30);
-
-        /* Step 2 Security Answer Check */
-        function checkAnswer() {
-            const val = document.getElementById('secret-input').value.trim().toLowerCase();
-            const hint = document.getElementById('hint-msg');
-            const success = document.getElementById('success-msg');
-            const btnNext = document.getElementById('btn-next-2');
-            const inputWrap = document.getElementById('input-wrap');
-
-            if (val === "aaru") {
-                inputWrap.classList.add('hidden');
-                hint.style.opacity = 0;
-                success.classList.remove('hidden');
-                btnNext.classList.remove('hidden');
-                confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
-            } else {
-                inputWrap.classList.add('shake');
-                hint.style.opacity = 1;
-                setTimeout(() => inputWrap.classList.remove('shake'), 500);
-            }
-        }
-        document.getElementById('secret-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') checkAnswer();
+        // Custom Cursor
+        document.addEventListener('mousemove', (e) => {
+            gsap.to('.cursor', { x: e.clientX, y: e.clientY, duration: 0.1 });
+            gsap.to('.cursor-dot', { x: e.clientX, y: e.clientY, duration: 0.01 });
         });
 
-        /* Step 3 Candle Logic */
-        let candleLit = false;
-        function lightCandles() {
-            if (candleLit) return;
-            candleLit = true;
-            document.getElementById('flame').style.opacity = 1;
-            document.getElementById('cake-msg').innerText = "Make a wish... ✨";
-            
-            const timerRing = document.getElementById('timer-ring');
-            const timerText = document.getElementById('timer-text');
-            timerRing.classList.remove('hidden');
-            timerText.classList.remove('hidden');
-            
-            confetti({ particleCount: 100, spread: 80, origin: { y: 0.5 } });
+        /* --- STEP 0: CURTAINS --- */
+        function openCurtains() {
+            document.getElementById('open-btn').style.display = 'none';
+            document.getElementById('step-curtain').classList.add('curtain-open');
+            setTimeout(() => {
+                document.getElementById('step-curtain').style.display = 'none';
+                document.getElementById('step-game').classList.add('active');
+                initBowGame();
+            }, 2000);
+        }
 
-            let timeLeft = 10;
-            const timer = setInterval(() => {
+        /* --- STEP 0.5: REAL BOW & ARROW PULL MECHANICS --- */
+        let isGameActive = false;
+        let isPulling = false;
+        let startX = 0, startY = 0;
+        let pullDist = 0;
+
+        function initBowGame() {
+            isGameActive = true;
+            
+            gsap.to('#target-container', {
+                y: '18vh',
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: "power1.inOut"
+            });
+
+            const bowWrap = document.getElementById('bow-wrapper');
+            bowWrap.addEventListener('mousedown', startPull);
+            window.addEventListener('mousemove', dragPull);
+            window.addEventListener('mouseup', releaseArrow);
+
+            bowWrap.addEventListener('touchstart', (e) => startPull(e.touches[0]));
+            window.addEventListener('touchmove', (e) => { if(isPulling) dragPull(e.touches[0]); });
+            window.addEventListener('touchend', releaseArrow);
+        }
+
+        function startPull(e) {
+            if(!isGameActive) return;
+            isPulling = true;
+            startX = e.clientX;
+            startY = e.clientY;
+        }
+
+        function dragPull(e) {
+            if(!isPulling || !isGameActive) return;
+            const dx = startX - e.clientX;
+            const dy = startY - e.clientY;
+            pullDist = Math.min(Math.max(dx, 0), 120); 
+
+            const stringPath = document.getElementById('bow-string-path');
+            stringPath.setAttribute('d', `M 60 20 Q ${60 - pullDist} 150 60 280`);
+
+            const arrowGroup = document.getElementById('bow-arrow-group');
+            gsap.set(arrowGroup, { x: -pullDist });
+        }
+
+        function releaseArrow() {
+            if(!isPulling || !isGameActive) return;
+            isPulling = false;
+
+            const stringPath = document.getElementById('bow-string-path');
+            gsap.to(stringPath, { attr: { d: "M 60 20 Q 60 150 60 280" }, duration: 0.2, ease: "elastic.out(1, 0.3)" });
+
+            const arrowGroup = document.getElementById('bow-arrow-group');
+            
+            if (pullDist > 30) {
+                isGameActive = false;
+                gsap.set(arrowGroup, { opacity: 0 });
+
+                const dynArrow = document.getElementById('dynamic-arrow');
+                const bowRect = document.getElementById('bow-wrapper').getBoundingClientRect();
+                const heartRect = document.getElementById('target-heart').getBoundingClientRect();
+
+                const startXPos = bowRect.left + 100;
+                const startYPos = bowRect.top + 150;
+                const targetXPos = heartRect.left + (heartRect.width / 2);
+                const targetYPos = heartRect.top + (heartRect.height / 2);
+
+                const deltaX = targetXPos - startXPos;
+                const deltaY = targetYPos - startYPos;
+                const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+
+                dynArrow.style.display = 'block';
+                gsap.set(dynArrow, { left: startXPos, top: startYPos, rotation: angle, scale: 1, opacity: 1 });
+
+                gsap.to(dynArrow, {
+                    left: targetXPos - 40,
+                    top: targetYPos - 10,
+                    duration: 0.5,
+                    ease: "power2.in",
+                    onComplete: () => {
+                        dynArrow.style.display = 'none';
+                        triggerHeartExplosion(targetXPos, targetYPos);
+                    }
+                });
+            } else {
+                gsap.to(arrowGroup, { x: 0, duration: 0.3 });
+            }
+            pullDist = 0;
+        }
+
+        function triggerHeartExplosion(x, y) {
+            const heart = document.getElementById('target-heart');
+            const ring = document.getElementById('blast-ring');
+            ring.style.left = `${x}px`;
+            ring.style.top = `${y}px`;
+            ring.style.width = '10px';
+            ring.style.height = '10px';
+            ring.style.transform = 'translate(-50%, -50%)';
+
+            gsap.timeline()
+                .to(ring, { width: 300, height: 300, opacity: 1, duration: 0.4, ease: "power2.out" })
+                .to(ring, { opacity: 0, duration: 0.2 });
+
+            gsap.to(heart, {
+                scale: 2.8, opacity: 0, rotation: 360, duration: 0.4, ease: "back.out(2)",
+                onComplete: () => {
+                    confetti({ particleCount: 250, spread: 120, origin: { x: x / window.innerWidth, y: y / window.innerHeight }, colors: ['#ff2a70', '#d4af37', '#ffffff', '#ff99aa'] });
+                    setTimeout(() => transitionStep('step-game', 'step-1'), 1200);
+                }
+            });
+        }
+
+        /* --- STEP TRANSITION LOGIC --- */
+        function transitionStep(currId, nextId) {
+            const curr = document.getElementById(currId);
+            const next = document.getElementById(nextId);
+            
+            gsap.to(curr, { x: '-100%', scale: 0.8, opacity: 0, duration: 0.8, ease: "power3.inOut", onComplete: () => {
+                curr.classList.remove('active');
+                curr.style.visibility = 'hidden';
+            }});
+            
+            next.style.visibility = 'visible';
+            next.classList.add('active');
+            gsap.fromTo(next, { x: '100%', scale: 1.2, opacity: 0 }, { x: '0%', scale: 1, opacity: 1, duration: 0.8, ease: "power3.inOut" });
+
+            // Specific Triggers
+            if(nextId === 'step-2') startCakeTimer();
+            if(nextId === 'step-5') initShayari();
+            if(nextId === 'step-8') animateMemoryWall();
+            if(nextId === 'step-9') {
+                setInterval(() => confetti({ particleCount: 6, spread: 180 }), 1000);
+            }
+        }
+
+        /* --- STEP 1: SECURITY CHECK --- */
+        function checkAnswer() {
+            const val = document.getElementById('secret-input').value.trim().toLowerCase();
+            if (val === "drishu") {
+                document.getElementById('hint-msg').style.opacity = 0;
+                document.getElementById('success-msg').classList.remove('hidden');
+                document.getElementById('btn-next-1').classList.remove('hidden');
+                confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+            } else {
+                gsap.fromTo('#secret-input', { x: -10 }, { x: 10, duration: 0.1, yoyo: true, repeat: 5 });
+                document.getElementById('hint-msg').style.opacity = 1;
+            }
+        }
+
+        /* --- STEP 2: CAKE TIMER & CANDLE --- */
+        function startCakeTimer() {
+            let timeLeft = 5;
+            const timerEl = document.getElementById('countdown-timer');
+            const cakeBox = document.getElementById('cake-container');
+            const msgEl = document.getElementById('cake-msg');
+            
+            timerEl.style.display = 'block';
+            timerEl.innerText = timeLeft;
+            
+            const countInterval = setInterval(() => {
                 timeLeft--;
-                timerText.innerText = timeLeft;
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    timerRing.classList.add('hidden');
-                    timerText.classList.add('hidden');
-                    document.getElementById('cake-msg').innerText = "Your wish has been sent to the stars! ✨";
-                    document.getElementById('btn-next-3').classList.remove('hidden');
+                if(timeLeft > 0) {
+                    timerEl.innerText = timeLeft;
+                    gsap.fromTo(timerEl, { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4 });
+                } else {
+                    clearInterval(countInterval);
+                    timerEl.style.display = 'none';
+                    cakeBox.style.display = 'block';
+                    msgEl.classList.remove('hidden');
+                    
+                    gsap.fromTo(cakeBox, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "bounce.out" });
+                    confetti({ particleCount: 60, spread: 50, origin: { y: 0.5 } });
                 }
             }, 1000);
         }
 
-        /* Step 4 Envelope & Typed Letter */
+        let candleLit = false;
+        function lightCandles() {
+            if(candleLit) return; candleLit = true;
+            document.getElementById('flame').style.opacity = 1;
+            document.getElementById('cake-msg').innerText = "Your wish is granted! ✨";
+            confetti({ particleCount: 100, spread: 80 });
+            setTimeout(() => document.getElementById('btn-next-2').classList.remove('hidden'), 1200);
+        }
+
+        /* --- STEP 3: TYPED LETTER --- */
         let envelopeOpened = false;
         function openEnvelope() {
             if (envelopeOpened) return;
             envelopeOpened = true;
             document.getElementById('envelope').classList.add('open');
-            
             setTimeout(() => {
                 new Typed('#typed-letter', {
-                    strings: [
-                        "Dear Aaru,\n\nOn this magical day, I want to remind you how deeply special you are to me. Your laughter heals my worst days, your presence brings peace to my soul, and your love makes my world infinitely brighter.\n\nThank you for being you—for every smile, every word, and every precious moment we share. Here's to making countless more beautiful memories together.\n\nHappy Birthday, my love! 💖"
-                    ],
-                    typeSpeed: 35,
-                    showCursor: false,
-                    onComplete: () => {
-                        document.getElementById('btn-next-4').classList.remove('hidden');
-                    }
+                    strings: ["Dear Drishu,\n\nOn this magical day, I want to remind you how deeply special you are to me. Your smile brightens my entire world.\n\nThank you for being my absolute favorite person. Let's make endless beautiful memories together.\n\nHappy Birthday, my love! 💖"],
+                    typeSpeed: 30, showCursor: false,
+                    onComplete: () => document.getElementById('btn-next-3').classList.remove('hidden')
                 });
             }, 1200);
         }
 
-        /* Step 5 & 10 Lightbox Modal */
+        /* --- STEP 4 & 8: PHOTOS LOADERS --- */
+        const gallery4 = document.getElementById('gallery-4');
+        const captions = ['Cute Smile ✨', 'Magical 🌸', 'Forever 💖', 'Pure Joy 🥰'];
+        for (let i = 1; i <= 4; i++) {
+            const pol = document.createElement('div');
+            pol.className = 'polaroid';
+            pol.style.transform = `rotate(${(i % 2 === 0 ? -1 : 1) * (i + 2)}deg)`;
+            pol.onclick = () => openLightbox(`photo${i}.jpg`, captions[i-1]);
+            pol.innerHTML = `<img src="photo${i}.jpg" alt="Memory"><div class="polaroid-cap">${captions[i-1]}</div>`;
+            gallery4.appendChild(pol);
+        }
+
+        const masonry = document.getElementById('masonry-wall');
+        for (let i = 5; i <= 12; i++) { 
+            const item = document.createElement('div');
+            item.className = 'masonry-item';
+            item.onclick = () => openLightbox(`photo${i}.jpg`, `Memory #${i}`);
+            item.innerHTML = `<img src="photo${i}.jpg" alt="Memory ${i}">`;
+            masonry.appendChild(item);
+        }
+
+        function animateMemoryWall() {
+            gsap.from(".masonry-item", {
+                duration: 1.4, scale: 0, rotation: 720, y: 200, opacity: 0, stagger: 0.12, ease: "back.out(1.2)"
+            });
+        }
+
         function openLightbox(src, caption) {
-            const lb = document.getElementById('lightbox');
             document.getElementById('lb-img').src = src;
-            document.getElementById('lb-cap').innerText = caption || '';
-            lb.classList.add('active');
+            document.getElementById('lb-cap').innerText = caption;
+            document.getElementById('lightbox').classList.add('active');
         }
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
         }
 
-        // Initialize Polaroid Gallery (Step 5)
-        const gallery4 = document.getElementById('gallery-4');
-        const polaroidData = [
-            { src: 'photo1.jpg', cap: 'Your Cute Smile ✨' },
-            { src: 'photo2.jpg', cap: 'Magical Moments 🌸' },
-            { src: 'photo3.jpg', cap: 'Forever Cherished 💖' },
-            { src: 'photo4.jpg', cap: 'Pure Joy 🥰' }
-        ];
-        polaroidData.forEach((item, idx) => {
-            const pol = document.createElement('div');
-            pol.className = 'polaroid hover-target';
-            pol.style.transform = `rotate(${(idx % 2 === 0 ? -1 : 1) * (idx + 3)}deg)`;
-            pol.onclick = () => openLightbox(item.src, item.cap);
-            pol.innerHTML = `<img src="${item.src}" loading="lazy" alt="Memory"><div class="polaroid-cap">${item.cap}</div>`;
-            gallery4.appendChild(pol);
-        });
-
-        /* Step 6 Shayari */
-        let shayariTypedInit = false;
-        function initShayariTyped() {
-            if (shayariTypedInit) return;
-            shayariTypedInit = true;
+        /* --- STEP 5: SHAYARI --- */
+        let shayariInit = false;
+        function initShayari() {
+            if(shayariInit) return; shayariInit = true;
             new Typed('#typed-shayari', {
-                strings: [
-                    "Chand se pyari hai soorat teri,\nDil ko chhoo jaati hai har baat teri,\nZindagi bhar ka saath maanga hai khuda se,\nBas yahi hai ek chhoti si khwahish meri... ❤️"
-                ],
-                typeSpeed: 45,
-                showCursor: false,
-                onComplete: () => {
-                    document.getElementById('btn-next-6').classList.remove('hidden');
-                }
+                strings: ["Chand se pyari hai soorat teri,\nDil ko chhoo jaati hai har baat teri,\nZindagi bhar ka saath maanga hai khuda se,\nBas yahi hai ek chhoti si khwahish meri... ❤️"],
+                typeSpeed: 40, showCursor: false,
+                onComplete: () => document.getElementById('btn-next-5').classList.remove('hidden')
             });
         }
 
-        /* Step 7 Generate 200 Reasons */
+        /* --- STEP 6: 200 REASONS GRID --- */
         const reasonsGrid = document.getElementById('reasons-grid');
-        const sweetPhrases = [
-            "Your beautiful smile that brightens my day.",
-            "The cute way you laugh at silly jokes.",
-            "Your kind and empathetic heart.",
-            "How you always care so deeply.",
-            "Your incredible grace and charm.",
-            "The way your eyes light up when happy.",
-            "Your voice that instantly calms me down.",
-            "How you make every moment special.",
-            "Your unwavering support and trust.",
-            "Because you are uniquely, perfectly YOU!"
-        ];
+        const sweetPhrases = ["Your beautiful smile", "The cute way you laugh", "Your kind heart", "How you care so deeply", "Your amazing eyes", "Your perfect hugs"];
         for (let i = 1; i <= 200; i++) {
             const card = document.createElement('div');
-            card.className = 'reason-card hover-target';
-            const phrase = sweetPhrases[(i - 1) % sweetPhrases.length];
-            card.innerHTML = `<p class="reason-text"><strong>#${i}</strong> - ${phrase}</p>`;
+            card.className = 'reason-card';
+            card.innerHTML = `<p class="reason-text"><strong>#${i}</strong> - ${sweetPhrases[(i - 1) % sweetPhrases.length]}</p>`;
             reasonsGrid.appendChild(card);
         }
 
-        // Unlock next step on scroll or fallback timer
-        let step7Unlocked = false;
-        reasonsGrid.addEventListener('scroll', () => {
-            if (!step7Unlocked && (reasonsGrid.scrollTop + reasonsGrid.clientHeight >= reasonsGrid.scrollHeight - 100)) {
-                step7Unlocked = true;
-                document.getElementById('btn-next-7').classList.remove('hidden');
-            }
-        });
-        setTimeout(() => {
-            if(!step7Unlocked) {
-                step7Unlocked = true;
-                document.getElementById('btn-next-7').classList.remove('hidden');
-            }
-        }, 5000);
-
-        /* Step 8 Gift Logic */
+        /* --- STEP 7: GIFT BOX --- */
         let giftOpened = false;
         function openGift() {
-            if(giftOpened) return;
-            giftOpened = true;
+            if(giftOpened) return; giftOpened = true;
             document.getElementById('gift').classList.add('open');
             document.getElementById('gift-msg').classList.remove('hidden');
-            document.getElementById('btn-next-8').classList.remove('hidden');
-            confetti({ particleCount: 120, spread: 90, origin: { y: 0.6 } });
-        }
-
-        /* Step 9 Balloons Logic */
-        const balloonSky = document.getElementById('balloon-sky');
-        const wishes = [
-            "Unlimited Happiness 💖",
-            "Eternal Love ✨",
-            "All Dreams Come True 🌟",
-            "Endless Smiles 😊",
-            "Good Health 🍀",
-            "Success Everywhere 🚀",
-            "My Heart Forever 💗"
-        ];
-        let poppedCount = 0;
-
-        wishes.forEach((wish, idx) => {
-            const wrap = document.createElement('div');
-            wrap.className = 'balloon-wrap hover-target';
-            wrap.style.animationDelay = `${idx * 0.4}s`;
-            wrap.innerHTML = `<div class="balloon"><span>Wish ${idx + 1}</span></div>`;
-            wrap.onclick = () => {
-                confetti({ particleCount: 40, spread: 50, origin: { x: (idx + 1) / (wishes.length + 1), y: 0.6 } });
-                document.getElementById('balloon-msg-box').classList.remove('hidden');
-                document.getElementById('balloon-msg-text').innerText = wish;
-                wrap.style.visibility = 'hidden';
-                poppedCount++;
-                if (poppedCount >= 3) {
-                    document.getElementById('btn-next-9').classList.remove('hidden');
-                }
-            };
-            balloonSky.appendChild(wrap);
-        });
-
-        /* Step 10 Masonry Wall (Exactly 8 Photos) */
-        const masonry = document.getElementById('masonry-wall');
-        if(masonry) {
-            masonry.innerHTML = ''; 
-            for (let i = 1; i <= 8; i++) { 
-                const item = document.createElement('div');
-                item.className = 'masonry-item hover-target';
-                item.onclick = () => openLightbox(`photo${i}.jpg`, `Precious Memory #${i}`);
-                item.innerHTML = `<img src="photo${i}.jpg" loading="lazy" alt="Aaru Memory ${i}">`;
-                masonry.appendChild(item);
-            }
-        }
-
-        /* Step 11 Finale Confetti & Secrets */
-        function fireFinaleConfetti() {
-            const duration = 3 * 1000;
-            const end = Date.now() + duration;
-
-            (function frame() {
-                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 } });
-                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 } });
-                if (Date.now() < end) requestAnimationFrame(frame);
-            })();
-        }
-
-        function triggerSecret() {
-            nextStep(11, '12a');
+            document.getElementById('btn-next-7').classList.remove('hidden');
+            confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
         }
     </script>
 </body>
