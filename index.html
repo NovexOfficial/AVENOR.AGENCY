@@ -484,18 +484,23 @@
             if(nextId === 'step-9') setInterval(() => confetti({ particleCount: 6, spread: 180 }), 1000);
         }
 
-        /* --- STEP 1: SECURITY CHECK --- */
-        function checkAnswer() {
-            if (document.getElementById('secret-input').value.trim().toLowerCase() === "Drishu") {
-                document.getElementById('hint-msg').style.opacity = 0;
-                document.getElementById('success-msg').classList.remove('hidden');
-                document.getElementById('btn-next-1').classList.remove('hidden');
-                confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
-            } else {
-                gsap.fromTo('#secret-input', { x: -10 }, { x: 10, duration: 0.1, yoyo: true, repeat: 5 });
-                document.getElementById('hint-msg').style.opacity = 1;
-            }
-        }
+    /* --- STEP 1: SECURITY --- */
+function checkAnswer() {
+    // Yahan par "drishu" check ho raha hai 👇
+    if (document.getElementById('secret-input').value.trim().toLowerCase() === "drishu") {
+        
+        // Agar answer sahi hai toh yeh hoga:
+        document.getElementById('hint-msg').style.opacity = 0;
+        document.getElementById('success-msg').classList.remove('hidden');
+        document.getElementById('btn-next-1').classList.remove('hidden');
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+        
+    } else {
+        // Agar answer galat hai toh box shake hoga aur hint dikhega:
+        gsap.fromTo('#secret-input', { x: -10 }, { x: 10, duration: 0.1, yoyo: true, repeat: 5 });
+        document.getElementById('hint-msg').style.opacity = 1;
+    }
+}
 
         /* --- STEP 2: 10 SEC TIMER AFTER CANDLE LIGHT --- */
         let candleLit = false;
