@@ -57,7 +57,7 @@
         .curtain-btn { z-index: 1002; font-size: 1.2rem; padding: 15px 40px; box-shadow: 0 0 40px rgba(255,42,112,0.8); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 60px #ff2a70; } 100% { transform: scale(1); } }
 
-        /* ================= STEP 0.5: REAL BOW & ARROW GAME ================= */
+        /* ================= STEP 0.5: BOW & ARROW GAME ================= */
         #step-game { background: radial-gradient(circle, #2a0815 0%, #050508 100%); overflow: hidden; }
         .game-title { position: absolute; top: 6vh; text-align: center; width: 100%; z-index: 20; pointer-events: none; }
         .game-canvas-area { position: relative; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: space-between; padding: 0 8vw; }
@@ -70,25 +70,32 @@
         .arrow-graphic { width: 100%; height: 100%; display: flex; align-items: center; font-size: 2rem; color: #fff; filter: drop-shadow(0 0 8px #ff2a70); }
         .blast-ring { position: absolute; border: 4px solid var(--neon-pink); border-radius: 50%; opacity: 0; pointer-events: none; z-index: 25; }
 
-        /* ================= OTHER STEPS STYLES ================= */
+        /* ================= STEP 1: SECURITY ================= */
         .secret-input { width: 100%; max-width: 320px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.2); padding: 14px 25px; border-radius: 50px; color: #fff; font-size: 1.1rem; text-align: center; font-family: var(--font-body); outline: none; margin-top: 15px; }
         .secret-input:focus { border-color: var(--neon-pink); box-shadow: 0 0 20px rgba(255,42,112,0.4); }
 
-        /* ================= PREMIUM CAKE & TIMER ================= */
-        #countdown-timer { font-size: 6rem; font-family: var(--font-head); font-weight: bold; color: var(--neon-pink); text-shadow: 0 0 30px rgba(255,42,112,0.8); display: none; }
+        /* ================= STEP 2: PREMIUM CAKE & TIMER ================= */
+        #countdown-timer { 
+            font-size: 5rem; 
+            font-family: var(--font-head); 
+            font-weight: bold; 
+            color: var(--neon-gold); 
+            text-shadow: 0 0 40px rgba(212,175,55,1); 
+            display: none; 
+            position: absolute; 
+            top: 20%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            z-index: 50; 
+        }
         
-        #cake-container { display: none; margin-top: 30px; }
+        #cake-container { display: block; margin-top: 30px; }
         .cake { position: relative; width: 250px; height: 200px; margin: 0 auto 40px; perspective: 1000px; transform-style: preserve-3d; }
         
         .plate { position: absolute; bottom: -20px; left: -25px; width: 300px; height: 40px; background: radial-gradient(ellipse at center, #444 0%, #111 100%); border-radius: 50%; box-shadow: 0 15px 25px rgba(0,0,0,0.8); border: 2px solid #555; z-index: 0; }
-        
         .tier { position: absolute; border-radius: 12px; z-index: 1; box-shadow: inset 0 -10px 20px rgba(0,0,0,0.3), 0 10px 20px rgba(0,0,0,0.5); }
-        
-        /* Bottom Pink Layer */
         .tier-1 { width: 250px; height: 90px; bottom: 0; background: linear-gradient(145deg, #ff6688, #ff2a70); }
         .tier-1::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 35px; background: #fff; border-radius: 12px 12px 25px 25px; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
-        
-        /* Top Pink Layer */
         .tier-2 { width: 180px; height: 80px; bottom: 90px; left: 35px; background: linear-gradient(145deg, #ff6688, #ff2a70); z-index: 2; }
         .tier-2::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 30px; background: #fff; border-radius: 12px 12px 20px 20px; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
         
@@ -96,8 +103,8 @@
         .candle-stick { width: 14px; height: 45px; background: repeating-linear-gradient(45deg, #fff, #fff 5px, #ff2a70 5px, #ff2a70 10px); border-radius: 4px; border: 1px solid #ddd; margin: 0 auto; }
         .flame { width: 18px; height: 28px; background: #ffcc00; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; position: absolute; top: -22px; left: 1px; box-shadow: 0 0 20px #ffcc00, 0 0 40px #ff6600; opacity: 0; transition: opacity 1s; animation: flicker 0.1s infinite alternate; }
         @keyframes flicker { 0% { transform: scale(1) rotate(-2deg); } 100% { transform: scale(1.1) rotate(2deg); } }
-        /* ======================================================= */
 
+        /* ================= STEP 3,4,5,6 STYLES ================= */
         .envelope-container { position: relative; width: 320px; height: 220px; margin: 40px auto; cursor: pointer; transition: 1s; animation: float-3d 4s infinite ease-in-out; }
         @keyframes float-3d { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         .envelope-back { position: absolute; width: 100%; height: 100%; background: #ff2a70; border-radius: 10px; z-index: 1; }
@@ -121,12 +128,15 @@
         .reason-card:hover { transform: translateY(-5px) scale(1.02); border-color: rgba(255,42,112,0.5); }
         .reason-text { font-family: var(--font-body); font-size: 0.95rem; color: #ff99aa; }
 
+        /* ================= STEP 7: GIFT SURPRISE ================= */
         .gift-box { position: relative; width: 150px; height: 150px; margin: 20px auto; cursor: pointer; transition: 0.3s; z-index: 5; }
         .box-body { width: 100%; height: 100px; background: linear-gradient(135deg, #1b28cc, #00e5ff); position: absolute; bottom: 0; border-radius: 8px; }
         .box-lid { width: 110%; height: 40px; background: linear-gradient(135deg, #00e5ff, #1b28cc); position: absolute; bottom: 90px; left: -5%; transition: transform 1s; transform-origin: bottom; border-radius: 8px; }
         .gift-box.open .box-lid { transform: translateY(-100px) rotateX(60deg) scale(1.1); opacity: 0; }
 
-        /* Masonry Memory Wall */
+        #surprise-img { width: 280px; max-width: 90%; border-radius: 12px; margin-top: 20px; box-shadow: 0 10px 40px rgba(255,42,112,0.7); }
+
+        /* ================= STEP 8: MASONRY MEMORY WALL ================= */
         .masonry { columns: 3 250px; column-gap: 20px; width: 95%; max-width: 1200px; padding: 20px; max-height: 75vh; overflow-y: auto; }
         .masonry::-webkit-scrollbar { display: none; }
         .masonry-item { break-inside: avoid; margin-bottom: 20px; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: 0.4s; }
@@ -181,7 +191,6 @@
             <h2 class="heading glow-text" style="font-size: 2rem;">Pull Back & Release to Hit Drishu's Heart 💘</h2>
             <p class="subtext" style="color: #ff99aa;">Drag the bow string backward & release it!</p>
         </div>
-
         <div class="game-canvas-area">
             <div class="bow-wrapper" id="bow-wrapper">
                 <svg class="bow-svg" viewBox="0 0 200 300">
@@ -205,26 +214,22 @@
         <div class="glass-panel text-center">
             <h1 class="heading glow-text" style="font-size: 2.2rem;">Security Check 🌍</h1>
             <p class="subtext" style="color: #ff99aa;">Duniya ki sabse pyari ladki kaun hai?</p>
-            
             <input type="text" id="secret-input" class="secret-input" placeholder="Type name..." autocomplete="off">
             <button class="btn-cinematic" onclick="checkAnswer()">Enter</button>
-
             <p id="hint-msg" class="subtext" style="color: #ff99aa; font-size: 0.9rem; opacity: 0; margin-top: 15px;">Hint: Jiska Birthday Hai 😊</p>
             <p id="success-msg" class="heading glow-text hidden" style="font-size: 1.5rem; margin-top: 15px; color: #00ff88;">Correct Answer ❤️</p>
-            
             <button class="btn-cinematic hidden" id="btn-next-1" onclick="transitionStep('step-1', 'step-2')">Unlock Magic ✨</button>
         </div>
     </div>
 
-    <!-- Step 2: Birthday Timer & Premium Cake -->
+    <!-- Step 2: Birthday Cake First, Then Timer Starts -->
     <div class="step-container" id="step-2">
-        <div class="glass-panel text-center">
+        <div class="glass-panel text-center" style="position: relative;">
+            <!-- Hidden 10-sec Countdown Overlay -->
+            <div id="countdown-timer">10</div>
+
             <h1 class="heading glow-text" style="color: #d4af37;">Make a Wish Drishu 🎂</h1>
             
-            <!-- Magic Countdown Timer -->
-            <div id="countdown-timer">5</div>
-
-            <!-- Premium Cake (Hidden initially) -->
             <div id="cake-container">
                 <div class="cake">
                     <div class="plate"></div>
@@ -237,7 +242,7 @@
                 </div>
             </div>
 
-            <p id="cake-msg" class="subtext hidden" style="font-style: italic; margin-top: 10px;">Click the candle to light it up.</p>
+            <p id="cake-msg" class="subtext" style="font-style: italic; margin-top: 10px;">Click the candle to light it up and start the magic!</p>
             <button class="btn-cinematic hidden" id="btn-next-2" onclick="transitionStep('step-2', 'step-3')">Continue</button>
         </div>
     </div>
@@ -256,7 +261,7 @@
         </div>
     </div>
 
-    <!-- Step 4: Beautiful Memories (Photo 1 to 4) -->
+    <!-- Step 4: Beautiful Memories -->
     <div class="step-container" id="step-4">
         <h1 class="heading glow-text">Beautiful Memories 🎞️</h1>
         <div class="gallery-wrap" id="gallery-4"></div>
@@ -279,19 +284,24 @@
         <button class="btn-cinematic" id="btn-next-6" style="margin-top: 15px;" onclick="transitionStep('step-6', 'step-7')">Open Surprise 🎁</button>
     </div>
 
-    <!-- Step 7: Gift -->
+    <!-- Step 7: Gift Box with surprise.jpg -->
     <div class="step-container" id="step-7">
         <div class="glass-panel text-center">
             <h1 class="heading glow-text">A Special Surprise 🎀</h1>
+            
             <div class="gift-box" id="gift" onclick="openGift()">
                 <div class="box-lid"></div><div class="box-body"></div>
             </div>
-            <h2 id="gift-msg" class="heading glow-text hidden" style="margin-top: 40px;">Your smile is my favorite gift! ❤️</h2>
+
+            <!-- The specific surprise.jpg image as requested -->
+            <img src="surprise.jpg" id="surprise-img" class="hidden" alt="Surprise!">
+            
+            <h2 id="gift-msg" class="heading glow-text hidden" style="margin-top: 20px;">Your smile is my favorite gift! ❤️</h2>
             <button class="btn-cinematic hidden" id="btn-next-7" onclick="transitionStep('step-7', 'step-8')">Open Memory Wall 📸</button>
         </div>
     </div>
 
-    <!-- Step 8: Masonry Memory Wall (Photo 5 to 12) -->
+    <!-- Step 8: Memory Wall (ALL Photos 1 to 12) -->
     <div class="step-container" id="step-8">
         <h1 class="heading glow-text" style="margin-top: 20px;">The Memory Wall 🎞️</h1>
         <div class="masonry" id="masonry-wall"></div>
@@ -360,20 +370,11 @@
 
         function initBowGame() {
             isGameActive = true;
-            
-            gsap.to('#target-container', {
-                y: '18vh',
-                duration: 2,
-                repeat: -1,
-                yoyo: true,
-                ease: "power1.inOut"
-            });
-
+            gsap.to('#target-container', { y: '18vh', duration: 2, repeat: -1, yoyo: true, ease: "power1.inOut" });
             const bowWrap = document.getElementById('bow-wrapper');
             bowWrap.addEventListener('mousedown', startPull);
             window.addEventListener('mousemove', dragPull);
             window.addEventListener('mouseup', releaseArrow);
-
             bowWrap.addEventListener('touchstart', (e) => startPull(e.touches[0]));
             window.addEventListener('touchmove', (e) => { if(isPulling) dragPull(e.touches[0]); });
             window.addEventListener('touchend', releaseArrow);
@@ -391,52 +392,33 @@
             const dx = startX - e.clientX;
             const dy = startY - e.clientY;
             pullDist = Math.min(Math.max(dx, 0), 120); 
-
-            const stringPath = document.getElementById('bow-string-path');
-            stringPath.setAttribute('d', `M 60 20 Q ${60 - pullDist} 150 60 280`);
-
-            const arrowGroup = document.getElementById('bow-arrow-group');
-            gsap.set(arrowGroup, { x: -pullDist });
+            document.getElementById('bow-string-path').setAttribute('d', `M 60 20 Q ${60 - pullDist} 150 60 280`);
+            gsap.set(document.getElementById('bow-arrow-group'), { x: -pullDist });
         }
 
         function releaseArrow() {
             if(!isPulling || !isGameActive) return;
             isPulling = false;
-
-            const stringPath = document.getElementById('bow-string-path');
-            gsap.to(stringPath, { attr: { d: "M 60 20 Q 60 150 60 280" }, duration: 0.2, ease: "elastic.out(1, 0.3)" });
-
+            gsap.to(document.getElementById('bow-string-path'), { attr: { d: "M 60 20 Q 60 150 60 280" }, duration: 0.2, ease: "elastic.out(1, 0.3)" });
             const arrowGroup = document.getElementById('bow-arrow-group');
             
             if (pullDist > 30) {
                 isGameActive = false;
                 gsap.set(arrowGroup, { opacity: 0 });
-
                 const dynArrow = document.getElementById('dynamic-arrow');
                 const bowRect = document.getElementById('bow-wrapper').getBoundingClientRect();
                 const heartRect = document.getElementById('target-heart').getBoundingClientRect();
-
                 const startXPos = bowRect.left + 100;
                 const startYPos = bowRect.top + 150;
                 const targetXPos = heartRect.left + (heartRect.width / 2);
                 const targetYPos = heartRect.top + (heartRect.height / 2);
-
-                const deltaX = targetXPos - startXPos;
-                const deltaY = targetYPos - startYPos;
-                const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+                const angle = Math.atan2(targetYPos - startYPos, targetXPos - startXPos) * (180 / Math.PI);
 
                 dynArrow.style.display = 'block';
                 gsap.set(dynArrow, { left: startXPos, top: startYPos, rotation: angle, scale: 1, opacity: 1 });
-
                 gsap.to(dynArrow, {
-                    left: targetXPos - 40,
-                    top: targetYPos - 10,
-                    duration: 0.5,
-                    ease: "power2.in",
-                    onComplete: () => {
-                        dynArrow.style.display = 'none';
-                        triggerHeartExplosion(targetXPos, targetYPos);
-                    }
+                    left: targetXPos - 40, top: targetYPos - 10, duration: 0.5, ease: "power2.in",
+                    onComplete: () => { dynArrow.style.display = 'none'; triggerHeartExplosion(targetXPos, targetYPos); }
                 });
             } else {
                 gsap.to(arrowGroup, { x: 0, duration: 0.3 });
@@ -445,19 +427,10 @@
         }
 
         function triggerHeartExplosion(x, y) {
-            const heart = document.getElementById('target-heart');
             const ring = document.getElementById('blast-ring');
-            ring.style.left = `${x}px`;
-            ring.style.top = `${y}px`;
-            ring.style.width = '10px';
-            ring.style.height = '10px';
-            ring.style.transform = 'translate(-50%, -50%)';
-
-            gsap.timeline()
-                .to(ring, { width: 300, height: 300, opacity: 1, duration: 0.4, ease: "power2.out" })
-                .to(ring, { opacity: 0, duration: 0.2 });
-
-            gsap.to(heart, {
+            ring.style.left = `${x}px`; ring.style.top = `${y}px`; ring.style.width = '10px'; ring.style.height = '10px'; ring.style.transform = 'translate(-50%, -50%)';
+            gsap.timeline().to(ring, { width: 300, height: 300, opacity: 1, duration: 0.4, ease: "power2.out" }).to(ring, { opacity: 0, duration: 0.2 });
+            gsap.to(document.getElementById('target-heart'), {
                 scale: 2.8, opacity: 0, rotation: 360, duration: 0.4, ease: "back.out(2)",
                 onComplete: () => {
                     confetti({ particleCount: 250, spread: 120, origin: { x: x / window.innerWidth, y: y / window.innerHeight }, colors: ['#ff2a70', '#d4af37', '#ffffff', '#ff99aa'] });
@@ -470,29 +443,20 @@
         function transitionStep(currId, nextId) {
             const curr = document.getElementById(currId);
             const next = document.getElementById(nextId);
-            
             gsap.to(curr, { x: '-100%', scale: 0.8, opacity: 0, duration: 0.8, ease: "power3.inOut", onComplete: () => {
-                curr.classList.remove('active');
-                curr.style.visibility = 'hidden';
+                curr.classList.remove('active'); curr.style.visibility = 'hidden';
             }});
-            
-            next.style.visibility = 'visible';
-            next.classList.add('active');
+            next.style.visibility = 'visible'; next.classList.add('active');
             gsap.fromTo(next, { x: '100%', scale: 1.2, opacity: 0 }, { x: '0%', scale: 1, opacity: 1, duration: 0.8, ease: "power3.inOut" });
 
-            // Specific Triggers
-            if(nextId === 'step-2') startCakeTimer();
             if(nextId === 'step-5') initShayari();
             if(nextId === 'step-8') animateMemoryWall();
-            if(nextId === 'step-9') {
-                setInterval(() => confetti({ particleCount: 6, spread: 180 }), 1000);
-            }
+            if(nextId === 'step-9') setInterval(() => confetti({ particleCount: 6, spread: 180 }), 1000);
         }
 
         /* --- STEP 1: SECURITY CHECK --- */
         function checkAnswer() {
-            const val = document.getElementById('secret-input').value.trim().toLowerCase();
-            if (val === "drishu") {
+            if (document.getElementById('secret-input').value.trim().toLowerCase() === "drishu") {
                 document.getElementById('hint-msg').style.opacity = 0;
                 document.getElementById('success-msg').classList.remove('hidden');
                 document.getElementById('btn-next-1').classList.remove('hidden');
@@ -503,13 +467,18 @@
             }
         }
 
-        /* --- STEP 2: CAKE TIMER & CANDLE --- */
-        function startCakeTimer() {
-            let timeLeft = 5;
+        /* --- STEP 2: 10 SEC TIMER AFTER CANDLE LIGHT --- */
+        let candleLit = false;
+        function lightCandles() {
+            if(candleLit) return; 
+            candleLit = true;
+            document.getElementById('flame').style.opacity = 1;
+            document.getElementById('cake-msg').innerText = "Magical Timer Started... ✨";
+            confetti({ particleCount: 100, spread: 80 });
+
+            // Start 10-second timer
+            let timeLeft = 10;
             const timerEl = document.getElementById('countdown-timer');
-            const cakeBox = document.getElementById('cake-container');
-            const msgEl = document.getElementById('cake-msg');
-            
             timerEl.style.display = 'block';
             timerEl.innerText = timeLeft;
             
@@ -521,40 +490,27 @@
                 } else {
                     clearInterval(countInterval);
                     timerEl.style.display = 'none';
-                    cakeBox.style.display = 'block';
-                    msgEl.classList.remove('hidden');
-                    
-                    gsap.fromTo(cakeBox, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "bounce.out" });
-                    confetti({ particleCount: 60, spread: 50, origin: { y: 0.5 } });
+                    document.getElementById('cake-msg').innerText = "Your wish is granted! ✨";
+                    document.getElementById('btn-next-2').classList.remove('hidden');
+                    confetti({ particleCount: 150, spread: 100, origin: { y: 0.5 } });
                 }
             }, 1000);
-        }
-
-        let candleLit = false;
-        function lightCandles() {
-            if(candleLit) return; candleLit = true;
-            document.getElementById('flame').style.opacity = 1;
-            document.getElementById('cake-msg').innerText = "Your wish is granted! ✨";
-            confetti({ particleCount: 100, spread: 80 });
-            setTimeout(() => document.getElementById('btn-next-2').classList.remove('hidden'), 1200);
         }
 
         /* --- STEP 3: TYPED LETTER --- */
         let envelopeOpened = false;
         function openEnvelope() {
-            if (envelopeOpened) return;
-            envelopeOpened = true;
+            if (envelopeOpened) return; envelopeOpened = true;
             document.getElementById('envelope').classList.add('open');
             setTimeout(() => {
                 new Typed('#typed-letter', {
                     strings: ["Dear Drishu,\n\nOn this magical day, I want to remind you how deeply special you are to me. Your smile brightens my entire world.\n\nThank you for being my absolute favorite person. Let's make endless beautiful memories together.\n\nHappy Birthday, my love! 💖"],
-                    typeSpeed: 30, showCursor: false,
-                    onComplete: () => document.getElementById('btn-next-3').classList.remove('hidden')
+                    typeSpeed: 30, showCursor: false, onComplete: () => document.getElementById('btn-next-3').classList.remove('hidden')
                 });
             }, 1200);
         }
 
-        /* --- STEP 4 & 8: PHOTOS LOADERS --- */
+        /* --- STEP 4: 4 PHOTOS LOADERS --- */
         const gallery4 = document.getElementById('gallery-4');
         const captions = ['Cute Smile ✨', 'Magical 🌸', 'Forever 💖', 'Pure Joy 🥰'];
         for (let i = 1; i <= 4; i++) {
@@ -566,19 +522,17 @@
             gallery4.appendChild(pol);
         }
 
+        /* --- STEP 8: MASONRY WALL (ALL 1 to 12 PHOTOS) --- */
         const masonry = document.getElementById('masonry-wall');
-        for (let i = 5; i <= 12; i++) { 
+        for (let i = 1; i <= 12; i++) { 
             const item = document.createElement('div');
             item.className = 'masonry-item';
             item.onclick = () => openLightbox(`photo${i}.jpg`, `Memory #${i}`);
             item.innerHTML = `<img src="photo${i}.jpg" alt="Memory ${i}">`;
             masonry.appendChild(item);
         }
-
         function animateMemoryWall() {
-            gsap.from(".masonry-item", {
-                duration: 1.4, scale: 0, rotation: 720, y: 200, opacity: 0, stagger: 0.12, ease: "back.out(1.2)"
-            });
+            gsap.from(".masonry-item", { duration: 1.4, scale: 0, rotation: 720, y: 200, opacity: 0, stagger: 0.12, ease: "back.out(1.2)" });
         }
 
         function openLightbox(src, caption) {
@@ -596,8 +550,7 @@
             if(shayariInit) return; shayariInit = true;
             new Typed('#typed-shayari', {
                 strings: ["Chand se pyari hai soorat teri,\nDil ko chhoo jaati hai har baat teri,\nZindagi bhar ka saath maanga hai khuda se,\nBas yahi hai ek chhoti si khwahish meri... ❤️"],
-                typeSpeed: 40, showCursor: false,
-                onComplete: () => document.getElementById('btn-next-5').classList.remove('hidden')
+                typeSpeed: 40, showCursor: false, onComplete: () => document.getElementById('btn-next-5').classList.remove('hidden')
             });
         }
 
@@ -611,14 +564,24 @@
             reasonsGrid.appendChild(card);
         }
 
-        /* --- STEP 7: GIFT BOX --- */
+        /* --- STEP 7: GIFT BOX & SURPRISE.JPG LOGIC --- */
         let giftOpened = false;
         function openGift() {
             if(giftOpened) return; giftOpened = true;
             document.getElementById('gift').classList.add('open');
-            document.getElementById('gift-msg').classList.remove('hidden');
-            document.getElementById('btn-next-7').classList.remove('hidden');
-            confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+            
+            // Wait for box to open, then hide box and show surprise image
+            setTimeout(() => {
+                document.getElementById('gift').style.display = 'none';
+                
+                const surImg = document.getElementById('surprise-img');
+                surImg.classList.remove('hidden');
+                gsap.fromTo(surImg, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: "back.out(1.5)" });
+                
+                document.getElementById('gift-msg').classList.remove('hidden');
+                document.getElementById('btn-next-7').classList.remove('hidden');
+                confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+            }, 800);
         }
     </script>
 </body>
